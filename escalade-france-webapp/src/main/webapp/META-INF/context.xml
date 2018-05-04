@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration des ressources JNDI directement dans le WAR de déploiement de la webapp -->
+<Context>
+    <Resource name="jdbc/DB_ESCALADE"
+              auth="Container"
+              type="javax.sql.DataSource"
+			
+              url="jdbc:postgresql://localhost:5432/SiteCommunautaireEscalade"
+              driverClassName="org.postgresql.Driver"
+              username="postgres"
+              password="admin"
+              defaultAutoCommit="false"
+              defaultTransactionIsolation="READ_COMMITTED"
+
+              initialSize="1"
+              maxTotal="30"
+              maxIdle="10"
+              maxWaitMillis="60000"
+              minIdle="1"
+              removeAbandonedTimeout="60"
+              removeAbandonedOnBorrow="true"
+              logAbandoned="true"
+              minEvictableIdleTimeMillis="10000"
+              timeBetweenEvictionRunsMillis="30000"
+              validationQuery="SELECT 1"
+              testWhileIdle="true"
+              testOnBorrow="true"
+    />
+</Context>

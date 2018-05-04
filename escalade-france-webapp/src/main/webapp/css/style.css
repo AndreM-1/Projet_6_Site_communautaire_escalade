@@ -1,0 +1,13 @@
+body{
+	background-color:#DDD;
+	margin-top: 10px;
+}
+
+.col-lg-2{
+	padding-top :7px;
+	padding-bottom:7px;
+}
+
+[class*="col"]{
+	border : 1px solid blue;
+}
