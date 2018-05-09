@@ -1,13 +1,108 @@
 body{
 	background-color:#DDD;
-	margin-top: 10px;
+	
 }
 
-.col-lg-2{
+#nomSiteWeb{
 	padding-top :7px;
 	padding-bottom:7px;
 }
 
-[class*="col"]{
-	border : 1px solid blue;
+header{
+	margin-top: 10px;
+	margin-bottom: 25px;
+}
+
+#banniereImage{
+	border-radius: 5px;
+	background: url('../jsp/assets/images/fondEcran1.jpg') no-repeat;
+	position: relative;
+	box-shadow: 0px 4px 4px #1c1a19;
+	height:300px;
+	margin-bottom: 25px;
+}
+
+#banniereDescription{
+	position:absolute;
+	bottom :42%;
+	left:28%;
+	font-size :3em;
+	color:white;
+}
+
+h1{
+	margin-bottom: 25px;
+}
+
+#rowFilActivite>div{
+	margin-bottom:25px;
+}
+
+#panel:hover{
+	box-shadow: 0px 4px 4px #1c1a19;
+}
+
+#photoParDefaut{
+	background-color:#0094FF;
+	height:200px;
+}
+
+#rowPhoto{
+	margin-right:0px;
+	margin-left:0px;
+
+}
+
+#sectionQsn{
+	display:flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-bottom:25px;
+}
+
+#sousSectionQsn{
+	display:flex;
+	align-items: flex-end;
+}
+
+
+p{
+	padding-left:15px;
+}
+
+.paraQsn,.paraCutil,.paraMl{
+	padding-left:0px;
+}
+
+#divConnexion{
+	border:1px solid grey;
+	margin-bottom:25px;
+	box-shadow: 0px 4px 4px #1c1a19;
+}
+
+footer{
+	border: 1px solid grey;
+	bottom:25px;
+	background-color:#404040;
+	color:white;
+}
+
+
+footer img{
+	border-radius:25px;
+}
+
+footer .col-lg-2{
+	padding-top:15px;
+	color:white;
+}
+
+
+#rowFilActivite>div>div>div{
+
+
+}
+
+[class*="col-lg-4"]{
+	
 }

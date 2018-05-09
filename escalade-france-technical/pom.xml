@@ -37,6 +37,12 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         
+        <!-- Bibliothèque comportant des fonctionnalités pour la gestion des dates -->
+      	<dependency>
+		    <groupId>joda-time</groupId>
+		    <artifactId>joda-time</artifactId>
+		</dependency>
+        
    		<!-- Dépendance vis-à-vis du Framework Spring --> 
         <dependency>
         	<groupId>org.springframework</groupId>

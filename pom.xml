@@ -146,6 +146,13 @@
 		         <version>4.1</version>
 	         </dependency>
 	         
+	         <!-- Bibliothèque comportant des fonctionnalités pour la gestion des dates -->
+	         <dependency>
+			    <groupId>joda-time</groupId>
+			    <artifactId>joda-time</artifactId>
+			    <version>2.9.9</version>
+			</dependency>
+	         
 	         <!-- Dépendance vis-à-vis du Framework Spring -->
 	         <dependency>
 		         <groupId>org.springframework</groupId>

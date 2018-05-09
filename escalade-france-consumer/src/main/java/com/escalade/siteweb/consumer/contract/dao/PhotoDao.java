@@ -8,4 +8,10 @@ public interface PhotoDao {
 
 	List<Photo> getListPhoto();
 
+	Photo getPhotoSite(int siteId);
+
+	List<Photo> getListPhotoSecteur(int siteId);
+
+	Photo getPhotoUtilisateur(int utilisateurId);
+
 }

@@ -5,12 +5,55 @@
         
 <struts>
 	<package name="default" extends="struts-default">
+	
+		<!-- Définition de l'intercepteur permettant de bloquer l'accès à la page de connexion pour un utilisateur déjà connecté -->
+		<interceptors>
+			<interceptor name="RefusAPC" class="com.escalade.siteweb.webapp.interceptor.RefusAPCInterceptor"/>
+			<interceptor-stack name="RefusAccesPageConnexionStack">
+				<interceptor-ref name="RefusAPC"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+	
 		<!-- Action par défaut -->
 		<default-action-ref name="index"/>
 		
 		<!-- Action "index" -->
 		<action name="index" class="com.escalade.siteweb.webapp.action.GestionAffichageAccueil" method="doList">
 			<result>/jsp/index.jsp</result>
+		</action>
+		
+		<!-- Action "page_generique_qsn" -->
+		<action name="page_generique_qsn" class="com.escalade.siteweb.webapp.action.GestionPageGenerique" method="doDetailUtilisateurAdmin">
+			<result>jsp/quisommesnous.jsp</result>
+		</action>
+		
+		<!-- Action "page_generique_cutil" -->
+		<action name="page_generique_cutil" class="com.escalade.siteweb.webapp.action.GestionPageGenerique">
+			<result>jsp/conditionsutilisations.jsp</result>
+		</action>
+		
+		<!-- Action "page_generique_ml" -->
+		<action name="page_generique_ml" class="com.escalade.siteweb.webapp.action.GestionPageGenerique">
+			<result>jsp/mentionslegales.jsp</result>
+		</action>
+		
+		 <!-- Actions Connexion/Deconnexion -->
+ 		<action name="connexion" class="com.escalade.siteweb.webapp.action.GestionConnexion" method="doLogin">
+ 			<!-- Référence à l'intercepteur permettant de bloquer l'accès à la page de connexion pour un utilisateur déjà connecté -->
+ 			<interceptor-ref name="RefusAccesPageConnexionStack" />
+ 			<result name="refus-acces-page-connexion" type="redirectAction">index</result>
+			<result name="input">/jsp/connexion.jsp</result>
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		
+		<action name="deconnexion" class="com.escalade.siteweb.webapp.action.GestionConnexion" method="doLogout">
+       		<result type="redirectAction">index</result>
+        </action>
+		
+		<!-- Action "test" -->
+		<action name="test" class="com.escalade.siteweb.webapp.action.TestAction" method="doTest">
+			<result>/jsp/test.jsp</result>
 		</action>
 		
 	</package>

@@ -1,8 +1,14 @@
 package com.escalade.siteweb.model.bean.site;
 
 import java.util.Date;
+import java.util.List;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.escalade.siteweb.model.bean.photo.Photo;
+import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
+
 
 public class Site {
 
@@ -30,6 +36,23 @@ public class Site {
 
 	@NotEmpty (message="Model - L'attribut dateMajSite doit être renseigné")
 	private Date dateMajSite;
+	
+	@NotEmpty (message="Model - L'attribut utilisateur doit être renseigné")
+	private Utilisateur utilisateur;
+	
+	@NotEmpty (message="Model - L'attribut pays doit être renseigné")
+	private Pays pays;
+	
+	@NotEmpty (message="Model - L'attribut region doit être renseigné")
+	private Region region;
+	
+	@NotEmpty (message="Model - L'attribut departement doit être renseigné")
+	private Departement departement;
+	
+	private Photo photoSite;
+	
+	private List<Photo> listPhotoSecteur;
+
 
 	// ==================== Constructeurs ====================
 	/**
@@ -138,7 +161,64 @@ public class Site {
 	public void setDateMajSite(Date dateMajSite) {
 		this.dateMajSite = dateMajSite;
 	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
 
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	
+	public Pays getPays() {
+		return pays;
+	}
+
+
+	public void setPays(Pays pays) {
+		this.pays = pays;
+	}
+
+
+	public Region getRegion() {
+		return region;
+	}
+
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+
+	public Departement getDepartement() {
+		return departement;
+	}
+
+
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
+	}
+	
+	public Photo getPhotoSite() {
+		return photoSite;
+	}
+
+
+	public void setPhotoSite(Photo photoSite) {
+		this.photoSite = photoSite;
+	}
+	
+
+	public List<Photo> getListPhotoSecteur() {
+		return listPhotoSecteur;
+	}
+
+
+	public void setListPhotoSecteur(List<Photo> listPhotoSecteur) {
+		this.listPhotoSecteur = listPhotoSecteur;
+	}
+	
 
 	// ==================== Méthodes ====================
 	@Override
@@ -155,6 +235,12 @@ public class Site {
 		.append(vSeparateur).append("dateDeFin=\"").append(dateDeFin).append('"')
 		.append(vSeparateur).append("dateAjoutSite=\"").append(dateAjoutSite).append('"')
 		.append(vSeparateur).append("dateMajSite=\"").append(dateMajSite).append('"')
+		.append(vSeparateur).append("utilisateur=\"").append(utilisateur).append('"')
+		.append(vSeparateur).append("pays=\"").append(pays).append('"')
+		.append(vSeparateur).append("region=\"").append(region).append('"')
+		.append(vSeparateur).append("departement=\"").append(departement).append('"')
+		.append(vSeparateur).append("photoSite=\"").append(photoSite).append('"')
+		.append(vSeparateur).append("listPhotoSecteur=\"").append(listPhotoSecteur).append('"')
 		.append("}");
 		return vStB.toString();
 	}

@@ -26,4 +26,16 @@ public class DepartementDaoImpl extends AbstractDaoImpl implements DepartementDa
 
         return vListDepartement;
     }
+	
+	@Override
+	public Departement getDepartement(int departementId) {
+		String vSQL = "SELECT * FROM public.departement WHERE id="+departementId;
+		
+		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
+		
+		RowMapper<Departement> vRowMapper=new DepartementRM();
+
+        List<Departement> vListDepartement=vJdbcTemplate.query(vSQL, vRowMapper);
+        return vListDepartement.get(0);
+	}
 }

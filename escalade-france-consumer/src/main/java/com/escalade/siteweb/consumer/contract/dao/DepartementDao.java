@@ -8,4 +8,6 @@ public interface DepartementDao {
 
 	List<Departement> getListDepartement();
 
+	Departement getDepartement(int departementId);
+
 }

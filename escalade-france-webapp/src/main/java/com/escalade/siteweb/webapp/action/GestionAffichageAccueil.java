@@ -1,23 +1,20 @@
 package com.escalade.siteweb.webapp.action;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.escalade.siteweb.business.contract.ManagerFactory;
-import com.escalade.siteweb.model.bean.photo.Photo;
-import com.escalade.siteweb.model.bean.site.Commentaire;
 import com.escalade.siteweb.model.bean.site.Departement;
 import com.escalade.siteweb.model.bean.site.Pays;
 import com.escalade.siteweb.model.bean.site.Region;
-import com.escalade.siteweb.model.bean.site.Secteur;
 import com.escalade.siteweb.model.bean.site.Site;
-import com.escalade.siteweb.model.bean.site.Voie;
-import com.escalade.siteweb.model.bean.utilisateur.FormulaireContact;
-import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class GestionAffichageAccueil extends ActionSupport {
+public class GestionAffichageAccueil extends ActionSupport implements SessionAware {
 	// ===================== Attributs =====================
 
 	private static final long serialVersionUID = 1L;
@@ -33,13 +30,9 @@ public class GestionAffichageAccueil extends ActionSupport {
 	private List<Region> listRegion;
 	private List<Departement> listDepartement;
 	private List<Site> listSite;
-	private List<Secteur> listSecteur;
-	private List<Voie> listVoie;
-	private List<Commentaire> listCommentaire;
-	private List <Utilisateur> listUtilisateur;
-	private List <FormulaireContact> listFormulaireContact;
-	private List <Photo> listPhoto;
-	private String imageAccueil="assets/images/fondEcran1.jpg";
+	
+	// ----- Eléments Struts
+	private Map<String, Object> session;
 
 
 	// ===================== Getters/Setters ===============	
@@ -74,88 +67,39 @@ public class GestionAffichageAccueil extends ActionSupport {
 	public void setListSite(List<Site> listSite) {
 		this.listSite = listSite;
 	}
-
-	public List<Secteur> getListSecteur() {
-		return listSecteur;
-	}
-
-	public void setListSecteur(List<Secteur> listSecteur) {
-		this.listSecteur = listSecteur;
-	}
-
-	public List<Voie> getListVoie() {
-		return listVoie;
-	}
-
-	public void setListVoie(List<Voie> listVoie) {
-		this.listVoie = listVoie;
-	}
-
-	public List<Commentaire> getListCommentaire() {
-		return listCommentaire;
-	}
-
-	public void setListCommentaire(List<Commentaire> listCommentaire) {
-		this.listCommentaire = listCommentaire;
-	}
-
-	public List<Utilisateur> getListUtilisateur() {
-		return listUtilisateur;
-	}
-
-	public void setListUtilisateur(List<Utilisateur> listUtilisateur) {
-		this.listUtilisateur = listUtilisateur;
-	}
-
-	public List<FormulaireContact> getListFormulaireContact() {
-		return listFormulaireContact;
-	}
-
-	public void setListFormulaireContact(List<FormulaireContact> listFormulaireContact) {
-		this.listFormulaireContact = listFormulaireContact;
+	
+	@Override
+	public void setSession(Map<String, Object> pSession) {
+		this.session=pSession;
+		
 	}
 	
-	public List<Photo> getListPhoto() {
-		return listPhoto;
-	}
-
-	public void setListPhoto(List<Photo> listPhoto) {
-		this.listPhoto = listPhoto;
-	}
-	
-	public String getImageAccueil() {
-		return imageAccueil;
-	}
-
-	public void setImageAccueil(String imageAccueil) {
-		this.imageAccueil = imageAccueil;
-	}
-
 	// ===================== Méthodes ======================
-	public String execute() {
-		return SUCCESS;
-	}
-
+	/**
+	 * Méthode permettant de récupérer des listes de variables en session qui 
+	 * seront utilisées dans plusieurs JSP car inclues dans la section header.
+	 * @return success
+	 */
 	public String doList() {
 		listPays = managerFactory.getPaysManager().getListPays();
 		listRegion = managerFactory.getRegionManager().getListRegion();
 		listDepartement = managerFactory.getDepartementManager().getListDepartement();
 		listSite=managerFactory.getSiteManager().getListSite();
-		listSecteur=managerFactory.getSecteurManager().getListSecteur();
-		listVoie=managerFactory.getVoieManager().getListVoie();
-		listCommentaire=managerFactory.getCommentaireManager().getListCommentaire();
-		listUtilisateur=managerFactory.getUtilisateurManager().getListUtilisateur();
-		listFormulaireContact=managerFactory.getFormulaireContactManager().getListFormulaireContact();
-		listPhoto=managerFactory.getPhotoManager().getListPhoto();
+		
+		//Ajout de variables en session
+		this.session.put("listPays", listPays);
+		this.session.put("listRegion", listRegion);
+		this.session.put("listDepartement", listDepartement);
+
 		System.out.println("Liste des pays :");
 		System.out.println(listPays);
 		System.out.println("Liste des régions :");
 		System.out.println(listRegion);
 		System.out.println("Liste des départements :");
 		System.out.println(listDepartement);
-		System.out.println(imageAccueil);
+		System.out.println("Liste des sites :");
+		System.out.println(listSite);
 
 		return ActionSupport.SUCCESS;
 	}
-
 }

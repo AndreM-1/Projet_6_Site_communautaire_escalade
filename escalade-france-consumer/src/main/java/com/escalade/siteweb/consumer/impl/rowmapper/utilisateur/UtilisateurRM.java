@@ -5,9 +5,16 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 
 public class UtilisateurRM implements RowMapper<Utilisateur>{
+	
+	private PhotoDao photoDao;
+	
+	public UtilisateurRM(PhotoDao photoDao) {
+		this.photoDao=photoDao;
+	}
 
 	@Override
 	public Utilisateur mapRow(ResultSet pRS, int pRowNum) throws SQLException {
@@ -25,6 +32,8 @@ public class UtilisateurRM implements RowMapper<Utilisateur>{
 		vUtilisateur.setVille(pRS.getString("ville"));
 		vUtilisateur.setPays(pRS.getString("pays"));
 		vUtilisateur.setAdministrateur(pRS.getBoolean("administrateur"));
+		if(photoDao.getPhotoUtilisateur(pRS.getInt("id"))!=null)
+			vUtilisateur.setPhotoUtilisateur(photoDao.getPhotoUtilisateur(pRS.getInt("id")));
 		return vUtilisateur;
 	}
 }

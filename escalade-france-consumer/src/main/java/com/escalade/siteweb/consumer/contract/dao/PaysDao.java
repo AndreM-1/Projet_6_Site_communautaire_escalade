@@ -8,4 +8,6 @@ public interface PaysDao {
 
 	List<Pays> getListPays();
 
+	Pays getPays(int paysId);
+
 }

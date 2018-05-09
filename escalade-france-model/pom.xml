@@ -30,6 +30,12 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>   
+        
+		<!-- Bibliothèque comportant des fonctionnalités pour la gestion des dates -->
+      	<dependency>
+		    <groupId>joda-time</groupId>
+		    <artifactId>joda-time</artifactId>
+		</dependency>
        	
        	<!-- Bibliothèque de tests unitaires utile uniquement pour la phase de test -->
     	<dependency>

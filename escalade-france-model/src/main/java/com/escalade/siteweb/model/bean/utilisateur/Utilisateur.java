@@ -7,6 +7,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import com.escalade.siteweb.model.bean.photo.Photo;
+
 public class Utilisateur {
 
 	// ==================== Attributs ====================
@@ -57,6 +59,9 @@ public class Utilisateur {
 	
 	@NotEmpty (message="Model - L'attribut administrateur doit être renseigné")
 	private Boolean administrateur;
+	
+	private Photo photoUtilisateur;
+
 
 	// ==================== Constructeurs ====================
 	/**
@@ -189,6 +194,15 @@ public class Utilisateur {
 	public void setAdministrateur(Boolean administrateur) {
 		this.administrateur = administrateur;
 	}
+	
+	public Photo getPhotoUtilisateur() {
+		return photoUtilisateur;
+	}
+
+
+	public void setPhotoUtilisateur(Photo photoUtilisateur) {
+		this.photoUtilisateur = photoUtilisateur;
+	}
 
 
 	// ==================== Méthodes ====================
@@ -211,6 +225,7 @@ public class Utilisateur {
 		.append(vSeparateur).append("ville=\"").append(ville).append('"')
 		.append(vSeparateur).append("pays=\"").append(pays).append('"')
 		.append(vSeparateur).append("administrateur=\"").append(administrateur).append('"')
+		.append(vSeparateur).append("photoUtilisateur=\"").append(photoUtilisateur).append('"')
 		.append("}");
 		return vStB.toString();
 	}

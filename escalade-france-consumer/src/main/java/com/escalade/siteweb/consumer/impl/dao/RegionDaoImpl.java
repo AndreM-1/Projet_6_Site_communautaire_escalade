@@ -26,4 +26,16 @@ public class RegionDaoImpl extends AbstractDaoImpl implements RegionDao {
 
         return vListRegion;
     }
+	
+	@Override
+	public Region getRegion(int regionId) {
+		String vSQL = "SELECT * FROM public.region WHERE id="+regionId;
+		
+		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
+		
+		RowMapper<Region> vRowMapper=new RegionRM();
+
+        List<Region> vListRegion=vJdbcTemplate.query(vSQL, vRowMapper);
+        return vListRegion.get(0);
+	}
 }

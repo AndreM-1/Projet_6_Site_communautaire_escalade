@@ -8,4 +8,6 @@ public interface RegionDao {
 
 	List<Region> getListRegion();
 
+	Region getRegion(int regionId);
+
 }
