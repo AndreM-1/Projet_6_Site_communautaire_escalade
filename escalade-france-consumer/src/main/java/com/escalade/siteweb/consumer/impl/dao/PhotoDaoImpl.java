@@ -44,7 +44,7 @@ public class PhotoDaoImpl extends AbstractDaoImpl implements PhotoDao{
 	}
 	
 	@Override
-	public List<Photo> getListPhotoSecteur(int siteId){
+	public List<Photo> getListPhotoAllSecteur(int siteId){
 		String vSQL = "SELECT * FROM public.photo INNER JOIN public.secteur ON photo.secteur_id=secteur.id WHERE secteur.site_id="+siteId;
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
 		
@@ -66,6 +66,18 @@ public class PhotoDaoImpl extends AbstractDaoImpl implements PhotoDao{
         List<Photo> vListPhoto=vJdbcTemplate.query(vSQL, vRowMapper);
         if(vListPhoto.size()!=0)	
         	return vListPhoto.get(0);
+        else
+        	return null;
+	}
+	
+	@Override
+	public List<Photo> getListPhotoSecteur(int secteurId) {
+		String vSQL="SELECT * FROM public.photo WHERE secteur_id="+secteurId;
+		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
+		RowMapper<Photo> vRowMapper=new PhotoRM();
+        List<Photo> vListPhoto=vJdbcTemplate.query(vSQL, vRowMapper);
+        if(vListPhoto.size()!=0)	
+        	return vListPhoto;
         else
         	return null;
 	}

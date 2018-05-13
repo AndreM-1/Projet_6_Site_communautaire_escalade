@@ -9,6 +9,9 @@
 		<div class="container-fluid">
 			<!-- Header -->
 			<%@ include file="_include/header.jsp"%>
+			<s:actionerror/>
+			
+			<!-- Formulaire de connexion -->
 			<div class="row">
 				<div class="col-lg-offset-4 col-lg-4" id="divConnexion">
 					<h1 class="text-center">Se connecter</h1>

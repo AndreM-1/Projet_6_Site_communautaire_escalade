@@ -8,4 +8,6 @@ public interface SecteurDao {
 
 	List<Secteur> getListSecteur();
 
+	List<Secteur> getListSecteur(int siteId);
+
 }

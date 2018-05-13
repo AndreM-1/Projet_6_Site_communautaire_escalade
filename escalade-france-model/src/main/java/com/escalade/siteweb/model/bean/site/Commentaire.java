@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 
+import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
+
 public class Commentaire {
 
 	// ==================== Attributs ====================
@@ -14,6 +16,10 @@ public class Commentaire {
 
 	@NotEmpty (message="Model - L'attribut dateCommentaire doit être renseigné")
 	private Date dateCommentaire;
+	
+	@NotEmpty (message="Model - L'attribut utilisateur doit être renseigné")
+	private Utilisateur utilisateur;
+
 
 	// ==================== Constructeurs ====================
 	/**
@@ -62,7 +68,15 @@ public class Commentaire {
 	public void setDateCommentaire(Date dateCommentaire) {
 		this.dateCommentaire = dateCommentaire;
 	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
 
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 
 	// ==================== Méthodes ====================
 	@Override
@@ -73,6 +87,7 @@ public class Commentaire {
 		.append("id=").append(id)
 		.append(vSeparateur).append("commentaire=\"").append(commentaire).append('"')
 		.append(vSeparateur).append("dateCommentaire=\"").append(dateCommentaire).append('"')
+		.append(vSeparateur).append("utilisateur=\"").append(utilisateur).append('"')
 		.append("}");
 		return vStB.toString();
 	}

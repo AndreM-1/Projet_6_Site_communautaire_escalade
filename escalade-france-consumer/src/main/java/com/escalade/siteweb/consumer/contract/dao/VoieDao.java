@@ -8,4 +8,6 @@ public interface VoieDao {
 
 	List<Voie> getListVoie();
 
+	List<Voie> getListVoie(int secteurId);
+
 }

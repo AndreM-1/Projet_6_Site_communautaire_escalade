@@ -2,17 +2,26 @@ package com.escalade.siteweb.consumer.impl.dao;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.contract.dao.SecteurDao;
+import com.escalade.siteweb.consumer.contract.dao.VoieDao;
 import com.escalade.siteweb.consumer.impl.rowmapper.site.SecteurRM;
 import com.escalade.siteweb.model.bean.site.Secteur;
 
 @Named
 public class SecteurDaoImpl extends AbstractDaoImpl implements SecteurDao {
+	
+	@Inject
+	private PhotoDao photoDao;
+	
+	@Inject
+	private VoieDao voieDao;
 	
 	@Override
 	public List<Secteur> getListSecteur() {
@@ -20,10 +29,26 @@ public class SecteurDaoImpl extends AbstractDaoImpl implements SecteurDao {
 
         JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
         
-        RowMapper<Secteur> vRowMapper=new SecteurRM();
+        RowMapper<Secteur> vRowMapper=new SecteurRM(photoDao,voieDao);
 
         List<Secteur> vListSecteur = vJdbcTemplate.query(vSQL, vRowMapper);
 
         return vListSecteur;
+    }
+	
+	@Override
+	public List<Secteur> getListSecteur(int siteId) {
+        String vSQL = "SELECT * FROM public.secteur WHERE site_id="+siteId;
+
+        JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
+        
+        RowMapper<Secteur> vRowMapper=new SecteurRM(photoDao,voieDao);
+
+        List<Secteur> vListSecteur = vJdbcTemplate.query(vSQL, vRowMapper);
+        
+        if(vListSecteur.size()!=0)
+        	return vListSecteur;
+        else
+        	return null;
     }
 }

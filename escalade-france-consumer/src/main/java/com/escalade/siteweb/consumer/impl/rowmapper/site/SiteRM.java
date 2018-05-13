@@ -5,10 +5,12 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.escalade.siteweb.consumer.contract.dao.CommentaireDao;
 import com.escalade.siteweb.consumer.contract.dao.DepartementDao;
 import com.escalade.siteweb.consumer.contract.dao.PaysDao;
 import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.contract.dao.RegionDao;
+import com.escalade.siteweb.consumer.contract.dao.SecteurDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.model.bean.site.Site;
 
@@ -19,13 +21,18 @@ public class SiteRM implements RowMapper<Site> {
 	private RegionDao regionDao;
 	private DepartementDao departementDao;
 	private PhotoDao photoDao;
+	private CommentaireDao commentaireDao;
+	private SecteurDao secteurDao;
 	
-	public SiteRM(UtilisateurDao utilisateurDao, PaysDao paysDao, RegionDao regionDao, DepartementDao departementDao,PhotoDao photoDao) {
+	public SiteRM(UtilisateurDao utilisateurDao, PaysDao paysDao, RegionDao regionDao, DepartementDao departementDao,PhotoDao photoDao,
+			CommentaireDao commentaireDao,SecteurDao secteurDao) {
 		this.utilisateurDao=utilisateurDao;
 		this.paysDao=paysDao;
 		this.regionDao=regionDao;
 		this.departementDao=departementDao;
 		this.photoDao=photoDao;
+		this.commentaireDao=commentaireDao;
+		this.secteurDao=secteurDao;
 	}
 
 	@Override
@@ -47,8 +54,15 @@ public class SiteRM implements RowMapper<Site> {
 		if(photoDao.getPhotoSite(pRS.getInt("id"))!=null)
 			vSite.setPhotoSite(photoDao.getPhotoSite(pRS.getInt("id")));
 		
-		if(photoDao.getListPhotoSecteur(pRS.getInt("id"))!=null)
-			vSite.setListPhotoSecteur(photoDao.getListPhotoSecteur(pRS.getInt("id")));
+		if(photoDao.getListPhotoAllSecteur(pRS.getInt("id"))!=null)
+			vSite.setListPhotoAllSecteur(photoDao.getListPhotoAllSecteur(pRS.getInt("id")));
+		
+		if(commentaireDao.getListCommentaire(pRS.getInt("id"))!=null)
+			vSite.setListCommentaire(commentaireDao.getListCommentaire(pRS.getInt("id")));
+		
+		if(secteurDao.getListSecteur(pRS.getInt("id"))!=null)
+			vSite.setListSecteur(secteurDao.getListSecteur(pRS.getInt("id")));
+		
 		return vSite;
 	}
 }

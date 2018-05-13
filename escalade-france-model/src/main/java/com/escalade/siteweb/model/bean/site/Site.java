@@ -51,8 +51,11 @@ public class Site {
 	
 	private Photo photoSite;
 	
-	private List<Photo> listPhotoSecteur;
-
+	private List<Photo> listPhotoAllSecteur;
+	
+	private List<Commentaire> listCommentaire;
+	
+	private List<Secteur> listSecteur;
 
 	// ==================== Constructeurs ====================
 	/**
@@ -210,15 +213,32 @@ public class Site {
 	}
 	
 
-	public List<Photo> getListPhotoSecteur() {
-		return listPhotoSecteur;
+	public List<Photo> getListPhotoAllSecteur() {
+		return listPhotoAllSecteur;
 	}
 
 
-	public void setListPhotoSecteur(List<Photo> listPhotoSecteur) {
-		this.listPhotoSecteur = listPhotoSecteur;
+	public void setListPhotoAllSecteur(List<Photo> listPhotoAllSecteur) {
+		this.listPhotoAllSecteur = listPhotoAllSecteur;
 	}
 	
+	public List<Commentaire> getListCommentaire() {
+		return listCommentaire;
+	}
+
+
+	public void setListCommentaire(List<Commentaire> listCommentaire) {
+		this.listCommentaire = listCommentaire;
+	}
+	
+	public List<Secteur> getListSecteur() {
+		return listSecteur;
+	}
+
+
+	public void setListSecteur(List<Secteur> listSecteur) {
+		this.listSecteur = listSecteur;
+	}
 
 	// ==================== Méthodes ====================
 	@Override
@@ -240,7 +260,9 @@ public class Site {
 		.append(vSeparateur).append("region=\"").append(region).append('"')
 		.append(vSeparateur).append("departement=\"").append(departement).append('"')
 		.append(vSeparateur).append("photoSite=\"").append(photoSite).append('"')
-		.append(vSeparateur).append("listPhotoSecteur=\"").append(listPhotoSecteur).append('"')
+		.append(vSeparateur).append("listPhotoAllSecteur=\"").append(listPhotoAllSecteur).append('"')
+		.append(vSeparateur).append("listCommentaire=\"").append(listCommentaire).append('"')
+		.append(vSeparateur).append("listSecteur=\"").append(listSecteur).append('"')
 		.append("}");
 		return vStB.toString();
 	}

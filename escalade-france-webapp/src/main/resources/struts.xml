@@ -38,6 +38,12 @@
 			<result>jsp/mentionslegales.jsp</result>
 		</action>
 		
+		<!-- Action "page_site" -->
+		<action name="page_site" class="com.escalade.siteweb.webapp.action.GestionAffichageSite"  method="doDetailSite">
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="success">jsp/site.jsp</result>
+		</action>
+		
 		 <!-- Actions Connexion/Deconnexion -->
  		<action name="connexion" class="com.escalade.siteweb.webapp.action.GestionConnexion" method="doLogin">
  			<!-- Référence à l'intercepteur permettant de bloquer l'accès à la page de connexion pour un utilisateur déjà connecté -->

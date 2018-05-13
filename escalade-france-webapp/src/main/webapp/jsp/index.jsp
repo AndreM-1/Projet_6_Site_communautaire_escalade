@@ -31,8 +31,14 @@
 										<h2 class="panel-title"><s:property value="utilisateur.pseudo"/> a ajouté un site</h2>
 									</s:else>	
 								</div>
-								<p><s:property value="nomSite"/></p>
-								<p><s:property value="pays.nomPays"/> - <s:property value="region.nomRegion"/> - <s:property value="departement.nomDepartement"/></p>
+								<p class="paraFilActivite">
+									<s:a action="page_site">
+										<s:param name="id" value="id"/>
+										<s:property value="nomSite"/>
+									</s:a>
+								</p>
+								<p class="paraFilActivite"><s:property value="pays.nomPays"/> - <s:property value="region.nomRegion"/> - 
+								<s:property value="departement.nomDepartement"/></p>
 								
 								<div class="row" id="rowPhoto">
 									<s:if test="%{photoSite!=null}">
@@ -41,14 +47,14 @@
 										</div>
 									</s:if>
 								
-									<s:iterator value="listPhotoSecteur" begin="0" end="1">
-										<s:if test="%{listPhotoSecteur!=null}">
+									<s:iterator value="listPhotoAllSecteur" begin="0" end="1">
+										<s:if test="%{listPhotoAllSecteur!=null}">
 											<div class="col-lg-4">
 												<img src="<s:property value="nomPhoto"/>" alt="Photo d'un secteur" height=200px/>
 											</div>
 										</s:if>
 									</s:iterator>
-									<s:if test="%{photoSite==null&&listPhotoSecteur==null}">
+									<s:if test="%{photoSite==null&&listPhotoAllSecteur==null}">
 										<div id="photoParDefaut"></div>
 									</s:if>	
 								</div>

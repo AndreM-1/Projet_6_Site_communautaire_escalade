@@ -10,8 +10,10 @@ public interface PhotoDao {
 
 	Photo getPhotoSite(int siteId);
 
-	List<Photo> getListPhotoSecteur(int siteId);
-
 	Photo getPhotoUtilisateur(int utilisateurId);
+
+	List<Photo> getListPhotoAllSecteur(int siteId);
+	
+	List<Photo> getListPhotoSecteur(int secteurId);
 
 }
