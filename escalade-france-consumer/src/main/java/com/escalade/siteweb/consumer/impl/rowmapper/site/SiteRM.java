@@ -13,6 +13,7 @@ import com.escalade.siteweb.consumer.contract.dao.RegionDao;
 import com.escalade.siteweb.consumer.contract.dao.SecteurDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.model.bean.site.Site;
+import com.escalade.siteweb.model.exception.NotFoundException;
 
 public class SiteRM implements RowMapper<Site> {
 	
@@ -46,7 +47,11 @@ public class SiteRM implements RowMapper<Site> {
 		vSite.setDateDeFin(pRS.getDate("date_de_fin"));
 		vSite.setDateAjoutSite(pRS.getTimestamp("date_ajout_site"));
 		vSite.setDateMajSite(pRS.getTimestamp("date_maj_site"));
-		vSite.setUtilisateur(utilisateurDao.getUtilisateur(pRS.getInt("utilisateur_id")));
+		try {
+			vSite.setUtilisateur(utilisateurDao.getUtilisateur(pRS.getInt("utilisateur_id")));
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
 		vSite.setPays(paysDao.getPays(pRS.getInt("pays_id")));
 		vSite.setRegion(regionDao.getRegion(pRS.getInt("region_id")));
 		vSite.setDepartement(departementDao.getDepartement(pRS.getInt("departement_id")));

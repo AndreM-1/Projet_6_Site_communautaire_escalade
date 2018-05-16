@@ -11,4 +11,6 @@ public interface SiteDao {
 
 	Site getSite(int siteId) throws NotFoundException;
 
+	List<Site> getListSite(int utilisateurId) throws NotFoundException;
+
 }

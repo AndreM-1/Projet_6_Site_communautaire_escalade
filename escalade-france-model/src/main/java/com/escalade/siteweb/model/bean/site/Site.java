@@ -10,8 +10,13 @@ import com.escalade.siteweb.model.bean.photo.Photo;
 import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 
 
-public class Site {
+public class Site implements java.io.Serializable {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// ==================== Attributs ====================
 	private Integer id;

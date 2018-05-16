@@ -6,15 +6,23 @@
 <struts>
 	<package name="default" extends="struts-default">
 	
-		<!-- Définition de l'intercepteur permettant de bloquer l'accès à la page de connexion pour un utilisateur déjà connecté -->
+		<!-- Définition des intercepteurs -->
 		<interceptors>
+			<!-- Définition de l'intercepteur permettant de bloquer l'accès à la page de connexion pour un utilisateur déjà connecté -->
 			<interceptor name="RefusAPC" class="com.escalade.siteweb.webapp.interceptor.RefusAPCInterceptor"/>
 			<interceptor-stack name="RefusAccesPageConnexionStack">
 				<interceptor-ref name="RefusAPC"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
+			
+			<!-- Définition de l'intercepteur permettant de bloquer l'accès à la page de profil ou de réservation de topo pour un utilisateur non connecté -->
+			<interceptor name="Auth" class="com.escalade.siteweb.webapp.interceptor.AuthInterceptor"></interceptor>
+			<interceptor-stack name="AuthenticatedStack">
+				<interceptor-ref name="Auth"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
 		</interceptors>
-	
+
 		<!-- Action par défaut -->
 		<default-action-ref name="index"/>
 		
@@ -42,6 +50,47 @@
 		<action name="page_site" class="com.escalade.siteweb.webapp.action.GestionAffichageSite"  method="doDetailSite">
 			<result name="error">jsp/erreur.jsp</result>
 			<result name="success">jsp/site.jsp</result>
+		</action>
+		
+		<!-- Action "page_utilisateur_fa" -->
+		<action name="page_utilisateur_fa" class="com.escalade.siteweb.webapp.action.GestionAffichageUtilisateur"  method="doDetailUtilisateur">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="success">jsp/utilisateurfa.jsp</result>
+		</action>
+		
+		<!-- Action "page_utilisateur_coord" -->
+		<action name="page_utilisateur_coord" class="com.escalade.siteweb.webapp.action.GestionAffichageUtilisateur"  method="doDetailUtilisateur">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="success">jsp/utilisateurcoord.jsp</result>
+		</action>
+		
+		<!-- Action "page_utilisateur_mdp" -->
+		<action name="page_utilisateur_mdp" class="com.escalade.siteweb.webapp.action.GestionAffichageUtilisateur"  method="doDetailUtilisateur">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo"  type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="success">jsp/utilisateurmdp.jsp</result>
+		</action>
+		
+		<!-- Action "update_utilisateur" -->
+		<action name="update_utilisateur" class="com.escalade.siteweb.webapp.action.GestionAffichageUtilisateur" method="doUpdateUtilisateur">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="success">jsp/utilisateurcoord.jsp</result>
+			<result name="success-deconnexion-chgt-pseudo" type="redirectAction">deconnexion</result>
+		</action>
+		
+		<!-- Action "update_mdp" -->
+		<action name="update_mdp" class="com.escalade.siteweb.webapp.action.GestionAffichageUtilisateur" method="doUpdateMdp">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="success">jsp/utilisateurmdp.jsp</result>
 		</action>
 		
 		 <!-- Actions Connexion/Deconnexion -->

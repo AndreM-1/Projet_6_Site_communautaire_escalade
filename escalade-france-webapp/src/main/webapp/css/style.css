@@ -1,6 +1,5 @@
 body{
 	background-color:#DDD;
-	
 }
 
 #nomSiteWeb{
@@ -84,10 +83,54 @@ h1{
 	font-size:0.6em;
 }
 
+#navProfilUtilisateur ul{
+	list-style-type:none;
+	display:flex;
+	border-bottom: 1px solid grey;
+	padding-left:0px;
+	
+}
+
+#navProfilUtilisateur li{
+	margin-right:30px;
+}
+
+#navProfilUtilisateur a{
+	font-size: 1.5em;
+    color: #181818;
+    padding-bottom: 3px;
+    text-decoration: none;
+}
+
+#navProfilUtilisateur a:hover{
+	color: #181818;
+    border-bottom: 4px solid #181818;
+}
+
+#idUtilisateur{
+	display:none;
+}
+
+#filActivite{
+	border-bottom: 4px solid #181818;
+}
+
+#mescoordonnees{
+	border-bottom: 4px solid #181818;	
+}
+
+#monmotdepasse{
+	border-bottom: 4px solid #181818;
+}
+
+#formUtilisateurCoord,#formUtilisateurMdp{
+	margin-bottom:25px;
+}
+
 
 footer{
 	border: 1px solid grey;
-	bottom:25px;
+	margin-bottom:0px;
 	background-color:#404040;
 	color:white;
 }

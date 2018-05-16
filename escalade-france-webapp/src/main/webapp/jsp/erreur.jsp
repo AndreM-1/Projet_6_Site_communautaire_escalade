@@ -11,7 +11,7 @@
 		<div class="container-fluid">
 			<!-- Header -->
 			<%@ include file="_include/header.jsp"%>
-		    <h1 class="text-center">Une erreur s'est produite lors de la sélection d'un site</h1>
+		    <h1 class="text-center">Une erreur s'est produite</h1>
 		    <s:actionerror />
 		    
 			<!-- Pied de page -->

@@ -3,7 +3,13 @@ package com.escalade.siteweb.model.bean.site;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class Pays {
+public class Pays implements java.io.Serializable {
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// ==================== Attributs ====================
 	private Integer id;

@@ -73,4 +73,20 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao{
         	 throw new NotFoundException("Consumer - Aucun site ne correspond à l'ID demandé.");
 		
 	}
+	
+	@Override
+	public List<Site> getListSite(int utilisateurId) throws NotFoundException{
+		String vSQL = "SELECT * FROM public.site WHERE utilisateur_id = "+utilisateurId + " ORDER BY date_maj_site DESC";
+		
+		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
+		
+		RowMapper<Site> vRowMapper=new SiteRM(utilisateurDao,paysDao,regionDao,departementDao,photoDao,commentaireDao,secteurDao);
+		
+		List<Site> vListSite = vJdbcTemplate.query(vSQL, vRowMapper);
+		
+        if(vListSite.size()!=0)	
+        	return vListSite;
+        else
+        	 throw new NotFoundException("Consumer - L'utilisateur n'a pas encore posté de site.");
+	}
 }

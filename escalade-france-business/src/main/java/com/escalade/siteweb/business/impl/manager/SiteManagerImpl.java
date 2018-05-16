@@ -30,4 +30,14 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 			throw new NotFoundException("Business - Aucun site ne correspond à l'ID demandé.");
 		}
 	}
+	
+	@Override
+	public List<Site> getListSite(int utilisateurId) throws NotFoundException{
+		try {
+			listSite=getDaoFactory().getSiteDao().getListSite(utilisateurId);  
+			return listSite;
+		} catch (NotFoundException e) {
+			throw new NotFoundException("Business - L'utilisateur n'a pas encore posté de site.");
+		}
+	}
 }

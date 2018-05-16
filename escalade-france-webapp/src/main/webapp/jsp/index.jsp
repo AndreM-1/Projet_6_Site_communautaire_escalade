@@ -17,7 +17,7 @@
 			</section>
 
 			<!-- Section Fil d'activité -->
-			<section id="filActivite">
+			<section>
 				<h1>Fil d'activité</h1>
 				<div class="row" id=rowFilActivite>
 					<s:iterator value="listSite">
@@ -25,10 +25,41 @@
 							<div class="panel panel-info" id="panel">
 								<div class="panel-heading">
 									<s:if test="%{dateAjoutSite!=dateMajSite}">
-										<h2 class="panel-title"><s:property value="utilisateur.pseudo"/> a mis à jour un site</h2>
+										<h2 class="panel-title">
+											<s:if test="#session.user">
+												<s:a action="page_utilisateur_fa">
+													<s:param name="id" value="utilisateur.id"/>
+													<s:property value="utilisateur.pseudo"/>
+												</s:a> a mis à jour un site
+
+											</s:if>
+											<s:else>
+												<s:a action="page_utilisateur_fa" data-toggle="tooltip" 
+												title="Vous devez être connecté pour avoir accès au profil d'un utilisateur">
+													<s:param name="id" value="utilisateur.id"/>
+													<s:property value="utilisateur.pseudo"/>
+												</s:a> a mis à jour un site
+											</s:else>
+										</h2>
 									</s:if>
 									<s:else>
-										<h2 class="panel-title"><s:property value="utilisateur.pseudo"/> a ajouté un site</h2>
+										<h2 class="panel-title">
+											<s:if test="#session.user">
+												<s:a action="page_utilisateur_fa">
+													<s:param name="id" value="utilisateur.id"/>
+													<s:property value="utilisateur.pseudo"/>
+												</s:a> 
+												a ajouté un site
+											</s:if>
+											<s:else>
+												<s:a action="page_utilisateur_fa" data-toggle="tooltip"
+												title="Vous devez être connecté pour avoir accès au profil d'un utilisateur">
+													<s:param name="id" value="utilisateur.id"/>
+													<s:property value="utilisateur.pseudo"/>
+												</s:a> 
+												a ajouté un site											
+											</s:else>
+										</h2>
 									</s:else>	
 								</div>
 								<p class="paraFilActivite">
@@ -66,6 +97,11 @@
 			</section>
 			
 			<!-- Pied de page -->
+			<script>
+			$(function (){
+   			$('a').tooltip();
+			});
+			</script>
 			<%@ include file="_include/footer.jsp"%>
 		</div>
 

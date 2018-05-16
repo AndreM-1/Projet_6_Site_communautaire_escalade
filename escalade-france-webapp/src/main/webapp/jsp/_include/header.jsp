@@ -25,6 +25,12 @@
 		<s:if test="#session.user">
 			<s:a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><s:property value="#session.user.pseudo" /></s:a>
 			<ul class="dropdown-menu">
+				<li>
+				<s:a action="page_utilisateur_fa">
+					<s:param name="id" value="#session.user.id"/>
+					Fil d'activité
+				</s:a>
+				</li>
 				<li><s:a action="deconnexion">Déconnexion</s:a></li>
 			</ul>	
 		</s:if>
@@ -33,7 +39,7 @@
 		</s:else>
 	</div>
 	<div class="col-lg-1">
-		<a class="btn btn-primary">Ajouter un site</a>	
+		<s:a class="btn btn-primary">Ajouter un site</s:a>
 	</div>
 	<div class="col-lg-1">	
 		<select id="selectLangue" name="langue" class="form-control">

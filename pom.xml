@@ -190,12 +190,19 @@
 				<version>2.3.34</version>
 			</dependency>
 			
-			<!-- Dépendance liée au plugin bootstrap -->
+			<!-- Dépendance liée au plugin bootstrap de Struts 2 -->
 	        <dependency>
 		        <groupId>com.jgeppert.struts2.bootstrap</groupId>
 		        <artifactId>struts2-bootstrap-plugin</artifactId>
 		        <version>2.5.2</version>
 	   		</dependency>
+	   		
+	   		<!-- Dépendance liée au plugin Dojo Ajax Tags de Struts 2 -->
+	   		<dependency>
+			    <groupId>org.apache.struts</groupId>
+			    <artifactId>struts2-dojo-plugin</artifactId>
+			    <version>2.3.34</version>
+			</dependency>
 			
 			<!-- Gestion des logs avec Log4j2. Spring et Struts n'utilisent pas les mêmes systèmes de log.
 			Struts utilise Apache Log4j2 tandis que Spring utilise Apache Commons Logging. On va rediriger

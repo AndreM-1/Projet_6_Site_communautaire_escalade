@@ -6,7 +6,12 @@ import javax.validation.constraints.NotEmpty;
 
 import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 
-public class Commentaire {
+public class Commentaire implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// ==================== Attributs ====================
 	private Integer id;

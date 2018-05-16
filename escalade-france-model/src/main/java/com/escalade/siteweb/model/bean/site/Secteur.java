@@ -7,7 +7,12 @@ import javax.validation.constraints.Size;
 
 import com.escalade.siteweb.model.bean.photo.Photo;
 
-public class Secteur {
+public class Secteur implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// ==================== Attributs ====================
 	private Integer id;

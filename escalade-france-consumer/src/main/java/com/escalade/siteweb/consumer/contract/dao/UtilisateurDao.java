@@ -9,8 +9,12 @@ public interface UtilisateurDao {
 
 	List<Utilisateur> getListUtilisateur();
 
-	Utilisateur getUtilisateur(int utilisateurId);
-
 	Utilisateur getUtilisateur(String adresseMail, String motDePasse) throws NotFoundException;
+
+	Utilisateur getUtilisateur(int utilisateurId) throws NotFoundException;
+
+	void updateUtilisateur(Utilisateur utilisateur);
+
+	void updateMdp(Utilisateur utilisateur);
 
 }

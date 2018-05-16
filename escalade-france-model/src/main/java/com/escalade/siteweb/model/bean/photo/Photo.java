@@ -3,8 +3,13 @@ package com.escalade.siteweb.model.bean.photo;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class Photo {
+public class Photo implements java.io.Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// ==================== Attributs ====================
 	private Integer id;
 

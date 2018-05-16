@@ -3,43 +3,55 @@ package com.escalade.siteweb.model.bean.utilisateur;
 import java.util.Date;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import com.escalade.siteweb.model.bean.photo.Photo;
 
-public class Utilisateur {
+public class Utilisateur implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// ==================== Attributs ====================
 	private Integer id;
 	
 	@NotEmpty (message="Model - L'attribut civilite doit être renseigné")
+	@NotBlank(message="Model - L'attribut civilite doit être renseigné")
 	@Size (min=1,max=8,message="Model - L'attribut civilite ne doit pas comporter plus de 8 caractères")
 	private String civilite;
 	
 	@NotEmpty (message="Model - L'attribut nom doit être renseigné")
+	@NotBlank(message="Model - L'attribut nom doit être renseigné")
 	@Size (min=1,max=100,message="Model - L'attribut nom ne doit pas comporter plus de 100 caractères")
 	private String nom;
 	
 	@NotEmpty (message="Model - L'attribut prenom doit être renseigné")
+	@NotBlank(message="Model - L'attribut prenom doit être renseigné")
 	@Size (min=1,max=100,message="Model - L'attribut prenom ne doit pas comporter plus de 100 caractères")
 	private String prenom;
 	
 	@NotEmpty (message="Model - L'attribut pseudo doit être renseigné")
+	@NotBlank(message="Model - L'attribut pseudo doit être renseigné")
 	@Size (min=1,max=100,message="Model - L'attribut pseudo ne doit pas comporter plus de 100 caractères")
 	private String pseudo;
 	
 	@NotEmpty (message="Model - L'attribut adresseMail doit être renseigné")
+	@NotBlank(message="Model - L'attribut adresseMail doit être renseigné")
 	@Email   (message="Model - Le format d'adresse mail n'est pas valide")
 	@Size (min=1,max=100,message="Model - L'attribut adresseMail ne doit pas comporter plus de 100 caractères")
 	private String adresseMail;
 	
 	@NotEmpty (message="Model - L'attribut motDePasse doit être renseigné")
+	@NotBlank(message="Model - L'attribut motDePasse doit être renseigné")
 	@Size (min=1,max=100,message="Model - L'attribut motDePasse ne doit pas comporter plus de 100 caractères")
 	private String motDePasse;
 	
-	@Size(min=14, max=14, message="Model - L'attribut téléphone doit comporter 14 caractères")
+	@Size(min=0, max=14, message="Model - L'attribut téléphone doit comporter 14 caractères")
 	private String telephone;
 	
 	@Past(message="La date de naissance doit être située dans le passé")
@@ -57,7 +69,6 @@ public class Utilisateur {
 	@Size (min=0,max=20,message="Model - L'attribut pays ne doit pas comporter plus de 20 caractères")
 	private String pays;
 	
-	@NotEmpty (message="Model - L'attribut administrateur doit être renseigné")
 	private Boolean administrateur;
 	
 	private Photo photoUtilisateur;
