@@ -36,10 +36,8 @@ public class Site implements java.io.Serializable {
 
 	private Date dateDeFin;
 
-	@NotEmpty (message="Model - L'attribut dateAjoutSite doit être renseigné")
 	private Date dateAjoutSite;
 
-	@NotEmpty (message="Model - L'attribut dateMajSite doit être renseigné")
 	private Date dateMajSite;
 	
 	@NotEmpty (message="Model - L'attribut utilisateur doit être renseigné")
@@ -260,10 +258,10 @@ public class Site implements java.io.Serializable {
 		.append(vSeparateur).append("dateDeFin=\"").append(dateDeFin).append('"')
 		.append(vSeparateur).append("dateAjoutSite=\"").append(dateAjoutSite).append('"')
 		.append(vSeparateur).append("dateMajSite=\"").append(dateMajSite).append('"')
-		.append(vSeparateur).append("utilisateur=\"").append(utilisateur).append('"')
-		.append(vSeparateur).append("pays=\"").append(pays).append('"')
-		.append(vSeparateur).append("region=\"").append(region).append('"')
-		.append(vSeparateur).append("departement=\"").append(departement).append('"')
+		.append(vSeparateur).append("utilisateur=\"").append(utilisateur.getPseudo()).append('"')
+		.append(vSeparateur).append("pays=\"").append(pays.getNomPays()).append('"')
+		.append(vSeparateur).append("region=\"").append(region.getNomRegion()).append('"')
+		.append(vSeparateur).append("departement=\"").append(departement.getNomDepartement()).append('"')
 		.append(vSeparateur).append("photoSite=\"").append(photoSite).append('"')
 		.append(vSeparateur).append("listPhotoAllSecteur=\"").append(listPhotoAllSecteur).append('"')
 		.append(vSeparateur).append("listCommentaire=\"").append(listCommentaire).append('"')

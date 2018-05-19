@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.escalade.siteweb.business.contract.ManagerFactory;
@@ -13,6 +15,7 @@ import com.escalade.siteweb.model.bean.site.Pays;
 import com.escalade.siteweb.model.bean.site.Region;
 import com.escalade.siteweb.model.bean.site.Site;
 import com.opensymphony.xwork2.ActionSupport;
+
 
 public class GestionAffichageAccueil extends ActionSupport implements SessionAware {
 	// ===================== Attributs =====================
@@ -33,7 +36,9 @@ public class GestionAffichageAccueil extends ActionSupport implements SessionAwa
 	
 	// ----- Eléments Struts
 	private Map<String, Object> session;
-
+	
+	
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(GestionAffichageAccueil.class);
 
 	// ===================== Getters/Setters ===============	
 	public List<Pays> getListPays() {
@@ -91,14 +96,14 @@ public class GestionAffichageAccueil extends ActionSupport implements SessionAwa
 		this.session.put("listRegion", listRegion);
 		this.session.put("listDepartement", listDepartement);
 
-		System.out.println("Liste des pays :");
-		System.out.println(listPays);
-		System.out.println("Liste des régions :");
-		System.out.println(listRegion);
-		System.out.println("Liste des départements :");
-		System.out.println(listDepartement);
-		System.out.println("Liste des sites :");
-		System.out.println(listSite);
+		LOGGER.info("Liste des pays :");
+		LOGGER.info(listPays);
+		LOGGER.info("Liste des régions :");
+		LOGGER.info(listRegion);
+		LOGGER.info("Liste des départements :");
+		LOGGER.info(listDepartement);
+		LOGGER.info("Liste des sites :");
+		LOGGER.info(listSite.get(0));
 
 		return ActionSupport.SUCCESS;
 	}

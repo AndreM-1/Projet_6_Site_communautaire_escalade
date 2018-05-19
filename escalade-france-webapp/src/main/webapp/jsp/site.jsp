@@ -12,6 +12,7 @@
 			
 			<!-- Section liée au détail d'un site -->
 			<h1 class="text-center"><s:property value="site.nomSite"/></h1>
+			
 			<h2>Ajouté par : <s:property value="site.utilisateur.pseudo"/></h2>
 			<h2>Localisation 
 				<s:if test="#session.user.pseudo==site.utilisateur.pseudo">
@@ -31,7 +32,7 @@
 			<s:if test="%{site.photoSite!=null}">
 				<img src="<s:property value="site.photoSite.nomPhoto"/>" alt="Photo d'un site"   />
 			</s:if>
-			
+	
 			<s:iterator value="site.listSecteur">
 				<h2>Secteur <s:property value="nomSecteur"/>
 					<s:if test="#session.user.pseudo==site.utilisateur.pseudo">
@@ -127,8 +128,9 @@
 						<a href="#ajoutCommentaire" data-toggle="collapse">Ajouter un commentaire</a>
 					</div>
 					<div>
-						<s:form id="ajoutCommentaire" class="panel-collapse collapse">
+						<s:form id="ajoutCommentaire" class="panel-collapse collapse" action="ajout_commentaire">
 							<div class="form-group">
+								<s:hidden name="site.id" label="Site id" />
 								<s:textarea name="commentaire.commentaire" class="form-control" rows="4"> </s:textarea>
 								<s:submit value="Valider" class="btn btn-primary"/>
 							</div>
@@ -140,8 +142,20 @@
 				</s:else>
 			</div>
 			<s:iterator value="site.listCommentaire">
-				<p><img src="<s:property value="utilisateur.photoUtilisateur.nomPhoto"/>" alt="Photo utilisateur"  width=40px height=40px/>
-				<s:property value="commentaire"/></p>
+				<p>
+					<s:if test="%{utilisateur.photoUtilisateur==null}">
+						<s:if test="%{utilisateur.civilite=='Monsieur'}">
+							<img src="jsp/assets/images/photo_profil_homme_anonyme.jpg" alt="Photo utilisateur" width=40px height=40px/>
+						</s:if>
+						<s:else>
+							<img src="jsp/assets/images/photo_profil_femme_anonyme.jpg" alt="Photo utilisateur" width=40px height=40px/>
+						</s:else>			
+					</s:if>
+					<s:else>
+						<img src="<s:property value="utilisateur.photoUtilisateur.nomPhoto"/>" alt="Photo utilisateur"  width=40px height=40px/>
+					</s:else>
+					<strong><s:property value="utilisateur.pseudo"/></strong> <s:property value="commentaire"/>
+				</p>
 			</s:iterator>
 			
 			<!-- Pied de page -->

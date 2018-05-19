@@ -18,4 +18,5 @@ public interface UtilisateurManager {
 
 	void updateMdp(Utilisateur utilisateur) throws FunctionalException;
 
+	void insertUtilisateur(Utilisateur utilisateur) throws FunctionalException;
 }

@@ -8,6 +8,7 @@ import javax.inject.Named;
 import javax.validation.ConstraintViolation;
 
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -52,7 +53,8 @@ public class UtilisateurManagerImpl extends AbstractManager implements Utilisate
 
 	@Override
 	public void updateUtilisateur(Utilisateur utilisateur) throws FunctionalException {
-
+		
+		//On lève une exception si la validation de bean échoue.
 		Set<ConstraintViolation<Utilisateur>> vViolations = getConstraintValidator().validate(utilisateur);
 
 		if(!vViolations.isEmpty()) {
@@ -62,6 +64,7 @@ public class UtilisateurManagerImpl extends AbstractManager implements Utilisate
 			throw new FunctionalException("Certains paramètres ne sont pas renseignés ou pas renseignés correctement.");
 		}
 
+		//Utilisation d'un TransactionTemplate.
 		TransactionTemplate vTransactionTemplate=new TransactionTemplate(getPlatformTransactionManager());
 		vTransactionTemplate.execute(new TransactionCallbackWithoutResult() {
 			protected void doInTransactionWithoutResult(TransactionStatus pTransactionStatus) {
@@ -69,9 +72,11 @@ public class UtilisateurManagerImpl extends AbstractManager implements Utilisate
 			}   
 		});
 	}
-	
+
 	@Override
 	public void updateMdp (Utilisateur utilisateur) throws FunctionalException{
+		
+		//On lève une exception si la validation de bean échoue.
 		Set<ConstraintViolation<Utilisateur>> vViolations = getConstraintValidator().validate(utilisateur);
 
 		if(!vViolations.isEmpty()) {
@@ -81,11 +86,38 @@ public class UtilisateurManagerImpl extends AbstractManager implements Utilisate
 			throw new FunctionalException("Le nouveau mot de passe n'est pas renseigné correctement.");
 		}
 		
+		//Utilisation d'un TransactionTemplate.
 		TransactionTemplate vTransactionTemplate=new TransactionTemplate(getPlatformTransactionManager());
 		vTransactionTemplate.execute(new TransactionCallbackWithoutResult() {
 			protected void doInTransactionWithoutResult(TransactionStatus pTransactionStatus) {
 				getDaoFactory().getUtilisateurDao().updateMdp(utilisateur);	
 			}   
 		});
+	}
+
+	@Override
+	public void insertUtilisateur (Utilisateur utilisateur) throws FunctionalException {
+		
+		//On lève une exception si la validation de bean échoue.
+		Set<ConstraintViolation<Utilisateur>> vViolations = getConstraintValidator().validate(utilisateur);
+
+		if(!vViolations.isEmpty()) {
+			for (ConstraintViolation<Utilisateur> violation : vViolations) {
+				System.out.println((violation.getMessage())); 
+			}
+			throw new FunctionalException("Certains paramètres ne sont pas renseignés correctement.");
+		}
+		
+		//Cette fois-ci, on utilise un TransactionStatus. En effet, contrairement aux cas précédents, on a besoin cette fois-ci de
+		//lever une FunctionalException, ce qui n'est pas possible avec l'utilisation d'une classe anonyme du transaction template.
+		TransactionStatus vTransactionStatus= getPlatformTransactionManager().getTransaction(new DefaultTransactionDefinition());
+		try {
+			getDaoFactory().getUtilisateurDao().insertUtilisateur(utilisateur);
+		} catch (FunctionalException vEx) {
+			getPlatformTransactionManager().rollback(vTransactionStatus);
+			throw new FunctionalException("Le pseudo ou l'adresse mail existe déjà.");
+		}
+		getPlatformTransactionManager().commit(vTransactionStatus);
+
 	}
 }

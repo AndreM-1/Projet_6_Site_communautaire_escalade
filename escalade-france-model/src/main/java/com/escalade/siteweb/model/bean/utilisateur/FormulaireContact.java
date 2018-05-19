@@ -1,7 +1,10 @@
 package com.escalade.siteweb.model.bean.utilisateur;
 
 
+import java.util.Date;
+
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -15,20 +18,29 @@ public class FormulaireContact implements java.io.Serializable {
 	// ==================== Attributs ====================
 	private Integer id;
 
-	@Size (min=0,max=100,message="Model - L'attribut nomNa ne doit pas comporter plus de 100 caractères")
+	@NotEmpty (message="Model - L'attribut nomNa doit être renseigné")
+	@NotBlank(message="Model - L'attribut nomNa doit être renseigné")
+	@Size (min=1,max=100,message="Model - L'attribut nomNa ne doit pas comporter plus de 100 caractères")
 	private String nomNa;
 
+	@NotEmpty (message="Model - L'attribut adresseMailNa doit être renseigné")
+	@NotBlank(message="Model - L'attribut adresseMailNa doit être renseigné")
 	@Email(message="Model - Le format d'adresse mail n'est pas valide")
-	@Size (min=0,max=100,message="Model - L'attribut adresseMailNa ne doit pas comporter plus de 100 caractères")
+	@Size (min=1,max=100,message="Model - L'attribut adresseMailNa ne doit pas comporter plus de 100 caractères")
 	private String adresseMailNa;
 
 	@NotEmpty (message="Model - L'attribut objet doit être renseigné")
+	@NotBlank(message="Model - L'attribut objet doit être renseigné")
 	@Size (min=1,max=100,message="Model - L'attribut objet ne doit pas comporter plus de 100 caractères")
 	private String objet;
 
 	@NotEmpty (message="Model - L'attribut message doit être renseigné")
+	@NotBlank (message="Model - L'attribut message doit être renseigné")
 	private String message;
 
+	private Utilisateur utilisateur;
+	
+	private Date dateFormContact;
 
 
 	// ==================== Constructeurs ====================
@@ -98,6 +110,24 @@ public class FormulaireContact implements java.io.Serializable {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	
+	public Date getDateFormContact() {
+		return dateFormContact;
+	}
+
+
+	public void setDateFormContact(Date dateFormContact) {
+		this.dateFormContact = dateFormContact;
+	}
 
 
 	// ==================== Méthodes ====================
@@ -111,6 +141,8 @@ public class FormulaireContact implements java.io.Serializable {
 		.append(vSeparateur).append("adresseMailNa=\"").append(adresseMailNa).append('"')
 		.append(vSeparateur).append("objet=\"").append(objet).append('"')
 		.append(vSeparateur).append("message=\"").append(message).append('"')
+		.append(vSeparateur).append("utilisateur=\"").append(utilisateur.getId()).append('"')
+		.append(vSeparateur).append("dateFormContact=\"").append(dateFormContact).append('"')
 		.append("}");
 		return vStB.toString();
 	}

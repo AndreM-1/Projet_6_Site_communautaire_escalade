@@ -25,11 +25,14 @@
 		<s:if test="#session.user">
 			<s:a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><s:property value="#session.user.pseudo" /></s:a>
 			<ul class="dropdown-menu">
+				<s:if test="#session.user.administrateur==true">
+					<li><s:a action="visu_formulaire_contact">Formulaire Contact</s:a></li>
+				</s:if>
 				<li>
-				<s:a action="page_utilisateur_fa">
-					<s:param name="id" value="#session.user.id"/>
-					Fil d'activité
-				</s:a>
+					<s:a action="page_utilisateur_fa">
+						<s:param name="id" value="#session.user.id"/>
+						Fil d'activité
+					</s:a>
 				</li>
 				<li><s:a action="deconnexion">Déconnexion</s:a></li>
 			</ul>	

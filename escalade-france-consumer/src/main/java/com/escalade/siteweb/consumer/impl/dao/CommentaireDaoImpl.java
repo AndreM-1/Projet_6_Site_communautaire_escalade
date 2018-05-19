@@ -1,12 +1,19 @@
 package com.escalade.siteweb.consumer.impl.dao;
 
+import java.sql.PreparedStatement;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.joda.time.DateTime;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import com.escalade.siteweb.consumer.contract.dao.CommentaireDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
@@ -47,4 +54,12 @@ public class CommentaireDaoImpl extends AbstractDaoImpl implements CommentaireDa
         else
         	return null;
     }
+	
+	@Override
+	public void insertCommentaire(String commentaire, int utilisateurId, int siteId, Date date) {
+		
+		JdbcTemplate vJdbcTemplate=new JdbcTemplate(getDataSource());
+		vJdbcTemplate.update("INSERT INTO public.commentaire(commentaire,utilisateur_id,site_id,date_commentaire) VALUES(?,?,?,?)", commentaire,utilisateurId,siteId,date);
+		
+	}
 }

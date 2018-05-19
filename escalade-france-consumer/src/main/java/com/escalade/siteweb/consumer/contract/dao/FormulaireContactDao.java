@@ -8,4 +8,6 @@ public interface FormulaireContactDao {
 
 	List<FormulaireContact> getListFormulaireContact();
 
+	void insertFormulaireContact(FormulaireContact formulaireContact, Boolean bUtil);
+
 }

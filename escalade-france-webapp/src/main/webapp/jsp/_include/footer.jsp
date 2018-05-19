@@ -3,7 +3,7 @@
 <footer>
 	<div class="row">
 		<div class="col-lg-2"> <s:a action="page_generique_qsn">Qui sommes-nous?</s:a></div>
-		<div class="col-lg-2">Contact</div>
+		<div class="col-lg-2"><s:a action="page_formulaire_contact" >Contact</s:a></div>
 		<div class="col-lg-2"><s:a action="page_generique_cutil">Conditions d'utilisations</s:a></div>
 		<div class="col-lg-2"><s:a action="page_generique_ml">Mentions légales</s:a> </div>
 		<div class="col-lg-1">

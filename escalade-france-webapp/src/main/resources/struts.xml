@@ -8,7 +8,7 @@
 	
 		<!-- Définition des intercepteurs -->
 		<interceptors>
-			<!-- Définition de l'intercepteur permettant de bloquer l'accès à la page de connexion pour un utilisateur déjà connecté -->
+			<!-- Définition de l'intercepteur permettant de bloquer l'accès à la page de connexion et à la page de création de compte pour un utilisateur déjà connecté -->
 			<interceptor name="RefusAPC" class="com.escalade.siteweb.webapp.interceptor.RefusAPCInterceptor"/>
 			<interceptor-stack name="RefusAccesPageConnexionStack">
 				<interceptor-ref name="RefusAPC"></interceptor-ref>
@@ -52,6 +52,22 @@
 			<result name="success">jsp/site.jsp</result>
 		</action>
 		
+		<!-- Action "page_formulaire_contact" -->
+		<action name="page_formulaire_contact" class="com.escalade.siteweb.webapp.action.GestionFormulaireContact"  method="doEnvoiFormContact">
+			<result name="input">jsp/formulairecontact.jsp</result>
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		
+		<!-- Action "page_creation_compte" -->
+		<action name="page_creation_compte" class="com.escalade.siteweb.webapp.action.GestionCreationCompte"  method="doCreationCompte">
+			<!-- Référence à l'intercepteur permettant de bloquer l'accès à la page de création de compte pour un utilisateur déjà connecté -->
+ 			<interceptor-ref name="RefusAccesPageConnexionStack" />
+ 			<result name="refus-acces-page-connexion" type="redirectAction">index</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="input">jsp/creationcompte.jsp</result>
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		
 		<!-- Action "page_utilisateur_fa" -->
 		<action name="page_utilisateur_fa" class="com.escalade.siteweb.webapp.action.GestionAffichageUtilisateur"  method="doDetailUtilisateur">
 			<interceptor-ref name="AuthenticatedStack" />
@@ -71,7 +87,7 @@
 		<!-- Action "page_utilisateur_mdp" -->
 		<action name="page_utilisateur_mdp" class="com.escalade.siteweb.webapp.action.GestionAffichageUtilisateur"  method="doDetailUtilisateur">
 			<interceptor-ref name="AuthenticatedStack" />
-			<result name="refus-acces-page-profil-res-topo"  type="redirectAction">connexion</result>
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
 			<result name="error">jsp/erreur.jsp</result>
 			<result name="success">jsp/utilisateurmdp.jsp</result>
 		</action>
@@ -92,6 +108,25 @@
 			<result name="error">jsp/erreur.jsp</result>
 			<result name="success">jsp/utilisateurmdp.jsp</result>
 		</action>
+		
+		<!-- Action "ajout_commentaire" -->
+		<action name="ajout_commentaire" class="com.escalade.siteweb.webapp.action.GestionAffichageSite" method="doAjoutCommentaire">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="success" type="redirectAction">
+			    <param name="actionName">page_site</param>
+       			<param name="id">${site.id}</param>
+			</result>
+		</action>
+		
+		<!-- Action "visu_formulaire_contact" -->
+		<action name="visu_formulaire_contact" class="com.escalade.siteweb.webapp.action.GestionFormulaireContact"  method="doVisuFormContact">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="success">jsp/visuformulairecontact.jsp</result>
+		</action>
+		
 		
 		 <!-- Actions Connexion/Deconnexion -->
  		<action name="connexion" class="com.escalade.siteweb.webapp.action.GestionConnexion" method="doLogin">

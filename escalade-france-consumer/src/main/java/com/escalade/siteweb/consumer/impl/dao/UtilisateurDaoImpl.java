@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -15,6 +16,7 @@ import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.consumer.impl.rowmapper.utilisateur.UtilisateurRM;
 import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
+import com.escalade.siteweb.model.exception.FunctionalException;
 import com.escalade.siteweb.model.exception.NotFoundException;
 
 
@@ -89,5 +91,22 @@ public class UtilisateurDaoImpl extends AbstractDaoImpl implements UtilisateurDa
 		
 		vJdbcTemplate.update(vSQL,vParams);
 		
+	}
+	
+	
+	@Override
+	public void insertUtilisateur (Utilisateur utilisateur) throws FunctionalException{
+		String vSQL="INSERT INTO public.utilisateur(civilite,nom,prenom,pseudo,adresse_mail,mot_de_passe,administrateur) VALUES "
+				+ "(:civilite,:nom,:prenom,:pseudo,:adresseMail,:motDePasse,:administrateur)";
+				
+		SqlParameterSource vParams=new BeanPropertySqlParameterSource(utilisateur);
+		NamedParameterJdbcTemplate vJdbcTemplate=new NamedParameterJdbcTemplate(getDataSource());
+		
+		try {
+			vJdbcTemplate.update(vSQL,vParams);
+		} catch (DuplicateKeyException vEx) {
+			System.out.println("Le pseudo ou l'adresse mail existe déjà.");
+			throw new FunctionalException("Le pseudo ou l'adresse mail existe déjà.");
+		}
 	}
 }

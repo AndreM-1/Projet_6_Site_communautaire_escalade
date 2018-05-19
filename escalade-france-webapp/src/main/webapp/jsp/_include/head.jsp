@@ -18,5 +18,5 @@
   <![endif]-->
 
 <s:head/>
-<sx:head/>
+
 <link rel="stylesheet" href="css/style.css" />

@@ -43,8 +43,8 @@ public class SiteRM implements RowMapper<Site> {
 		vSite.setDescriptif(pRS.getString("descriptif"));
 		vSite.setCommentairePersonnel(pRS.getString("commentaire_personnel"));
 		vSite.setTopoDisponible(pRS.getBoolean("topo_disponible"));
-		vSite.setDateDeDebut(pRS.getDate("date_de_debut"));
-		vSite.setDateDeFin(pRS.getDate("date_de_fin"));
+		vSite.setDateDeDebut(pRS.getTimestamp("date_de_debut"));
+		vSite.setDateDeFin(pRS.getTimestamp("date_de_fin"));
 		vSite.setDateAjoutSite(pRS.getTimestamp("date_ajout_site"));
 		vSite.setDateMajSite(pRS.getTimestamp("date_maj_site"));
 		try {
