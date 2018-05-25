@@ -3,6 +3,7 @@ package com.escalade.siteweb.consumer.contract.dao;
 import java.util.List;
 
 import com.escalade.siteweb.model.bean.photo.Photo;
+import com.escalade.siteweb.model.exception.FunctionalException;
 
 public interface PhotoDao {
 
@@ -15,5 +16,7 @@ public interface PhotoDao {
 	List<Photo> getListPhotoAllSecteur(int siteId);
 	
 	List<Photo> getListPhotoSecteur(int secteurId);
+
+	void insertPhotoUtilisateur(String nomPhoto, int utilisateurId) throws FunctionalException;
 
 }

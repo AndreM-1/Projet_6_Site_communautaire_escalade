@@ -14,19 +14,44 @@
 			<s:if test="#session.user.id==utilisateur.id">
 				<!-- Section liée au détail d'un utilisateur-->
 				<h1 class="text-center">
-				<s:if test="%{utilisateur.photoUtilisateur!=null}">
-					<img src="<s:property value="utilisateur.photoUtilisateur.nomPhoto"/>" alt="Photo utilisateur"  width=100px height=100px/>
-				</s:if>
-				<s:else>
-					<s:if test="%{utilisateur.civilite=='Monsieur'}">
-						<img src="jsp/assets/images/photo_profil_homme_anonyme.jpg" alt="Photo utilisateur" width=100px height=100px/>
+				
+				<s:a data-toggle="modal" href="#formUploadPhotoUtilisateur">
+					<s:if test="%{utilisateur.photoUtilisateur!=null}">
+						<img src="<s:property value="utilisateur.photoUtilisateur.nomPhoto"/>" alt="Photo utilisateur"  width=100px height=100px/>
 					</s:if>
 					<s:else>
-						<img src="jsp/assets/images/photo_profil_femme_anonyme.jpg" alt="Photo utilisateur" width=100px height=100px/>
+						<s:if test="%{utilisateur.civilite=='Monsieur'}">
+							<img src="jsp/assets/images/photo_profil_homme_anonyme.jpg" alt="Photo utilisateur anonyme" width=100px height=100px/>
+						</s:if>
+						<s:else>
+							<img src="jsp/assets/images/photo_profil_femme_anonyme.jpg" alt="Photo utilisateur anonyme" width=100px height=100px/>
+						</s:else>
 					</s:else>
-				</s:else>
+				</s:a>
+				
 				<s:property value="utilisateur.pseudo"/></h1>
-	            
+				
+				<div class="modal fade" id="formUploadPhotoUtilisateur">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+							<div class="modal-header">
+			              		<button type="button" class="close" data-dismiss="modal">x</button>
+         						<h4 class="modal-title text-center">Modifier la photo</h4>
+							</div>
+							<div class="modal-body">
+								<s:form action="upload_photo_util" namespace="/" enctype="multipart/form-data">
+									<p class="text-center"><label for="upload">Sélectionner une photo :</label></p>
+									<s:hidden name="utilisateur.id" label="Utilisateur Id :"></s:hidden>
+									<s:file name="fileUpload" id="upload"></s:file>	
+									<div class="text-center">							
+											<s:submit value="Valider" class="btn btn-primary"/>
+									</div>
+								</s:form>
+							</div>
+						</div>
+					</div>
+				</div>				
+		     
 	            <!-- Menu de navigation -->
 	           
 	            <nav id="navProfilUtilisateur">
@@ -58,9 +83,10 @@
 				<s:form id="formUtilisateurCoord" action="update_utilisateur">
 					<div class="row">
 						<div class="col-lg-6">
-							<div id="idUtilisateur">
-								<s:textfield name="utilisateur.id" label="Id" />
-							</div>
+								<s:hidden name="utilisateur.id" label="Id"/>
+								<s:if test="%{utilisateur.photoUtilisateur!=null}">
+									<s:hidden name="utilisateur.photoUtilisateur.nomPhoto" label="Photo Utilisateur"/>
+								</s:if>
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="row">

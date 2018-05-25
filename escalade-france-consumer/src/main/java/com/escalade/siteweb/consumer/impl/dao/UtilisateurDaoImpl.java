@@ -70,7 +70,7 @@ public class UtilisateurDaoImpl extends AbstractDaoImpl implements UtilisateurDa
 	}
 	
 	@Override
-	public void updateUtilisateur(Utilisateur utilisateur) {
+	public void updateUtilisateur(Utilisateur utilisateur) throws FunctionalException {
 
 		String vSQL="UPDATE public.utilisateur SET civilite=:civilite, nom=:nom, prenom=:prenom, pseudo=:pseudo, adresse_mail=:adresseMail, telephone=:telephone,"
 				+ "date_naissance=:dateNaissance, adresse=:adresse, code_postal=:codePostal, ville=:ville, pays=:pays WHERE id=:id";
@@ -78,7 +78,12 @@ public class UtilisateurDaoImpl extends AbstractDaoImpl implements UtilisateurDa
 		SqlParameterSource vParams=new BeanPropertySqlParameterSource(utilisateur);
 		NamedParameterJdbcTemplate vJdbcTemplate=new NamedParameterJdbcTemplate(getDataSource());
 		
-		vJdbcTemplate.update(vSQL,vParams);
+		try {
+			vJdbcTemplate.update(vSQL,vParams);
+		} catch (DuplicateKeyException vEx) {
+			System.out.println("Le pseudo ou l'adresse mail existe déjà.");
+			throw new FunctionalException("Le pseudo ou l'adresse mail existe déjà.");
+		}
 			
 	}
 	

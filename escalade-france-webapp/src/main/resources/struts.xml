@@ -4,6 +4,7 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
         
 <struts>
+	<!-- Package par défaut -->
 	<package name="default" extends="struts-default">
 	
 		<!-- Définition des intercepteurs -->
@@ -97,8 +98,18 @@
 			<interceptor-ref name="AuthenticatedStack" />
 			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
 			<result name="error">jsp/erreur.jsp</result>
+			<result name="input">jsp/utilisateurcoord.jsp</result>
 			<result name="success">jsp/utilisateurcoord.jsp</result>
 			<result name="success-deconnexion-chgt-pseudo" type="redirectAction">deconnexion</result>
+		</action>
+		
+		<!-- Action "upload_photo_util" -->
+		<action name="upload_photo_util" class="com.escalade.siteweb.webapp.action.GestionAffichageUtilisateur" method="doUploadPhotoUtil">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="input">jsp/utilisateurcoord.jsp</result>
+			<result name="success">jsp/utilisateurcoord.jsp</result>
 		</action>
 		
 		<!-- Action "update_mdp" -->
@@ -127,6 +138,14 @@
 			<result name="success">jsp/visuformulairecontact.jsp</result>
 		</action>
 		
+		<!-- Action "page_ajout_site"  -->
+		<action name="page_ajout_site" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doAjoutSite">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="input">jsp/pageajoutsite.jsp</result>
+			<result name="success">jsp/pageajoutsite.jsp</result>
+		</action>
 		
 		 <!-- Actions Connexion/Deconnexion -->
  		<action name="connexion" class="com.escalade.siteweb.webapp.action.GestionConnexion" method="doLogin">
@@ -146,6 +165,47 @@
 			<result>/jsp/test.jsp</result>
 		</action>
 		
+	</package>
+	
+	<!-- Package pour les actions AJAX -->
+	<package name="ajax" extends="default,json-default">
+	
+	   <!-- Gestion globale des erreurs -->
+	    <global-results>
+	        <result name="error" type="json">
+            	<param name="statusCode">400</param>
+	            <param name="includeProperties">actionErrors.*,fieldErrors.*</param>
+	            <!-- Pour accéder au attributs des classes parentes à la classe d'action -->
+	            <param name="ignoreHierarchy">false</param>
+	        </result>
+	    </global-results>	
+	    
+		<!-- Action renvoyant la liste des pays  -->
+		<action name="page_ajout_site_ajax_getListPays" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doAjaxGetListPays">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="success" type="json">
+				<param name="root">listPays</param>	
+			</result>
+		</action>
+		
+		<!-- Action renvoyant la liste des régions d'un pays  -->
+		<action name="page_ajout_site_ajax_getListRegion" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doAjaxGetListRegion">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="success" type="json">
+				<param name="root">listRegion</param>	
+			</result>
+		</action>
+		
+		<!-- Action renvoyant la liste des départements d'une région  -->
+		<action name="page_ajout_site_ajax_getListDepartement" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doAjaxGetListDepartement">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="success" type="json">
+				<param name="root">listDepartement</param>	
+			</result>
+		</action>
 	</package>
 
 </struts>

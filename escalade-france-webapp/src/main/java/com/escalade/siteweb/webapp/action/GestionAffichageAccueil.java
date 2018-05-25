@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.escalade.siteweb.business.contract.ManagerFactory;
@@ -37,7 +37,7 @@ public class GestionAffichageAccueil extends ActionSupport implements SessionAwa
 	// ----- Eléments Struts
 	private Map<String, Object> session;
 	
-	
+	//Définition du LOGGER
 	private static final Logger LOGGER=(Logger) LogManager.getLogger(GestionAffichageAccueil.class);
 
 	// ===================== Getters/Setters ===============	
@@ -103,7 +103,7 @@ public class GestionAffichageAccueil extends ActionSupport implements SessionAwa
 		LOGGER.info("Liste des départements :");
 		LOGGER.info(listDepartement);
 		LOGGER.info("Liste des sites :");
-		LOGGER.info(listSite.get(0));
+		LOGGER.info(listSite.get(3));
 
 		return ActionSupport.SUCCESS;
 	}

@@ -16,7 +16,6 @@ public class Photo implements java.io.Serializable {
 	@NotEmpty (message="Model - L'attribut nomPhoto doit être renseigné")
 	@Size (min=1,max=100,message="Model - L'attribut nomPhoto ne doit pas comporter plus de 100 caractères")
 	private String nomPhoto;
-	private String cheminImage="jsp/assets/images/";
 
 	// ==================== Constructeurs ====================
 	/**
@@ -53,7 +52,7 @@ public class Photo implements java.io.Serializable {
 
 
 	public void setNomPhoto(String nomPhoto) {
-		this.nomPhoto = cheminImage+nomPhoto+".jpg";
+		this.nomPhoto =nomPhoto;
 	}
 	
 

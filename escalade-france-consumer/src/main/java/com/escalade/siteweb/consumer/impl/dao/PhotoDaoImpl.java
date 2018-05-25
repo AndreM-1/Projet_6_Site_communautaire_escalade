@@ -4,12 +4,17 @@ import java.util.List;
 
 import javax.inject.Named;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.impl.rowmapper.photo.PhotoRM;
 import com.escalade.siteweb.model.bean.photo.Photo;
+import com.escalade.siteweb.model.exception.FunctionalException;
 
 @Named
 public class PhotoDaoImpl extends AbstractDaoImpl implements PhotoDao{
@@ -80,5 +85,18 @@ public class PhotoDaoImpl extends AbstractDaoImpl implements PhotoDao{
         	return vListPhoto;
         else
         	return null;
+	}
+	
+	@Override
+	public void insertPhotoUtilisateur(String nomPhoto, int utilisateurId) throws FunctionalException{
+		String vSQL="INSERT INTO public.photo(nom_photo,utilisateur_id) VALUES (?,?)";
+		JdbcTemplate vJdbcTemplate=new JdbcTemplate(getDataSource());
+	
+		try {
+			vJdbcTemplate.update(vSQL, nomPhoto,utilisateurId);
+		} catch (DuplicateKeyException vEx) {
+			System.out.println("Couche Consumer - L'utilisateur a déjà une photo en base de données");
+			throw new FunctionalException("Couche Consumer - L'utilisateur a déjà une photo en base de données");
+		}
 	}
 }

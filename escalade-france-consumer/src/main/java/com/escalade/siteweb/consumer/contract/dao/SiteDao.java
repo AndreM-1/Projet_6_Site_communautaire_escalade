@@ -13,4 +13,8 @@ public interface SiteDao {
 
 	List<Site> getListSite(int utilisateurId) throws NotFoundException;
 
+	void insertSite(Site site) throws Exception;
+
+	int getCountNbSite();
+
 }

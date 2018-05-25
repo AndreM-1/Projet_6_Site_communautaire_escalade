@@ -105,6 +105,16 @@
 			<artifactId>xwork-core</artifactId>
 		</dependency>      
 		
+   		<!-- Dépendances liées à la gestion de l'upload -->
+   		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		</dependency>
+   		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		</dependency>
+		
 		<!-- Dépendance liée au plugin Dojo Ajax Tags de Struts 2 -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>

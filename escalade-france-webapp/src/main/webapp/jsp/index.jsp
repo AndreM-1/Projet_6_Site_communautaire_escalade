@@ -62,6 +62,7 @@
 										</h2>
 									</s:else>	
 								</div>
+								
 								<p class="paraFilActivite">
 									<s:a action="page_site">
 										<s:param name="id" value="id"/>
@@ -89,6 +90,7 @@
 										<div id="photoParDefaut"></div>
 									</s:if>	
 								</div>
+								
 							</div>	
 						</div>
 					</s:iterator>
@@ -96,12 +98,13 @@
 				</div>
 			</section>
 			
-			<!-- Pied de page -->
 			<script>
 			$(function (){
    			$('a').tooltip();
 			});
 			</script>
+			
+			<!-- Pied de page -->
 			<%@ include file="_include/footer.jsp"%>
 		</div>
 

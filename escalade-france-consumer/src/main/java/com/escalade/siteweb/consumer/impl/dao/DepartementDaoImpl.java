@@ -9,7 +9,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.escalade.siteweb.consumer.contract.dao.DepartementDao;
 import com.escalade.siteweb.consumer.impl.rowmapper.site.DepartementRM;
+import com.escalade.siteweb.consumer.impl.rowmapper.site.RegionRM;
 import com.escalade.siteweb.model.bean.site.Departement;
+import com.escalade.siteweb.model.bean.site.Region;
+import com.escalade.siteweb.model.exception.NotFoundException;
 
 @Named
 public class DepartementDaoImpl extends AbstractDaoImpl implements DepartementDao {
@@ -28,14 +31,29 @@ public class DepartementDaoImpl extends AbstractDaoImpl implements DepartementDa
     }
 	
 	@Override
-	public Departement getDepartement(int departementId) {
-		String vSQL = "SELECT * FROM public.departement WHERE id="+departementId;
+	public List<Departement> getListDepartement(int regionId){
 		
-		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
-		
-		RowMapper<Departement> vRowMapper=new DepartementRM();
+		String vSQL="SELECT * FROM public.departement WHERE region_id="+regionId;
+        JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
+        
+        RowMapper<Departement> vRowMapper=new DepartementRM();
 
-        List<Departement> vListDepartement=vJdbcTemplate.query(vSQL, vRowMapper);
-        return vListDepartement.get(0);
+        List<Departement> vListDepartement = vJdbcTemplate.query(vSQL, vRowMapper);
+
+        return vListDepartement;
+	}
+	
+	public Departement getDepartement(int departementId) throws NotFoundException {
+		String vSQL="SELECT * FROM public.departement WHERE id="+departementId;
+        JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
+        
+        RowMapper<Departement> vRowMapper=new DepartementRM();
+
+        List<Departement> vListDepartement = vJdbcTemplate.query(vSQL, vRowMapper);
+
+		if(vListDepartement.size()!=0)	
+			return vListDepartement.get(0);
+		else
+			throw new NotFoundException("Consumer - Aucun département ne correspond à l'ID demandé.");
 	}
 }

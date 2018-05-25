@@ -10,4 +10,6 @@ public interface SecteurDao {
 
 	List<Secteur> getListSecteur(int siteId);
 
+	void insertSecteur(String nomSecteur, int siteId);
+
 }

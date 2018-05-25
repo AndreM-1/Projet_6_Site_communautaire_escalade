@@ -2,6 +2,7 @@ package com.escalade.siteweb.model.bean.site;
 
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -18,6 +19,7 @@ public class Secteur implements java.io.Serializable {
 	private Integer id;
 
 	@NotEmpty (message="Model - L'attribut nomSecteur doit être renseigné")
+	@NotBlank(message="Model - L'attribut nomSecteur doit être renseigné")
 	@Size (min=1,max=100,message="Model - L'attribut nomSecteur ne doit pas comporter plus de 100 caractères")
 	private String nomSecteur;
 	

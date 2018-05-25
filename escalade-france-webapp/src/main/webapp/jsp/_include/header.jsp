@@ -13,11 +13,11 @@
    				<label class="sr-only" for="selectRegion">Region</label>
 				<s:select id="selectRegion" name="region.id" list="#session.listRegion" listKey="id" listValue="nomRegion" class="form-control"/>
 				
-				<label class="sr-only" for="selectRegion">Departement</label>
+				<label class="sr-only" for="selectDepartement">Departement</label>
 				<s:select id="selectDepartement" name="departement.id" list="#session.listDepartement" listKey="id" listValue="nomDepartement"
 				class="form-control"/>
 				<s:textfield name="rechercheSite" placeholder="Rechercher un site" requiredLabel="true" />
-				<s:submit value="Lancer la recherche" class="btn btn-primary"/>
+				<s:submit value="Rechercher" class="btn btn-primary"/>
 			</div>
 		</s:form>	
 	</div>
@@ -42,7 +42,7 @@
 		</s:else>
 	</div>
 	<div class="col-lg-1">
-		<s:a class="btn btn-primary">Ajouter un site</s:a>
+		<s:a class="btn btn-primary" action="page_ajout_site">Ajouter un site</s:a>
 	</div>
 	<div class="col-lg-1">	
 		<select id="selectLangue" name="langue" class="form-control">
@@ -52,7 +52,9 @@
    
 	</div>
 	<!-- jQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	
 	<!-- Javascript de Bootstrap -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </header>

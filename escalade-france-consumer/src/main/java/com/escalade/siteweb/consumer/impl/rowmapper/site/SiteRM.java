@@ -52,9 +52,21 @@ public class SiteRM implements RowMapper<Site> {
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
-		vSite.setPays(paysDao.getPays(pRS.getInt("pays_id")));
-		vSite.setRegion(regionDao.getRegion(pRS.getInt("region_id")));
-		vSite.setDepartement(departementDao.getDepartement(pRS.getInt("departement_id")));
+		try {
+			vSite.setPays(paysDao.getPays(pRS.getInt("pays_id")));
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			vSite.setRegion(regionDao.getRegion(pRS.getInt("region_id")));
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			vSite.setDepartement(departementDao.getDepartement(pRS.getInt("departement_id")));
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
 		
 		if(photoDao.getPhotoSite(pRS.getInt("id"))!=null)
 			vSite.setPhotoSite(photoDao.getPhotoSite(pRS.getInt("id")));

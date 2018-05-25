@@ -80,7 +80,7 @@ public class GestionConnexion extends ActionSupport implements SessionAware, Ser
 		System.out.println("Adresse mail :"+adresseMail);
 		System.out.println("Mot de Passe :"+motDePasse);
 		System.out.println("Se souvenir de moi:"+seSouvenirDeMoi);
-
+	
 		if (!StringUtils.isAllEmpty(adresseMail, motDePasse)) {
 			try {
 				Utilisateur vUtilisateur= managerFactory.getUtilisateurManager().getUtilisateur(adresseMail, motDePasse);

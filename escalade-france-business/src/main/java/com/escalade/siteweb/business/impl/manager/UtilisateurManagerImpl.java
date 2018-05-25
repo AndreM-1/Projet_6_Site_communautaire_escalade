@@ -64,13 +64,16 @@ public class UtilisateurManagerImpl extends AbstractManager implements Utilisate
 			throw new FunctionalException("Certains paramètres ne sont pas renseignés ou pas renseignés correctement.");
 		}
 
-		//Utilisation d'un TransactionTemplate.
-		TransactionTemplate vTransactionTemplate=new TransactionTemplate(getPlatformTransactionManager());
-		vTransactionTemplate.execute(new TransactionCallbackWithoutResult() {
-			protected void doInTransactionWithoutResult(TransactionStatus pTransactionStatus) {
-				getDaoFactory().getUtilisateurDao().updateUtilisateur(utilisateur);	
-			}   
-		});
+		//Utilisation d'un TransactionStatus. On a besoin de lever une FunctionalException,
+		//ce qui n'est pas possible avec l'utilisation d'une classe anonyme du transaction template.
+		TransactionStatus vTransactionStatus= getPlatformTransactionManager().getTransaction(new DefaultTransactionDefinition());
+		try {
+			getDaoFactory().getUtilisateurDao().updateUtilisateur(utilisateur);
+		} catch (FunctionalException e) {
+			getPlatformTransactionManager().rollback(vTransactionStatus);
+			throw new FunctionalException("Le pseudo ou l'adresse mail existe déjà.");
+		}	
+		getPlatformTransactionManager().commit(vTransactionStatus);
 	}
 
 	@Override
@@ -108,8 +111,8 @@ public class UtilisateurManagerImpl extends AbstractManager implements Utilisate
 			throw new FunctionalException("Certains paramètres ne sont pas renseignés correctement.");
 		}
 		
-		//Cette fois-ci, on utilise un TransactionStatus. En effet, contrairement aux cas précédents, on a besoin cette fois-ci de
-		//lever une FunctionalException, ce qui n'est pas possible avec l'utilisation d'une classe anonyme du transaction template.
+		//Utilisation d'un TransactionStatus. On a besoin de lever une FunctionalException,
+		//ce qui n'est pas possible avec l'utilisation d'une classe anonyme du transaction template.
 		TransactionStatus vTransactionStatus= getPlatformTransactionManager().getTransaction(new DefaultTransactionDefinition());
 		try {
 			getDaoFactory().getUtilisateurDao().insertUtilisateur(utilisateur);

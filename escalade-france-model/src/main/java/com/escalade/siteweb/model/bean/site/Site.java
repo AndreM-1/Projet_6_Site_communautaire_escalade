@@ -3,6 +3,7 @@ package com.escalade.siteweb.model.bean.site;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -22,6 +23,7 @@ public class Site implements java.io.Serializable {
 	private Integer id;
 
 	@NotEmpty (message="Model - L'attribut nomSite doit être renseigné")
+	@NotBlank(message="Model - L'attribut nomSite doit être renseigné")
 	@Size (min=1,max=100,message="Model - L'attribut nomSite ne doit pas comporter plus de 100 caractères")
 	private String nomSite;
 
@@ -29,7 +31,6 @@ public class Site implements java.io.Serializable {
 
 	private String commentairePersonnel;
 
-	@NotEmpty (message="Model - L'attribut topoDisponible doit être renseigné")
 	private Boolean topoDisponible;
 
 	private Date dateDeDebut;
@@ -40,16 +41,12 @@ public class Site implements java.io.Serializable {
 
 	private Date dateMajSite;
 	
-	@NotEmpty (message="Model - L'attribut utilisateur doit être renseigné")
 	private Utilisateur utilisateur;
 	
-	@NotEmpty (message="Model - L'attribut pays doit être renseigné")
 	private Pays pays;
 	
-	@NotEmpty (message="Model - L'attribut region doit être renseigné")
 	private Region region;
 	
-	@NotEmpty (message="Model - L'attribut departement doit être renseigné")
 	private Departement departement;
 	
 	private Photo photoSite;

@@ -42,7 +42,7 @@ h1{
 }
 
 #photoParDefaut{
-	background-color:#0094FF;
+	background-color:#B19EFF;  
 	height:200px;
 }
 
@@ -73,7 +73,7 @@ h1{
 	padding-left:0px;
 }
 
-#divConnexion{
+#divConnexion,#divAjoutSite{
 	border:1px solid grey;
 	margin-bottom:25px;
 	padding-bottom:10px;

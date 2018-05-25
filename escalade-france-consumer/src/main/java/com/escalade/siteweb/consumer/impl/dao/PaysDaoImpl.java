@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.escalade.siteweb.consumer.contract.dao.PaysDao;
 import com.escalade.siteweb.consumer.impl.rowmapper.site.PaysRM;
 import com.escalade.siteweb.model.bean.site.Pays;
+import com.escalade.siteweb.model.exception.NotFoundException;
 
 @Named
 public class PaysDaoImpl extends AbstractDaoImpl implements PaysDao {
@@ -28,7 +29,7 @@ public class PaysDaoImpl extends AbstractDaoImpl implements PaysDao {
     }
 	
 	@Override
-	public Pays getPays(int paysId) {
+	public Pays getPays(int paysId) throws NotFoundException {
 		String vSQL = "SELECT * FROM public.pays WHERE id="+paysId;
 		
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
@@ -36,6 +37,10 @@ public class PaysDaoImpl extends AbstractDaoImpl implements PaysDao {
 		RowMapper<Pays> vRowMapper=new PaysRM();
 
         List<Pays> vListPays=vJdbcTemplate.query(vSQL, vRowMapper);
-        return vListPays.get(0);
+        
+		if(vListPays.size()!=0)	
+			return vListPays.get(0);
+		else
+			throw new NotFoundException("Consumer - Aucun pays ne correspond à l'ID demandé.");
 	}
 }

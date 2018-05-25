@@ -14,7 +14,7 @@ public interface UtilisateurDao {
 
 	Utilisateur getUtilisateur(int utilisateurId) throws NotFoundException;
 
-	void updateUtilisateur(Utilisateur utilisateur);
+	void updateUtilisateur(Utilisateur utilisateur) throws FunctionalException;
 
 	void updateMdp(Utilisateur utilisateur);
 
