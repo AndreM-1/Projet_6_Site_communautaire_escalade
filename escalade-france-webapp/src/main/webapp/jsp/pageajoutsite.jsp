@@ -24,9 +24,9 @@
 					<s:select id="selectPaysPaj" name="pays" label="Pays" list="listPays"
 						listKey="id" listValue="nomPays" onchange="onSelectPaysPajChange()" requiredLabel="true" />
 			
-					<s:select id="selectRegionPaj" name="region" label="Region" list="{}" onchange="onSelectRegionPajChange()" requiredLabel="true" />
+					<s:select id="selectRegionPaj" name="region" label="Region" list="listRegion" listValue="nomRegion" onchange="onSelectRegionPajChange()" requiredLabel="true" />
 					
-					<s:select id="selectDepartementPaj" name="departement" label ="Departement" list="{}" requiredLabel="true"/>
+					<s:select id="selectDepartementPaj" name="departement" label ="Departement" list="listDepartement" listValue="nomDepartement" requiredLabel="true"/>
 				
 					<!-- Section liée au descriptif et à la photo du site -->
 					<h2>Descriptif du site</h2>
@@ -75,7 +75,7 @@
 									<p><strong>Topo de la voie ${counterVoie}</strong></p>
 									<div class="row">
 										<div class="col-lg-3">
-											<s:textfield name="" value="Nom de la voie *"/> 
+											<s:textfield name="listSecteur[%{counterSecteur}-1].listVoie[%{counterVoie}-1].nomVoie" value="Nom de la voie *"/> 
 										</div>
 										<div class="col-lg-3">
 											<s:textfield name="" value="Cotation"/>
@@ -167,7 +167,9 @@
      			params,
                 function (data) {
                     var $selectRegion = jQuery("#selectRegionPaj");
+                    var $selectDepartement = jQuery("#selectDepartementPaj");
                     $selectRegion.empty();
+                    $selectDepartement.empty();
                     jQuery.each(data, function (key, val) {
                         $selectRegion.append(
                             jQuery("<option>")

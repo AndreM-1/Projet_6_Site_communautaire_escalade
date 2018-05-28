@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -54,7 +53,7 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 	private File fileUpload;
 	private String fileUploadContentType;
 	private String fileUploadFileName;
-	
+
 	// ----- Eléments Struts
 	private Map<String, Object> session;
 	private HttpServletRequest servletRequest;
@@ -80,11 +79,11 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
-	
+
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	
+
 
 	public void setPhotoUtilisateur(Photo photoUtilisateur) {
 		this.photoUtilisateur = photoUtilisateur;
@@ -156,17 +155,17 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 	public void setFileUploadFileName(String fileUploadFileName) {
 		this.fileUploadFileName = fileUploadFileName;
 	}
-	
+
 	@Override
 	public void setSession(Map<String, Object> pSession) {
 		this.session=pSession;
-		
+
 	}
-	
+
 	@Override
 	public void setServletRequest(HttpServletRequest pRequest) {
 		this.servletRequest=pRequest;
-		
+
 	}
 
 
@@ -198,7 +197,7 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 	public String doUpdateUtilisateur() {
 
 		String vResult = ActionSupport.INPUT;
-		
+
 		LOGGER.info("Entrée dans la méthode doUpdateUtilisateur");
 
 		if(utilisateur==null) {
@@ -207,13 +206,13 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 		}else {
 			try {
 				pseudoInitial=managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getPseudo();
-				utilisateur.setMotDePasse(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getMotDePasse());
+				utilisateur.setMotDePasse("MotDePasse");
 				utilisateur.setPhotoUtilisateur(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getPhotoUtilisateur());
 			} catch (NotFoundException e) {
 				this.addActionError("Utilisateur non trouvé. ID = " + id);
 				vResult="error";
 			}
-			LOGGER.info("Utilisateur récupéré"+utilisateur);
+			LOGGER.info("Utilisateur récupéré : "+utilisateur);
 			LOGGER.info("pseudoInitial :"+pseudoInitial);
 			try {
 				managerFactory.getUtilisateurManager().updateUtilisateur(utilisateur);
@@ -241,9 +240,11 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 	public String doUpdateMdp() {
 
 		String vResult = ActionSupport.SUCCESS;
-		LOGGER.info(utilisateur);
-		LOGGER.info(ancienMotDePasse);
-		LOGGER.info(nouveauMotDePasse);
+		String adresseMail="";
+		Boolean funcExc=false;
+		LOGGER.info("Méthode doUpdateMdp - Utilisateur :"+utilisateur);
+		LOGGER.info("Méthode doUpdateMdp - Ancien mot de Passe :"+ancienMotDePasse);
+		LOGGER.info("Méthode doUpdateMdp - Nouveau mot de Passe :"+nouveauMotDePasse);
 		LOGGER.info(confirmationNouveauMotDePasse);
 		if(utilisateur==null) {
 			this.addActionError("Aucun utilisateur n'a été récupéré");
@@ -254,30 +255,42 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 				utilisateur.setNom(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getNom());
 				utilisateur.setPrenom(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getPrenom());
 				utilisateur.setPseudo(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getPseudo());
-				utilisateur.setAdresseMail(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getAdresseMail());
-				utilisateur.setMotDePasse(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getMotDePasse());
+				adresseMail=managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getAdresseMail();
+				utilisateur.setAdresseMail(adresseMail);
 				utilisateur.setPhotoUtilisateur(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getPhotoUtilisateur());
 			} catch (NotFoundException e) {
 				this.addActionError("Utilisateur non trouvé. ID = " + id);
 				vResult="error";
 			}
 
-			if(!ancienMotDePasse.equals(utilisateur.getMotDePasse())||!confirmationNouveauMotDePasse.equals(nouveauMotDePasse)) {
-				this.addActionError("Champs erronés");
-			}else {
-				try {
-					utilisateur.setMotDePasse(confirmationNouveauMotDePasse);
-					managerFactory.getUtilisateurManager().updateMdp(utilisateur);
-				} catch (FunctionalException e) {
-					this.addActionError(e.getMessage());
-				}	
+			try {
+				utilisateur=managerFactory.getUtilisateurManager().getUtilisateur(adresseMail, ancienMotDePasse);
+				LOGGER.info("Méthode doUpdateMdp - Utilisateur :"+utilisateur);
+			} catch (NotFoundException e1) {
+				this.addActionError("Votre mot de passe actuel n'est pas correct.");
+				funcExc=true;
 			}
+
+			if(!funcExc) {
+				if(!confirmationNouveauMotDePasse.equals(nouveauMotDePasse)) {
+					this.addActionError("Incohérence dans la saisie du nouveau mot de passe");
+				}else {
+					try {
+						utilisateur.setMotDePasse(confirmationNouveauMotDePasse);
+						managerFactory.getUtilisateurManager().updateMdp(utilisateur);
+					} catch (FunctionalException e) {
+						this.addActionError(e.getMessage());
+					}	
+				}
+			}
+
+
 		}
 		return vResult;
 	}
 
 	public String doUploadPhotoUtil() {
-		
+
 		String destPath="";
 		String[] tabString;	
 		String vResult="";
@@ -288,34 +301,34 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 			LOGGER.info("Src (Dossier Temp) File name: " + fileUpload);
 			LOGGER.info("Nom initial du fichier :"+fileUploadFileName);
 			tabString=fileUploadFileName.split("\\.");
-			
+
 			//On change le nom du fichier à uploader, en reprenant l'extension du fichier initial.
 			fileUploadFileName="utilisateur_"+utilisateur.getId()+"."+tabString[tabString.length-1];
 			LOGGER.info("Dst File name: " + fileUploadFileName);
-			
+
 			//On définit le répertoire où sera uploadé le fichier.
 			destPath=servletRequest.getServletContext().getRealPath("/jsp/assets/images/");
 			LOGGER.info("CHEMIN ABSOLU : "+destPath);
-		
+
 			File destFile  = new File(destPath, fileUploadFileName);
-			
+
 			//On copie le fichier dans ce répertoire.
 			FileUtils.copyFile(fileUpload, destFile);
-			
+
 			//On définit le nom de la photo tel qu'il sera en base de données
 			nomPhoto="jsp/assets/images/"+fileUploadFileName;
 			LOGGER.info("nom_photo :" +nomPhoto);
 			LOGGER.info("utilisateur_id :" +utilisateur.getId());
-			
+
 			//Si l'utilisateur n'a pas de photo en BDD, la photo sera ajoutée. Sinon, rien ne se passe, et
 			//on affiche juste un message pour dire que l'utilisateur a déjà une photo en BDD.
 			try {
 				managerFactory.getPhotoManager().insertPhotoUtilisateur(nomPhoto,utilisateur.getId());
 			} catch (FunctionalException fEx) {
 				LOGGER.info(fEx.getMessage());
-			
+
 			}
-			
+
 			//On récupère l'utilisateur (i.e. l'ensemble de ces attributs) qui correspond à notre Id d'utilisateur
 			try {
 				utilisateur=managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId());
@@ -323,15 +336,15 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 				LOGGER.info("Utilisateur non trouvé. ID = " + utilisateur.getId());
 				vResult=ActionSupport.ERROR;
 			}
-			
+
 			vResult=ActionSupport.SUCCESS;
-			
+
 		} catch(IOException e) {
 			e.printStackTrace();
 			this.addActionError("Echec lors de l'upload du fichier");
 			return ActionSupport.ERROR;
 		}
-		
+
 		LOGGER.info("vResult : "+vResult);
 		return vResult;
 

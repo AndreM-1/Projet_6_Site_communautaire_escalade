@@ -19,7 +19,6 @@ public class Commentaire implements java.io.Serializable{
 	@NotEmpty (message="Model - L'attribut commentaire doit être renseigné")
 	private String commentaire;
 
-	@NotEmpty (message="Model - L'attribut dateCommentaire doit être renseigné")
 	private Date dateCommentaire;
 	
 	@NotEmpty (message="Model - L'attribut utilisateur doit être renseigné")

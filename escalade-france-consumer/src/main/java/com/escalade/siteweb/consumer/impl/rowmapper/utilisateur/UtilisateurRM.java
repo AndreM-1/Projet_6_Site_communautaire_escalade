@@ -24,7 +24,8 @@ public class UtilisateurRM implements RowMapper<Utilisateur>{
 		vUtilisateur.setPrenom(pRS.getString("prenom"));
 		vUtilisateur.setPseudo(pRS.getString("pseudo"));
 		vUtilisateur.setAdresseMail(pRS.getString("adresse_mail"));
-		vUtilisateur.setMotDePasse(pRS.getString("mot_de_passe"));
+		vUtilisateur.setSalt(pRS.getString("salt"));
+		vUtilisateur.setMotDePasseSecurise(pRS.getString("mot_de_passe_securise"));
 		vUtilisateur.setTelephone(pRS.getString("telephone"));
 		vUtilisateur.setDateNaissance(pRS.getDate("date_naissance"));
 		vUtilisateur.setAdresse(pRS.getString("adresse"));

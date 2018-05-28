@@ -39,7 +39,7 @@
          						<h4 class="modal-title text-center">Modifier la photo</h4>
 							</div>
 							<div class="modal-body">
-								<s:form action="upload_photo_util" namespace="/" enctype="multipart/form-data">
+								<s:form action="upload_photo_util" method="POST" enctype="multipart/form-data">
 									<p class="text-center"><label for="upload">Sélectionner une photo :</label></p>
 									<s:hidden name="utilisateur.id" label="Utilisateur Id :"></s:hidden>
 									<s:file name="fileUpload" id="upload"></s:file>	
@@ -80,7 +80,7 @@
 				<s:actionerror/>	
 				
 				<!-- Section comportant les coordonnées de l'utilisateur sélectionné -->
-				<s:form id="formUtilisateurCoord" action="update_utilisateur">
+				<s:form id="formUtilisateurCoord" action="update_utilisateur" method="POST">
 					<div class="row">
 						<div class="col-lg-6">
 								<s:hidden name="utilisateur.id" label="Id"/>

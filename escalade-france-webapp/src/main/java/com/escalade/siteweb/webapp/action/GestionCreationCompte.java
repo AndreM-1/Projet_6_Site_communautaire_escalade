@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -38,6 +40,9 @@ public class GestionCreationCompte extends ActionSupport implements SessionAware
 	// ----- Eléments Struts
 	private Map<String, Object> session;
 	private HttpServletRequest servletRequest;
+	
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(GestionCreationCompte.class);
 
 	// ===================== Getters/Setters =====================
 	public Utilisateur getUtilisateur() {
@@ -89,7 +94,7 @@ public class GestionCreationCompte extends ActionSupport implements SessionAware
 				utilisateur.setAdministrateur(false);
 
 				try {
-					System.out.println("utilisateur :"+utilisateur);
+					LOGGER.info("utilisateur :"+utilisateur);
 					managerFactory.getUtilisateurManager().insertUtilisateur(utilisateur);
 
 					try {

@@ -10,8 +10,6 @@ public interface UtilisateurDao {
 
 	List<Utilisateur> getListUtilisateur();
 
-	Utilisateur getUtilisateur(String adresseMail, String motDePasse) throws NotFoundException;
-
 	Utilisateur getUtilisateur(int utilisateurId) throws NotFoundException;
 
 	void updateUtilisateur(Utilisateur utilisateur) throws FunctionalException;
@@ -19,5 +17,7 @@ public interface UtilisateurDao {
 	void updateMdp(Utilisateur utilisateur);
 
 	void insertUtilisateur(Utilisateur utilisateur) throws FunctionalException;
+
+	Utilisateur getUtilisateur(String adresseMail) throws NotFoundException;
 
 }

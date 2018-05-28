@@ -66,7 +66,7 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 	public void setListSecteur(List<Secteur> listSecteur) {
 		this.listSecteur = listSecteur;
 	}
-	
+
 	public List<Voie> getListVoie() {
 		return listVoie;
 	}
@@ -137,6 +137,8 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 	public String doAjoutSite() {
 		String vResult=ActionSupport.INPUT;
 		listPays=managerFactory.getPaysManager().getListPays();
+		listRegion=managerFactory.getRegionManager().getListRegion(listPays.get(0).getId());
+		listDepartement=managerFactory.getDepartementManager().getListDepartement(listRegion.get(0).getId());
 		LOGGER.info("Méthode doAjoutSite()- Liste Pays : "+listPays);
 		if(site!=null) {
 			if(pays!=null&&region!=null&&departement!=null) {
@@ -155,8 +157,14 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 				try {
 
 					LOGGER.info("Après validation du formulaire d'ajout de site - Liste de Secteurs : "+listSecteur);
-					//LOGGER.info("Après validation du formulaire d'ajout de site - Liste de Voies : "+listVoie);
-			
+					/*for(Secteur secteur :listSecteur) {
+						LOGGER.info(" Nom du secteur : "+secteur.getNomSecteur());
+						for(Voie voie :secteur.getListVoie()) {
+							LOGGER.info("Après validation du formulaire d'ajout de site - Liste de Voies : "+voie.getNomVoie());
+						}
+					}*/
+
+
 					managerFactory.getSiteManager().insertSite(site,listSecteur);
 
 				} catch (FunctionalException e) {

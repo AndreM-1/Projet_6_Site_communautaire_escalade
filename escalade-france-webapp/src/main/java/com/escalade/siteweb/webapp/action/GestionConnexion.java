@@ -6,6 +6,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -21,16 +23,17 @@ public class GestionConnexion extends ActionSupport implements SessionAware, Ser
 	@Inject
 	private ManagerFactory managerFactory;
 
-	// ----- Paramètres en entrée
 	
-	// ----- Eléments en sortie
+	// ----- Paramètres
 	private String adresseMail;
 	private String motDePasse;
-	private Boolean seSouvenirDeMoi;
 	
 	// ----- Eléments Struts
 	private Map<String, Object> session;
 	private HttpServletRequest servletRequest;
+	
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(GestionConnexion.class);
 	
 	// ===================== Getters/Setters ===============
 	public String getAdresseMail() {
@@ -47,14 +50,6 @@ public class GestionConnexion extends ActionSupport implements SessionAware, Ser
 
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
-	}
-
-	public Boolean getSeSouvenirDeMoi() {
-		return seSouvenirDeMoi;
-	}
-
-	public void setSeSouvenirDeMoi(Boolean seSouvenirDeMoi) {
-		this.seSouvenirDeMoi = seSouvenirDeMoi;
 	}
 	
 	@Override
@@ -77,9 +72,8 @@ public class GestionConnexion extends ActionSupport implements SessionAware, Ser
 	 */
 	public String doLogin() {
 		String vResult = ActionSupport.INPUT;
-		System.out.println("Adresse mail :"+adresseMail);
-		System.out.println("Mot de Passe :"+motDePasse);
-		System.out.println("Se souvenir de moi:"+seSouvenirDeMoi);
+		LOGGER.info("Adresse mail :"+adresseMail);
+		LOGGER.info("Mot de Passe :"+motDePasse);
 	
 		if (!StringUtils.isAllEmpty(adresseMail, motDePasse)) {
 			try {
@@ -90,7 +84,7 @@ public class GestionConnexion extends ActionSupport implements SessionAware, Ser
 
 				vResult = ActionSupport.SUCCESS;
 			} catch (NotFoundException pEx) {
-				System.out.println(pEx.getMessage());
+				LOGGER.info(pEx.getMessage());
 				this.addActionError("Identifiant ou mot de passe invalide !");
 			}
 		}

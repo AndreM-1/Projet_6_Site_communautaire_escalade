@@ -53,13 +53,13 @@
 				<s:actionerror/>
 				
 				<!-- Section permettant à l'utilisateur de changer son mot de passe -->
-				<s:form id="formUtilisateurMdp" action="update_mdp">
+				<s:form id="formUtilisateurMdp" action="update_mdp" method="POST">
 					<div class="row">
 						<div class="col-lg-4">
 							<div id="idUtilisateur">
 								<s:textfield name="utilisateur.id" label="Id" />
 							</div>
-						 	<s:password name="ancienMotDePasse" label="Ancien mot de passe" requiredLabel="true"/>
+						 	<s:password name="ancienMotDePasse" label="Mot de passe actuel" requiredLabel="true"/>
 						 	<s:password name="nouveauMotDePasse" label="Nouveau mot de passe" requiredLabel="true"/>
 						 	<s:password name="confirmationNouveauMotDePasse" label="Confirmation du nouveau mot de passe" requiredLabel="true"/>
 				 		</div>

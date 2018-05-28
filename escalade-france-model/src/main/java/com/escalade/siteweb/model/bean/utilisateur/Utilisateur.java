@@ -51,10 +51,13 @@ public class Utilisateur implements java.io.Serializable {
 	@Size (min=1,max=100,message="Model - L'attribut motDePasse ne doit pas comporter plus de 100 caractères")
 	private String motDePasse;
 	
+	private String salt;
+	
+	private String motDePasseSecurise;
+	
 	@Size(min=0, max=14, message="Model - L'attribut téléphone doit comporter 14 caractères")
 	private String telephone;
 	
-	@Past(message="La date de naissance doit être située dans le passé")
 	private Date dateNaissance;
 	
 	@Size (min=0,max=100,message="Model - L'attribut adresse ne doit pas comporter plus de 100 caractères")
@@ -148,6 +151,25 @@ public class Utilisateur implements java.io.Serializable {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
+	
+	public String getSalt() {
+		return salt;
+	}
+
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+
+	public String getMotDePasseSecurise() {
+		return motDePasseSecurise;
+	}
+
+
+	public void setMotDePasseSecurise(String motDePasseSecurise) {
+		this.motDePasseSecurise = motDePasseSecurise;
+	}
 
 	public String getTelephone() {
 		return telephone;
@@ -229,6 +251,8 @@ public class Utilisateur implements java.io.Serializable {
 		.append(vSeparateur).append("pseudo=\"").append(pseudo).append('"')
 		.append(vSeparateur).append("adresseMail=\"").append(adresseMail).append('"')
 		.append(vSeparateur).append("motDePasse=\"").append(motDePasse).append('"')
+		.append(vSeparateur).append("salt=\"").append(salt).append('"')
+		.append(vSeparateur).append("motDePasseSecurise=\"").append(motDePasseSecurise).append('"')
 		.append(vSeparateur).append("telephone=\"").append(telephone).append('"')
 		.append(vSeparateur).append("dateNaissance=\"").append(dateNaissance).append('"')
 		.append(vSeparateur).append("adresse=\"").append(adresse).append('"')
