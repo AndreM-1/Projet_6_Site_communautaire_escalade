@@ -147,6 +147,17 @@
 			<result name="success">jsp/pageajoutsite.jsp</result>
 		</action>
 		
+		<!-- Action "reservation_topo" -->
+		<action name="reservation_topo" class="com.escalade.siteweb.webapp.action.GestionAffichageSite"  method="doReservationTopo">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="success" type="redirectAction">
+			    <param name="actionName">page_site</param>
+       			<param name="id">${site.id}</param>
+			</result>
+		</action>
+		
 		 <!-- Actions Connexion/Deconnexion -->
  		<action name="connexion" class="com.escalade.siteweb.webapp.action.GestionConnexion" method="doLogin">
  			<!-- Référence à l'intercepteur permettant de bloquer l'accès à la page de connexion pour un utilisateur déjà connecté -->

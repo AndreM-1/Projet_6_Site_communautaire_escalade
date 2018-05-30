@@ -6,6 +6,7 @@ import com.escalade.siteweb.consumer.contract.dao.FormulaireContactDao;
 import com.escalade.siteweb.consumer.contract.dao.PaysDao;
 import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.contract.dao.RegionDao;
+import com.escalade.siteweb.consumer.contract.dao.ReservationTopoDao;
 import com.escalade.siteweb.consumer.contract.dao.SecteurDao;
 import com.escalade.siteweb.consumer.contract.dao.SiteDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
@@ -52,6 +53,10 @@ public interface DaoFactory {
 	void setPhotoDao(PhotoDao photoDao);
 
 	PhotoDao getPhotoDao();
+
+	void setReservationTopoDao(ReservationTopoDao reservationTopoDao);
+
+	ReservationTopoDao getReservationTopoDao();
 
 	
 }

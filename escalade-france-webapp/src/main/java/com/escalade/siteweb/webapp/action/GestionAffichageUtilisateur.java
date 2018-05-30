@@ -207,7 +207,7 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 			try {
 				pseudoInitial=managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getPseudo();
 				utilisateur.setMotDePasse("MotDePasse");
-				utilisateur.setPhotoUtilisateur(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getPhotoUtilisateur());
+				//utilisateur.setPhotoUtilisateur(managerFactory.getUtilisateurManager().getUtilisateur(utilisateur.getId()).getPhotoUtilisateur());
 			} catch (NotFoundException e) {
 				this.addActionError("Utilisateur non trouvé. ID = " + id);
 				vResult="error";

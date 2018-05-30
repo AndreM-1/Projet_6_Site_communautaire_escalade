@@ -10,6 +10,7 @@ import com.escalade.siteweb.consumer.contract.dao.FormulaireContactDao;
 import com.escalade.siteweb.consumer.contract.dao.PaysDao;
 import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.contract.dao.RegionDao;
+import com.escalade.siteweb.consumer.contract.dao.ReservationTopoDao;
 import com.escalade.siteweb.consumer.contract.dao.SecteurDao;
 import com.escalade.siteweb.consumer.contract.dao.SiteDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
@@ -47,6 +48,9 @@ public class DaoFactoryImpl implements DaoFactory{
 	
 	@Inject
 	private PhotoDao photoDao;
+	
+	@Inject
+	private ReservationTopoDao reservationTopoDao;
 
 	
 	@Override
@@ -149,4 +153,14 @@ public class DaoFactoryImpl implements DaoFactory{
 		this.photoDao = photoDao;
 	}
 
+	@Override
+	public ReservationTopoDao getReservationTopoDao() {
+		return reservationTopoDao;
+	}
+
+	@Override
+	public void setReservationTopoDao(ReservationTopoDao reservationTopoDao) {
+		this.reservationTopoDao = reservationTopoDao;
+	}
+	
 }

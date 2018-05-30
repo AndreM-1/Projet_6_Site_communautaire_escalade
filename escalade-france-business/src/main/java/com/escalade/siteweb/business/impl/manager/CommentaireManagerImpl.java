@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.inject.Named;
 
-import org.joda.time.DateTime;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;

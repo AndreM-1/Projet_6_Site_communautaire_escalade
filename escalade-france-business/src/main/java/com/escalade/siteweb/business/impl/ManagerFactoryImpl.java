@@ -10,6 +10,7 @@ import com.escalade.siteweb.business.contract.manager.FormulaireContactManager;
 import com.escalade.siteweb.business.contract.manager.PaysManager;
 import com.escalade.siteweb.business.contract.manager.PhotoManager;
 import com.escalade.siteweb.business.contract.manager.RegionManager;
+import com.escalade.siteweb.business.contract.manager.ReservationTopoManager;
 import com.escalade.siteweb.business.contract.manager.SecteurManager;
 import com.escalade.siteweb.business.contract.manager.SiteManager;
 import com.escalade.siteweb.business.contract.manager.UtilisateurManager;
@@ -47,6 +48,9 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	
 	@Inject
 	private PhotoManager photoManager;
+	
+	@Inject
+	private ReservationTopoManager reservationTopoManager;
 
 	@Override
 	public PaysManager getPaysManager() {
@@ -147,4 +151,16 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	public void setPhotoManager(PhotoManager photoManager) {
 		this.photoManager = photoManager;
 	}
+
+	@Override
+	public ReservationTopoManager getReservationTopoManager() {
+		return reservationTopoManager;
+	}
+
+	@Override
+	public void setReservationTopoManager(ReservationTopoManager reservationTopoManager) {
+		this.reservationTopoManager = reservationTopoManager;
+	}
+	
+	
 }

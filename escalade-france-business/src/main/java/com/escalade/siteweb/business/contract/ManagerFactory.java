@@ -6,6 +6,7 @@ import com.escalade.siteweb.business.contract.manager.FormulaireContactManager;
 import com.escalade.siteweb.business.contract.manager.PaysManager;
 import com.escalade.siteweb.business.contract.manager.PhotoManager;
 import com.escalade.siteweb.business.contract.manager.RegionManager;
+import com.escalade.siteweb.business.contract.manager.ReservationTopoManager;
 import com.escalade.siteweb.business.contract.manager.SecteurManager;
 import com.escalade.siteweb.business.contract.manager.SiteManager;
 import com.escalade.siteweb.business.contract.manager.UtilisateurManager;
@@ -55,5 +56,9 @@ public interface ManagerFactory {
 	void setPhotoManager(PhotoManager photoManager);
 
 	PhotoManager getPhotoManager();
+
+	void setReservationTopoManager(ReservationTopoManager reservationTopoManager);
+
+	ReservationTopoManager getReservationTopoManager();
 
 }

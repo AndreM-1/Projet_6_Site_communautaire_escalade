@@ -68,19 +68,69 @@
 					<s:if test="%{site.topoDisponible==true}">
 						<p><s:a class="btn btn-primary" data-toggle="modal" href="#formReservationTopo">Réserver une topo</s:a></p>
 						<div class="modal fade" id="formReservationTopo">
-							<div class="modal-dialog modal-sm">
+							<div class="modal-dialog modal-md">
 								<div class="modal-content">
 									<div class="modal-header">
 					              		<button type="button" class="close" data-dismiss="modal">x</button>
-              							<h4 class="modal-title">Réservation de topo</h4>
+              							<h4 class="modal-title text-center">Réservation de topo</h4>
 									</div>
 									<div class="modal-body">
-										<s:form>
+										<s:form action="reservation_topo" method="POST">
+											<s:hidden name="site.id" label="Site id"/>
+											<s:actionerror/>
 											<div class="form-group">
-												<s:textfield name="site.dateDeDebut" label="Date de début :"></s:textfield>
-												<s:textfield name="site.dateDeFin" label="Date de fin :" ></s:textfield>
+												<p class="text-center">Veuillez saisir les dates de réservation pour la topo.</p>
+												<p class="text-center">Les topo ne peuvent être réservées que pour une journée.</p>
+												<div class="row">
+													<div class="col-lg-6">
+														<label for="reservationTopo.dateDeDebut">Date de début</label>
+														<input type="date" name="reservationTopo.dateDeDebut" class="form-control" id= "reservationTopo.dateDeDebut"/>
+													</div>
+													<div class="col-lg-6">
+														<label for="reservationTopo.heureDeDebut">Heure de début</label>
+														<select name="reservationTopo.heureDeDebut" id="reservationTopo.heureDeDebut" class="form-control">
+												        	<option value="08:00">08:00</option>
+												           	<option value="09:00">09:00</option>
+												          	<option value="10:00">10:00</option>
+												           	<option value="11:00">11:00</option>											      	 
+										      		   		<option value="12:00">12:00</option>
+										      		   		<option value="13:00">13:00</option>
+												           	<option value="14:00">14:00</option>
+												           	<option value="15:00">15:00</option>
+												           	<option value="16:00">16:00</option>
+												           	<option value="17:00">17:00</option>
+														</select>
+													</div>
+												</div>
 											</div>
-												<s:submit value="Valider" class="btn btn-primary"/>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-lg-6">
+														<label for="reservationTopo.dateDeFin">Date de fin</label>
+														<input type="date" name="reservationTopo.dateDeFin" id="reservationTopo.dateDeFin" class="form-control"/>
+													</div>
+													<div class="col-lg-6">
+														<label for="reservationTopo.heureDeFin">Heure de fin</label>
+														<select name="reservationTopo.heureDeFin" id="reservationTopo.heureDeFin" class="form-control">
+												           	<option value="09:00">09:00</option>
+												          	<option value="10:00">10:00</option>
+												           	<option value="11:00">11:00</option>											      	 
+										      		   		<option value="12:00">12:00</option>
+										      		   		<option value="13:00">13:00</option>
+												           	<option value="14:00">14:00</option>
+												           	<option value="15:00">15:00</option>
+												           	<option value="16:00">16:00</option>
+												           	<option value="17:00">17:00</option>
+												           	<option value="18:00">18:00</option>														
+														</select>
+													</div>
+												</div>
+											</div> 
+											<div class="row">
+												<div class="col-lg-offset-2 col-lg-8">
+													<s:submit value="Valider" class="btn btn-primary btn-block"/>
+												</div>
+											</div>
 										</s:form>
 									</div>
 		
