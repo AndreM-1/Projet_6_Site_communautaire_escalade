@@ -83,7 +83,7 @@ public class GestionCreationCompte extends ActionSupport implements SessionAware
 	 */
 	public String doCreationCompte() {
 		// Si (this.utilisateur == null) c'est que l'on entre dans le formulaire de création de compte utilisateur
-		// Sinon, c'est que l'on vient de valider le formulaire de crétaion de compte
+		// Sinon, c'est que l'on vient de valider le formulaire de création de compte
 
 		// Par défaut, le result est "input
 		String vResult = ActionSupport.INPUT;

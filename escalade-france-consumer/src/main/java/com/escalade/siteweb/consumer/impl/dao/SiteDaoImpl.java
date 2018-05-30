@@ -19,6 +19,7 @@ import com.escalade.siteweb.consumer.contract.dao.DepartementDao;
 import com.escalade.siteweb.consumer.contract.dao.PaysDao;
 import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.contract.dao.RegionDao;
+import com.escalade.siteweb.consumer.contract.dao.ReservationTopoDao;
 import com.escalade.siteweb.consumer.contract.dao.SecteurDao;
 import com.escalade.siteweb.consumer.contract.dao.SiteDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
@@ -51,6 +52,9 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao{
 	@Inject
 	private SecteurDao secteurDao;
 	
+	@Inject
+	private ReservationTopoDao reservationTopoDao;
+	
 	//Définition du LOGGER
 	private static final Logger LOGGER=(Logger) LogManager.getLogger(SiteDaoImpl.class);
 	
@@ -60,7 +64,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao{
 
         JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
         
-        RowMapper<Site> vRowMapper=new SiteRM(utilisateurDao,paysDao,regionDao,departementDao,photoDao,commentaireDao,secteurDao);
+        RowMapper<Site> vRowMapper=new SiteRM(utilisateurDao,paysDao,regionDao,departementDao,photoDao,commentaireDao,secteurDao,reservationTopoDao);
 
         List<Site> vListSite = vJdbcTemplate.query(vSQL, vRowMapper);
 
@@ -73,7 +77,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao{
 		
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
 		
-		RowMapper<Site> vRowMapper=new SiteRM(utilisateurDao,paysDao,regionDao,departementDao,photoDao,commentaireDao,secteurDao);
+		RowMapper<Site> vRowMapper=new SiteRM(utilisateurDao,paysDao,regionDao,departementDao,photoDao,commentaireDao,secteurDao,reservationTopoDao);
 		
 		List<Site> vListSite = vJdbcTemplate.query(vSQL, vRowMapper);
 		
@@ -90,7 +94,7 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao{
 		
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
 		
-		RowMapper<Site> vRowMapper=new SiteRM(utilisateurDao,paysDao,regionDao,departementDao,photoDao,commentaireDao,secteurDao);
+		RowMapper<Site> vRowMapper=new SiteRM(utilisateurDao,paysDao,regionDao,departementDao,photoDao,commentaireDao,secteurDao,reservationTopoDao);
 		
 		List<Site> vListSite = vJdbcTemplate.query(vSQL, vRowMapper);
 		

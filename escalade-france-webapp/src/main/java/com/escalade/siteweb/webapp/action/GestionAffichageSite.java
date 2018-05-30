@@ -33,10 +33,6 @@ public class GestionAffichageSite extends ActionSupport implements SessionAware{
 	// ----- Paramètres en entrée
 	private Integer id;
 	private Commentaire commentaire;
-	private Date dateDeDebut;
-	private Date dateDeFin;
-	private String heureDeDebut;
-	private String heureDeFin;
 	private ReservationTopo reservationTopo;
 
 
@@ -74,39 +70,7 @@ public class GestionAffichageSite extends ActionSupport implements SessionAware{
 	public void setCommentaire(Commentaire commentaire) {
 		this.commentaire = commentaire;
 	}
-	
-	public Date getDateDeDebut() {
-		return dateDeDebut;
-	}
 
-	public void setDateDeDebut(Date dateDeDebut) {
-		this.dateDeDebut = dateDeDebut;
-	}
-
-	public String getHeureDeDebut() {
-		return heureDeDebut;
-	}
-
-	public void setHeureDeDebut(String heureDeDebut) {
-		this.heureDeDebut = heureDeDebut;
-	}
-
-	public Date getDateDeFin() {
-		return dateDeFin;
-	}
-
-	public void setDateDeFin(Date dateDeFin) {
-		this.dateDeFin = dateDeFin;
-	}
-
-	public String getHeureDeFin() {
-		return heureDeFin;
-	}
-
-	public void setHeureDeFin(String heureDeFin) {
-		this.heureDeFin = heureDeFin;
-	}
-	
 	public ReservationTopo getReservationTopo() {
 		return reservationTopo;
 	}
@@ -161,34 +125,51 @@ public class GestionAffichageSite extends ActionSupport implements SessionAware{
 	}
 
 	public String doReservationTopo(){
-		String vResult=ActionSupport.SUCCESS;
-		if(reservationTopo.getDateDeDebut()!=null && reservationTopo.getDateDeFin()!=null) {
-			Utilisateur utilisateur=(Utilisateur)session.get("user");
-			SimpleDateFormat formater=new SimpleDateFormat("dd-MM-yyyy");
-			LOGGER.info("Méthode doReservationTopo - Date de début (format par défaut) : "+reservationTopo.getDateDeDebut());
-			LOGGER.info("Méthode doReservationTopo - Date de fin (format par défaut) : "+reservationTopo.getDateDeFin());
-			LOGGER.info("Méthode doReservationTopo - Date de début (format personnalisé) : "+formater.format(reservationTopo.getDateDeDebut()));
-			LOGGER.info("Méthode doReservationTopo - Date de fin (format personnalisé) : "+formater.format(reservationTopo.getDateDeFin()));
-			LOGGER.info("Méthode doReservationTopo - Heure de début : "+reservationTopo.getHeureDeDebut());
-			LOGGER.info("Méthode doReservationTopo - Heure de fin : "+reservationTopo.getHeureDeFin());
-			LOGGER.info("Méthode doReservationTopo - Utilisateur Id en session (celui qui réserve la topo) :"+utilisateur.getId());
-			reservationTopo.setDateReservation(new Date());
-			LOGGER.info("Méthode doReservationTopo - Site Id :"+site.getId());
+		
+		String vResult=ActionSupport.INPUT;
+		
+		if(site.getId()!=null) {
 			try {
-				managerFactory.getReservationTopoManager().insertReservationTopo(reservationTopo.getDateDeDebut(),reservationTopo.getHeureDeDebut(),reservationTopo.getDateDeFin(),
-						reservationTopo.getHeureDeFin(),utilisateur.getId(),site.getId(),reservationTopo.getDateReservation());
-			} catch (FunctionalException fEx) {
-				LOGGER.info(fEx.getMessage());
-				this.addActionError(fEx.getMessage());
-				
-			} catch(TechnicalException tEx) {
-				LOGGER.info(tEx.getMessage());
-				this.addActionError(tEx.getMessage());
-				vResult="error";
+				site.setListReservationTopo(managerFactory.getReservationTopoManager().getListReservationTopo(site.getId()));
+			} catch (NotFoundException e) {
+				LOGGER.info("Pas de réservation de topo pour ce site");
 			}
-		} else {
-			LOGGER.info("Veuillez renseigner les champs date de début et date de fin.");
-			this.addActionError("Veuillez renseigner les champs date de début et date de fin.");
+		}else {
+			this.addActionError("L'id du site est manquant.");
+			vResult="error";
+		}
+				
+		if(reservationTopo!=null) {
+			if(reservationTopo.getDateDeDebut()!=null && reservationTopo.getDateDeFin()!=null) {
+				vResult=ActionSupport.SUCCESS;
+				Utilisateur utilisateur=(Utilisateur)session.get("user");
+				SimpleDateFormat formater=new SimpleDateFormat("dd-MM-yyyy");
+				LOGGER.info("Méthode doReservationTopo - Date de début (format par défaut) : "+reservationTopo.getDateDeDebut());
+				LOGGER.info("Méthode doReservationTopo - Date de fin (format par défaut) : "+reservationTopo.getDateDeFin());
+				LOGGER.info("Méthode doReservationTopo - Date de début (format personnalisé) : "+formater.format(reservationTopo.getDateDeDebut()));
+				LOGGER.info("Méthode doReservationTopo - Date de fin (format personnalisé) : "+formater.format(reservationTopo.getDateDeFin()));
+				LOGGER.info("Méthode doReservationTopo - Heure de début : "+reservationTopo.getHeureDeDebut());
+				LOGGER.info("Méthode doReservationTopo - Heure de fin : "+reservationTopo.getHeureDeFin());
+				LOGGER.info("Méthode doReservationTopo - Utilisateur Id en session (celui qui réserve la topo) :"+utilisateur.getId());
+				reservationTopo.setDateReservation(new Date());
+				LOGGER.info("Méthode doReservationTopo - Site Id :"+site.getId());
+				try {
+					managerFactory.getReservationTopoManager().insertReservationTopo(reservationTopo.getDateDeDebut(),reservationTopo.getHeureDeDebut(),reservationTopo.getDateDeFin(),
+							reservationTopo.getHeureDeFin(),utilisateur.getId(),site.getId(),reservationTopo.getDateReservation());
+				} catch (FunctionalException fEx) {
+					LOGGER.info(fEx.getMessage());
+					this.addActionError(fEx.getMessage());
+					vResult=ActionSupport.INPUT;
+
+				} catch(TechnicalException tEx) {
+					LOGGER.info(tEx.getMessage());
+					this.addActionError(tEx.getMessage());
+					vResult="error";
+				}
+			} else {
+				LOGGER.info("Veuillez renseigner les champs date de début et date de fin.");
+				this.addActionError("Veuillez renseigner les champs date de début et date de fin.");
+			}
 		}
 		return vResult;
 	}

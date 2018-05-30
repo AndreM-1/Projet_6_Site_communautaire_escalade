@@ -35,6 +35,18 @@ public class ReservationTopoManagerImpl extends AbstractManager implements Reser
 	
 	
 	@Override
+	public List<ReservationTopo> getListReservationTopo(int siteId) throws NotFoundException {
+		try {
+			listReservationTopo=getDaoFactory().getReservationTopoDao().getListReservationTopo(siteId);
+		} catch (NotFoundException e) {
+			throw new NotFoundException("Business - Pas de réservation de topo pour ce site. ");
+		}
+		return this.listReservationTopo;
+		
+	}
+	
+	
+	@Override
 	public void insertReservationTopo(Date dateDeDebut, String heureDeDebut, Date dateDeFin, String heureDeFin, int utilisateurId, int siteId, Date dateReservation) 
 			throws FunctionalException,TechnicalException{
 		List<ReservationTopo> listReservationTopo=null;
@@ -61,7 +73,7 @@ public class ReservationTopoManagerImpl extends AbstractManager implements Reser
 		}
 		
 		if(heureDeFinInt<heureDeDebutInt) {
-			throw new FunctionalException("L'heure de fin de réservation ne peut pas être située avant l'heure de début.");
+			throw new FunctionalException("L'heure de fin ne peut pas être située avant l'heure de début.");
 		}
 		
 		try {

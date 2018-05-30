@@ -33,10 +33,6 @@ public class Site implements java.io.Serializable {
 
 	private Boolean topoDisponible;
 
-	private Date dateDeDebut;
-
-	private Date dateDeFin;
-
 	private Date dateAjoutSite;
 
 	private Date dateMajSite;
@@ -56,6 +52,8 @@ public class Site implements java.io.Serializable {
 	private List<Commentaire> listCommentaire;
 	
 	private List<Secteur> listSecteur;
+	
+	private List<ReservationTopo> listReservationTopo;
 
 	// ==================== Constructeurs ====================
 	/**
@@ -124,27 +122,6 @@ public class Site implements java.io.Serializable {
 	public void setTopoDisponible(Boolean topoDisponible) {
 		this.topoDisponible = topoDisponible;
 	}
-
-
-	public Date getDateDeDebut() {
-		return dateDeDebut;
-	}
-
-
-	public void setDateDeDebut(Date dateDeDebut) {
-		this.dateDeDebut = dateDeDebut;
-	}
-
-
-	public Date getDateDeFin() {
-		return dateDeFin;
-	}
-
-
-	public void setDateDeFin(Date dateDeFin) {
-		this.dateDeFin = dateDeFin;
-	}
-
 
 	public Date getDateAjoutSite() {
 		return dateAjoutSite;
@@ -239,6 +216,16 @@ public class Site implements java.io.Serializable {
 	public void setListSecteur(List<Secteur> listSecteur) {
 		this.listSecteur = listSecteur;
 	}
+	
+	public List<ReservationTopo> getListReservationTopo() {
+		return listReservationTopo;
+	}
+
+
+	public void setListReservationTopo(List<ReservationTopo> listReservationTopo) {
+		this.listReservationTopo = listReservationTopo;
+	}
+
 
 	// ==================== Méthodes ====================
 	@Override
@@ -251,8 +238,6 @@ public class Site implements java.io.Serializable {
 		.append(vSeparateur).append("descriptif=\"").append(descriptif).append('"')
 		.append(vSeparateur).append("commentairePersonnel=\"").append(commentairePersonnel).append('"')
 		.append(vSeparateur).append("topoDisponible=\"").append(topoDisponible).append('"')
-		.append(vSeparateur).append("dateDeDebut=\"").append(dateDeDebut).append('"')
-		.append(vSeparateur).append("dateDeFin=\"").append(dateDeFin).append('"')
 		.append(vSeparateur).append("dateAjoutSite=\"").append(dateAjoutSite).append('"')
 		.append(vSeparateur).append("dateMajSite=\"").append(dateMajSite).append('"')
 		.append(vSeparateur).append("utilisateur=\"").append(utilisateur.getPseudo()).append('"')
@@ -263,6 +248,7 @@ public class Site implements java.io.Serializable {
 		.append(vSeparateur).append("listPhotoAllSecteur=\"").append(listPhotoAllSecteur).append('"')
 		.append(vSeparateur).append("listCommentaire=\"").append(listCommentaire).append('"')
 		.append(vSeparateur).append("listSecteur=\"").append(listSecteur).append('"')
+		.append(vSeparateur).append("listReservationTopo=\"").append(listReservationTopo).append('"')
 		.append("}");
 		return vStB.toString();
 	}

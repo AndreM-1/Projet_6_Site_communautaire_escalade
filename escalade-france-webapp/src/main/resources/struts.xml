@@ -151,6 +151,7 @@
 		<action name="reservation_topo" class="com.escalade.siteweb.webapp.action.GestionAffichageSite"  method="doReservationTopo">
 			<interceptor-ref name="AuthenticatedStack" />
 			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="input">jsp/reservationtopo.jsp</result>
 			<result name="error">jsp/erreur.jsp</result>
 			<result name="success" type="redirectAction">
 			    <param name="actionName">page_site</param>

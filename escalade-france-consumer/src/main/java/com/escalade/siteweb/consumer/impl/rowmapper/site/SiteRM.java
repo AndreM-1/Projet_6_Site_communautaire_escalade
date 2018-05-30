@@ -3,6 +3,8 @@ package com.escalade.siteweb.consumer.impl.rowmapper.site;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.escalade.siteweb.consumer.contract.dao.CommentaireDao;
@@ -10,6 +12,7 @@ import com.escalade.siteweb.consumer.contract.dao.DepartementDao;
 import com.escalade.siteweb.consumer.contract.dao.PaysDao;
 import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.contract.dao.RegionDao;
+import com.escalade.siteweb.consumer.contract.dao.ReservationTopoDao;
 import com.escalade.siteweb.consumer.contract.dao.SecteurDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.model.bean.site.Site;
@@ -24,9 +27,13 @@ public class SiteRM implements RowMapper<Site> {
 	private PhotoDao photoDao;
 	private CommentaireDao commentaireDao;
 	private SecteurDao secteurDao;
+	private ReservationTopoDao reservationTopoDao;
+	
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(SiteRM.class);
 	
 	public SiteRM(UtilisateurDao utilisateurDao, PaysDao paysDao, RegionDao regionDao, DepartementDao departementDao,PhotoDao photoDao,
-			CommentaireDao commentaireDao,SecteurDao secteurDao) {
+			CommentaireDao commentaireDao,SecteurDao secteurDao,ReservationTopoDao reservationTopoDao) {
 		this.utilisateurDao=utilisateurDao;
 		this.paysDao=paysDao;
 		this.regionDao=regionDao;
@@ -34,6 +41,7 @@ public class SiteRM implements RowMapper<Site> {
 		this.photoDao=photoDao;
 		this.commentaireDao=commentaireDao;
 		this.secteurDao=secteurDao;
+		this.reservationTopoDao=reservationTopoDao;
 	}
 
 	@Override
@@ -43,8 +51,6 @@ public class SiteRM implements RowMapper<Site> {
 		vSite.setDescriptif(pRS.getString("descriptif"));
 		vSite.setCommentairePersonnel(pRS.getString("commentaire_personnel"));
 		vSite.setTopoDisponible(pRS.getBoolean("topo_disponible"));
-		vSite.setDateDeDebut(pRS.getTimestamp("date_de_debut"));
-		vSite.setDateDeFin(pRS.getTimestamp("date_de_fin"));
 		vSite.setDateAjoutSite(pRS.getTimestamp("date_ajout_site"));
 		vSite.setDateMajSite(pRS.getTimestamp("date_maj_site"));
 		try {
@@ -79,6 +85,12 @@ public class SiteRM implements RowMapper<Site> {
 		
 		if(secteurDao.getListSecteur(pRS.getInt("id"))!=null)
 			vSite.setListSecteur(secteurDao.getListSecteur(pRS.getInt("id")));
+		
+		try {
+			vSite.setListReservationTopo(reservationTopoDao.getListReservationTopo(pRS.getInt("id")));
+		} catch (NotFoundException e) {
+			LOGGER.info(e.getMessage());
+		}
 		
 		return vSite;
 	}
