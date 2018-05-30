@@ -43,7 +43,8 @@ CREATE TABLE public.utilisateur (
                 prenom VARCHAR(100) NOT NULL,
                 pseudo VARCHAR(100) NOT NULL,
                 adresse_mail VARCHAR(100) NOT NULL,
-                mot_de_passe VARCHAR(100) NOT NULL,
+                salt VARCHAR(30) NOT NULL,
+                mot_de_passe_securise VARCHAR(44) NOT NULL,
                 telephone CHAR(14),
                 date_naissance DATE,
                 adresse VARCHAR(100),
@@ -65,6 +66,14 @@ CREATE UNIQUE INDEX utilisateur_idx1
  ON public.utilisateur
  ( adresse_mail );
 
+CREATE UNIQUE INDEX utilisateur_idx2
+ ON public.utilisateur 
+ ( salt );
+
+CREATE UNIQUE INDEX utilisateur_idx3
+ ON public.utilisateur
+ ( mot_de_passe_securise );
+
 CREATE UNIQUE INDEX photo_idx
  ON public.photo
  (nom_photo);
@@ -77,8 +86,6 @@ CREATE TABLE public.site (
                 descriptif VARCHAR,
                 commentaire_personnel VARCHAR,
                 topo_disponible BOOLEAN NOT NULL,
-                date_de_debut TIMESTAMP,
-                date_de_fin TIMESTAMP,
                 pays_id INTEGER NOT NULL,
                 region_id INTEGER NOT NULL,
                 departement_id INTEGER NOT NULL,
@@ -162,6 +169,23 @@ CREATE TABLE public.formulaire_contact (
 
 
 ALTER SEQUENCE public.formulaire_contact_id_seq OWNED BY public.formulaire_contact.id;
+
+CREATE SEQUENCE public.reservation_topo_id_seq;
+
+CREATE TABLE public.reservation_topo (
+                id INTEGER NOT NULL DEFAULT nextval('public.reservation_topo_id_seq'),
+                date_de_debut DATE NOT NULL,
+                heure_de_debut CHAR(5) NOT NULL,
+                date_de_fin DATE NOT NULL,
+                heure_de_fin CHAR(5)NOT NULL,
+                utilisateur_id INTEGER NOT NULL,
+                site_id INTEGER NOT NULL,
+                date_reservation TIMESTAMP NOT NULL,
+                CONSTRAINT reservation_topo_pk PRIMARY KEY (id)
+);
+
+
+ALTER SEQUENCE public.reservation_topo_id_seq OWNED BY public.reservation_topo.id;
 
 ALTER TABLE public.site ADD CONSTRAINT pays_site_fk
 FOREIGN KEY (pays_id)
@@ -257,6 +281,20 @@ NOT DEFERRABLE;
 ALTER TABLE public.photo ADD CONSTRAINT secteur_photo_fk
 FOREIGN KEY (secteur_id)
 REFERENCES public.secteur (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.reservation_topo ADD CONSTRAINT utilisateur_reservation_topo_fk
+FOREIGN KEY (utilisateur_id)
+REFERENCES public.utilisateur (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.reservation_topo ADD CONSTRAINT site_reservation_topo_fk
+FOREIGN KEY (site_id)
+REFERENCES public.site (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;

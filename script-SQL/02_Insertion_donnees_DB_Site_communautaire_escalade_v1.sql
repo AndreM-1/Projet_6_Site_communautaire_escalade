@@ -47,32 +47,33 @@ INSERT INTO public.departement (nom_departement,region_id) VALUES ('Ain',1),('Al
 -- *********************************************************************
 -- utilisateur
 -- *********************************************************************
-INSERT INTO public.utilisateur(civilite,nom,prenom,pseudo,adresse_mail,mot_de_passe,telephone,date_naissance,adresse,code_postal,ville,pays,administrateur)
+INSERT INTO public.utilisateur(civilite,nom,prenom,pseudo,adresse_mail,salt,mot_de_passe_securise,telephone,date_naissance,adresse,code_postal,ville,pays,administrateur)
 VALUES 
-('Monsieur', 'Monnier','André','André M.','andre_monnier@yahoo.fr','M0tp@SAdM8!!','06-13-74-63-52','1983-10-25','666 Chemin de sur la ville','74340','Samoëns','France',true),
-('Monsieur', 'Durand','Martin','Martin','martin.durand@gmail.com','M@rt1R@777?','06-31-47-36-25','1982-05-04','1 AVENUE BERTHOLLET','74000','ANNECY','France',false),
-('Monsieur', 'Gallet','Romuald','Romu G.','romuald.gallet@yahoo.fr','GEsc@L@Det?',NULL,NULL,NULL,NULL,NULL,NULL,false);																  
+-- Mot de passe non sécurisé :M0tp@SAdM83!!
+('Monsieur', 'Monnier','André','André M.','andre.monnier@hotmail.fr','31hraAmHVPmwZ3BWrbZOip7OTfHowG','IoqlU/twMW5yR8EQsXw+wm2s9eLRzmtBHapDRfF/ck8=','06-13-74-63-52','1983-10-25','666 Chemin de sur la ville','74340','Samoëns','France',true),
+-- Mot de passe non sécurisé :M@rt1R@778?
+('Monsieur', 'Durand','Martin','Martin','martin.durand@gmail.com','tmm74Y907HxYFoZ84fkT18o1WC4J4h','CE/Rkn/38VtNh2NuqCz+7aG/VXiWwyA2Wxm0l/8cQ2c=','06-31-47-36-25','1982-05-04','1 AVENUE BERTHOLLET','74000','ANNECY','France',false),
+-- Mot de passe non sécurisé :GEsc@L@Dais?
+('Monsieur', 'Gallet','Romuald','Romu G.','romuald.gallet@yahoo.fr','lLGSalPUNp8LaK5YezAzvGiuqvH5Va','QYWhASzYFe0L1TYrKNMovzj9hQ5fLfEaYlqkjP5iKFc=',NULL,NULL,NULL,NULL,NULL,NULL,false);															  
 
 -- *********************************************************************
 -- site
 -- *********************************************************************
-INSERT INTO public.site (nom_site,descriptif,commentaire_personnel,topo_disponible,date_de_debut,date_de_fin,pays_id,region_id,departement_id,utilisateur_id,
-	date_ajout_site,date_maj_site)
+INSERT INTO public.site (nom_site,descriptif,commentaire_personnel,topo_disponible,pays_id,region_id,departement_id,utilisateur_id,date_ajout_site,date_maj_site)
 VALUES 
 		-- Site Les Monts
 	   ('Les Monts','Ce site offre une vue dominante sur la ville de Chambéry et sur le massif de la Chartreuse','Très beau site qui comporte 2 secteurs avec de nombreuses voies !',
-		true,'2018-06-20 10:00:00','2018-06-20 14:00:00',1,1,12,1,'2018-05-06 10:00:00','2018-05-06 10:00:00'),
+		true,1,1,12,1,'2018-05-06 10:00:00','2018-05-06 10:00:00'),
 	   
 	   -- Site SuperU
 	   ('SuperU','Située sur la commune de Montmélian cette superbe barre rocheuse est idéale pour les amoureux de tranquillité et de nouveautés.','L''orientation Sud-Est vous permettra,
 	   	pendant le printemps, de profiter pleinement du lieu et du panorama. Vous viendrez avant tout à SuperU pour goûter aux plaisirs d''un accès typé montagne comme pour ses voies de 
-	   	continuités. Vous trouverez aussi des itinéraires à sections blocs et d''autres plus résistants.',true,'2018-06-21 14:00:00','2018-06-21 18:00:00',1,1,12,1,
-	   	'2018-05-07 10:00:00','2018-05-07 10:00:00'),
+	   	continuités. Vous trouverez aussi des itinéraires à sections blocs et d''autres plus résistants.',true,1,1,12,1,'2018-05-07 10:00:00','2018-05-07 10:00:00'),
 
 	   -- Site Bassin Long
 	   ('Bassin Long','Site situé dans un cadre agréable et facile d''accès. Ce site comporte 5 secteurs.','La vallée est le lieu habituel de pâturage des chèvres.
 	   	Il est conseillé de ne pas rester sous les falaises lors du passage des troupeaux. Chute de pierres possible. A bassin Long on peut piquer une tête.
-	   	N’oubliez pas d’emporter avec vous les déchets en partant.',true,'2018-06-22 14:00:00','2018-06-22 18:00:00',1,17,101,2,'2018-05-08 14:35:00','2018-05-08 14:35:00');
+	   	N’oubliez pas d’emporter avec vous les déchets en partant.',true,1,17,101,2,'2018-05-08 14:35:00','2018-05-08 14:35:00');
 
 
 -- *********************************************************************
@@ -170,3 +171,15 @@ VALUES ('jsp/assets/images/utilisateur_1.jpg',1,NULL,NULL),
 	   ('jsp/assets/images/secteur_91.jpg',NULL,NULL,9),
 	   ('jsp/assets/images/secteur_101.jpg',NULL,NULL,10),
 	   ('jsp/assets/images/secteur_102.jpg',NULL,NULL,10);
+
+-- *********************************************************************
+-- reservation_topo
+-- *********************************************************************
+INSERT INTO public.reservation_topo(date_de_debut,heure_de_debut,date_de_fin,heure_de_fin,utilisateur_id,site_id,date_reservation)
+VALUES ('2018-06-20','10:00','2018-06-20','14:00',2,1,'2018-06-12 08:02:03'),
+	   ('2018-06-22','08:00','2018-06-22','18:00',3,1,'2018-06-15 18:05:07'),
+	   ('2018-06-25','08:00','2018-06-25','13:00',2,2,'2018-06-18 19:05:30'),
+	   ('2018-06-25','13:00','2018-06-25','16:00',3,2,'2018-06-18 19:05:30'),
+	   ('2018-06-25','14:00','2018-06-25','16:00',1,3,'2018-06-20 20:05:07'),
+	   ('2018-07-02','08:00','2018-07-02','12:00',1,3,'2018-06-26 18:05:07'),
+	   ('2018-07-02','13:00','2018-07-02','17:00',3,3,'2018-06-20 07:15:17');

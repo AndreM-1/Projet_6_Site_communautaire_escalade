@@ -194,7 +194,6 @@
 	    
 		<!-- Action renvoyant la liste des pays  -->
 		<action name="page_ajout_site_ajax_getListPays" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doAjaxGetListPays">
-			<interceptor-ref name="AuthenticatedStack" />
 			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
 			<result name="success" type="json">
 				<param name="root">listPays</param>	
@@ -203,7 +202,6 @@
 		
 		<!-- Action renvoyant la liste des régions d'un pays  -->
 		<action name="page_ajout_site_ajax_getListRegion" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doAjaxGetListRegion">
-			<interceptor-ref name="AuthenticatedStack" />
 			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
 			<result name="success" type="json">
 				<param name="root">listRegion</param>	
@@ -212,7 +210,6 @@
 		
 		<!-- Action renvoyant la liste des départements d'une région  -->
 		<action name="page_ajout_site_ajax_getListDepartement" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doAjaxGetListDepartement">
-			<interceptor-ref name="AuthenticatedStack" />
 			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
 			<result name="success" type="json">
 				<param name="root">listDepartement</param>	

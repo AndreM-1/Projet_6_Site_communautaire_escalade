@@ -90,20 +90,23 @@
 								<div class="row" id="rowPhoto">
 									<s:if test="%{photoSite!=null}">
 										<div class="col-lg-4">
-											<img src="<s:property value="photoSite.nomPhoto"/>" alt="Photo d'un site" height=200px  />
+											<img src="<s:property value="photoSite.nomPhoto"/>" alt="Photo d'un site" height=200px width=252px/>
 										</div>
 									</s:if>
+									<s:else>
+										<div class="col-lg-4 photoParDefaut"></div>
+									</s:else>
 								
 									<s:iterator value="listPhotoAllSecteur" begin="0" end="1">
 										<s:if test="%{listPhotoAllSecteur!=null}">
 											<div class="col-lg-4">
-												<img src="<s:property value="nomPhoto"/>" alt="Photo d'un secteur" height=200px/>
+												<img src="<s:property value="nomPhoto"/>" alt="Photo d'un secteur" height=200px width=252px/>
 											</div>
 										</s:if>
+										<s:else>
+											<div class="col-lg-4 photoParDefaut"></div>
+										</s:else>
 									</s:iterator>
-									<s:if test="%{photoSite==null&&listPhotoAllSecteur==null}">
-										<div id="photoParDefaut"></div>
-									</s:if>	
 								</div>
 							</div>	
 						</div>

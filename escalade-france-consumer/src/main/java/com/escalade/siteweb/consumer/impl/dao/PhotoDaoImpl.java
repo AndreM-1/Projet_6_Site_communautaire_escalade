@@ -50,7 +50,7 @@ public class PhotoDaoImpl extends AbstractDaoImpl implements PhotoDao{
 	
 	@Override
 	public List<Photo> getListPhotoAllSecteur(int siteId){
-		String vSQL = "SELECT * FROM public.photo INNER JOIN public.secteur ON photo.secteur_id=secteur.id WHERE secteur.site_id="+siteId;
+		String vSQL = "SELECT * FROM public.photo INNER JOIN public.secteur ON photo.secteur_id=secteur.id WHERE secteur.site_id="+siteId+" ORDER BY photo.id ASC";
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
 		
 		RowMapper<Photo> vRowMapper=new PhotoRM();

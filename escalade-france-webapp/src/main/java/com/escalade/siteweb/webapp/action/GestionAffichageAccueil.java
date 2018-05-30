@@ -87,8 +87,8 @@ public class GestionAffichageAccueil extends ActionSupport implements SessionAwa
 	 */
 	public String doList() {
 		listPays = managerFactory.getPaysManager().getListPays();
-		listRegion = managerFactory.getRegionManager().getListRegion();
-		listDepartement = managerFactory.getDepartementManager().getListDepartement();
+		listRegion=managerFactory.getRegionManager().getListRegion(listPays.get(0).getId());
+		listDepartement=managerFactory.getDepartementManager().getListDepartement(listRegion.get(0).getId());
 		listSite=managerFactory.getSiteManager().getListSite();
 		
 		//Ajout de variables en session

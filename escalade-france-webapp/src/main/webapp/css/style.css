@@ -12,6 +12,10 @@ header{
 	margin-bottom: 25px;
 }
 
+#barreDeRecherche{
+	padding-left:4%;
+}
+
 #banniereImage{
 	border-radius: 5px;
 	background: url('../jsp/assets/images/fondEcran1.jpg') no-repeat;
@@ -41,7 +45,7 @@ h1{
 	box-shadow: 0px 4px 4px #1c1a19;
 }
 
-#photoParDefaut{
+.photoParDefaut{
 	background-color:#B19EFF;  
 	height:200px;
 }
@@ -49,7 +53,10 @@ h1{
 #rowPhoto{
 	margin-right:0px;
 	margin-left:0px;
+}
 
+#rowPhoto div{
+	padding-left:0px;
 }
 
 #sectionQsn{
@@ -147,10 +154,5 @@ footer .col-lg-2{
 }
 
 
-#rowPhoto div{
-	
-}
-
-[class*="col-lg-4"]{
-	
+[class*="col-lg"]{
 }
