@@ -5,7 +5,7 @@
 		<s:a action="index">escalade-france.com</s:a>
 	</div>
 	<div class="col-lg-7" id="barreDeRecherche">
-		<s:form class="form-inline" method="POST">
+		<s:form class="form-inline" action="recherche_site" method="POST">
 			<div class="form-group">
 				<label class="sr-only" for="selectPays">Pays</label>
 			    <s:select id="selectPays" name="pays" list="#session.listPays" listKey="id" listValue="nomPays" onchange="onSelectPaysChange()" class="form-control"/>
@@ -19,7 +19,7 @@
 				<s:select id="selectDepartement" name="departement" list="#session.listDepartement" listValue="nomDepartement" class="form-control" />
 			</div>
 			<div class="form-group">
-				<s:textfield name="rechercheSite" placeholder="Rechercher un site" requiredLabel="true" />
+				<s:textfield name="siteRecherche" placeholder="Rechercher un site" requiredLabel="true" />
 			</div>
 				<s:submit value="Rechercher" class="btn btn-primary" width="500px"/>
 		

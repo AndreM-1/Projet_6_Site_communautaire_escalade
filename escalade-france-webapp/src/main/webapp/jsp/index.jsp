@@ -102,9 +102,9 @@
 			</section>
 			
 			<script>
-			$(function (){
-   			$('a').tooltip();
-			});
+				$(function (){
+	   			$('a').tooltip();
+				});
 			</script>
 			
 			<!-- Pied de page -->

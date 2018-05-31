@@ -16,6 +16,14 @@ header{
 	padding-left:4%;
 }
 
+.panelBodyResultatRecherche{
+	display:flex;
+}
+
+.panelBodySiteTrouve{
+	margin-left:5px;
+}
+
 #banniereImage{
 	border-radius: 5px;
 	background: url('../jsp/assets/images/fondEcran1.jpg') no-repeat;

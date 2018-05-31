@@ -25,8 +25,6 @@ public class GestionAffichageAccueil extends ActionSupport implements SessionAwa
 	@Inject
 	private ManagerFactory managerFactory;
 
-	// ----- Paramètres en entrée
-
 
 	// ----- Eléments en sortie
 	private List<Pays> listPays;
