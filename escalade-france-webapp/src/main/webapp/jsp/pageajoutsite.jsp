@@ -20,13 +20,13 @@
 				<!-- Section liée à la localisation -->
 				<h2>Localisation</h2>
 		
-				<s:form action="page_ajout_site" method="POST" enctype="multipart/form-data">
-					<s:select id="selectPaysPaj" name="pays" label="Pays" list="listPays"
-						listKey="id" listValue="nomPays" onchange="onSelectPaysPajChange()" requiredLabel="true" />
+				<s:form action="page_ajout_site" method="POST" enctype="multipart/form-data" id="form_one">
+					<s:form></s:form>
+					<s:select id="selectPaysPaj" name="site.pays" label="Pays" list="listPays" listKey="id" listValue="nomPays" onchange="onSelectPaysPajChange()" requiredLabel="true" />
 			
-					<s:select id="selectRegionPaj" name="region" label="Region" list="listRegion" listValue="nomRegion" onchange="onSelectRegionPajChange()" requiredLabel="true" />
+					<s:select id="selectRegionPaj" name="site.region" label="Region" list="listRegion" listValue="nomRegion" onchange="onSelectRegionPajChange()" requiredLabel="true" />
 					
-					<s:select id="selectDepartementPaj" name="departement" label ="Departement" list="listDepartement" listValue="nomDepartement" requiredLabel="true"/>
+					<s:select id="selectDepartementPaj" name="site.departement" label ="Departement" list="listDepartement" listValue="nomDepartement" requiredLabel="true"/>
 				
 					<!-- Section liée au descriptif et à la photo du site -->
 					<h2>Descriptif du site</h2>
@@ -36,7 +36,13 @@
 					<p><strong>Ajouter une photo pour le site</strong> </p>
 					<p class="text-center">
 						<s:a data-toggle="modal" href="#formUploadPhotoSite">
-							<img src="jsp/assets/images/ajout_site_secteur.png" alt="Photo site" />
+							<s:if test="%{site.photoSite.nomPhoto!=null}">
+								<s:hidden name="site.photoSite.nomPhoto"/>
+								<img src="<s:property value="site.photoSite.nomPhoto"/>" alt="Photo utilisateur"  width=100px height=100px/>
+							</s:if>
+							<s:else>
+								<img src="jsp/assets/images/ajout_site_secteur.png" alt="Photo site" />
+							</s:else>
 						</s:a>
 					</p>
 					
@@ -49,11 +55,12 @@
 		   							<h4 class="modal-title text-center">Ajouter une photo de site</h4>
 								</div>
 								<div class="modal-body">
-									<s:form action="" method="POST" namespace="/" enctype="multipart/form-data">
+									<s:form action="upload_photo_site" method="POST" enctype="multipart/form-data" id="form_two">
 										<p class="text-center"><label for="fileSiteUpload">Sélectionner une photo :</label></p>
+										<s:hidden name="site.photoSite.nomPhoto"/>
 										<s:file name="fileSiteUpload" id="fileSiteUpload"></s:file>	
 										<div class="text-center">							
-												<s:submit value="Valider" class="btn btn-primary"/>
+											<s:submit value="Valider" class="btn btn-primary"/>
 										</div>
 									</s:form>
 								</div>
@@ -66,7 +73,7 @@
 					<h4><a href="#ajoutSecteur1" data-toggle="collapse">Ajouter un secteur</a></h4>
 					<s:iterator var="counterSecteur" status="rowstatusSecteur" begin="1" end="3">
 						<div id="ajoutSecteur${counterSecteur}" class="panel-collapse collapse" >
-							<s:textfield name="listSecteur.nomSecteur"><h4>Nom du secteur ${counterSecteur} *</h4> </s:textfield>
+							<s:textfield name="site.listSecteur[%{#rowstatusSecteur.index}].nomSecteur"><h4>Nom du secteur ${counterSecteur} *</h4> </s:textfield>
 							
 							<!-- Section liée aux voies d'un secteur, d'où 2 boucles avec deux indices -->	
 							<p><a href="#ajoutVoie${counterSecteur}1" data-toggle="collapse">Ajouter une voie</a></p>
@@ -75,19 +82,19 @@
 									<p><strong>Topo de la voie ${counterVoie}</strong></p>
 									<div class="row">
 										<div class="col-lg-3">
-											<s:textfield name="listSecteur[%{counterSecteur}-1].listVoie[%{counterVoie}-1].nomVoie" value="Nom de la voie *"/> 
+											<s:textfield name="site.listSecteur[%{#rowstatusSecteur.index}].listVoie[%{#rowStatusVoie.index}].nomVoie" value="Nom de la voie *"/> 
 										</div>
 										<div class="col-lg-3">
-											<s:textfield name="" value="Cotation"/>
+											<s:textfield name="site.listSecteur[%{#rowstatusSecteur.index}].listVoie[%{#rowStatusVoie.index}].cotation" value="Cotation"/>
 										</div>
 										<div class="col-lg-2">
-											<s:textfield name="" value="Hauteur"/> 
+											<s:textfield name="site.listSecteur[%{#rowstatusSecteur.index}].listVoie[%{#rowStatusVoie.index}].hauteur" value="Hauteur"/> 
 										</div>
 										<div class="col-lg-2">
-											<s:textfield name="" value="Nb points"/>
+											<s:textfield name="site.listSecteur[%{#rowstatusSecteur.index}].listVoie[%{#rowStatusVoie.index}].nbPoints" value="Nb points"/>
 										</div>
 										<div class="col-lg-2">
-											<s:textfield name="" value="Durée"/>
+											<s:textfield name="site.listSecteur[%{#rowstatusSecteur.index}].listVoie[%{#rowStatusVoie.index}].duree" value="Durée"/>
 										</div>
 									</div>
 									<s:if test="#rowStatusVoie.last==false">
@@ -143,7 +150,7 @@
 					
 					<!-- Validation de l'ensemble du formulaire d'ajout de site -->
 					<p class="text-center">
-					<s:submit value="Valider" class="btn btn-primary btn-lg"/> 
+						<s:submit value="Valider" class="btn btn-primary btn-lg"/> 
 					</p>
 					
 				</s:form>

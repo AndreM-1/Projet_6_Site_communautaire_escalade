@@ -13,28 +13,30 @@
 			<!-- Section liée au détail d'un site -->
 			<h1 class="text-center"><s:property value="site.nomSite"/></h1>
 			
-			<h2>Ajouté par : <s:property value="site.utilisateur.pseudo"/></h2>
-			<h2>Localisation 
+			<h2 class="well">Ajouté par : <s:property value="site.utilisateur.pseudo"/></h2>
+			
+			<h2 class="well">Localisation 
 				<s:if test="#session.user.pseudo==site.utilisateur.pseudo">
 					<s:a class="pull-right lienModification"><span class="glyphicon glyphicon-pencil"></span>Modifier</s:a>
 				</s:if>
 			</h2>
+		
 			<p><s:property value="site.pays.nomPays"/></p>
 			<p><s:property value="site.region.nomRegion"/></p>
 			<p><s:property value="site.departement.nomDepartement"/></p>
-			<h2>Descriptif du site 
+			
+			<h2 class="well">Descriptif du site 
 				<s:if test="#session.user.pseudo==site.utilisateur.pseudo">
 					<s:a class="pull-right lienModification"><span class="glyphicon glyphicon-pencil"></span>Modifier</s:a>
 				</s:if>
 			</h2>
 			<p><s:property value="site.descriptif"/></p>
-		
 			<s:if test="%{site.photoSite!=null}">
-				<img src="<s:property value="site.photoSite.nomPhoto"/>" alt="Photo d'un site"   />
+				<img src="<s:property value="site.photoSite.nomPhoto"/>" alt="Photo d'un site" height=400px/>
 			</s:if>
-	
+				
 			<s:iterator value="site.listSecteur">
-				<h2>Secteur <s:property value="nomSecteur"/>
+				<h2 class="well">Secteur <s:property value="nomSecteur"/>
 					<s:if test="#session.user.pseudo==site.utilisateur.pseudo">
 						<s:a class="pull-right lienModification"><span class="glyphicon glyphicon-pencil"></span>Modifier</s:a>
 					</s:if>
@@ -43,22 +45,21 @@
 					<p><s:property value="nomVoie"/> : <s:property value="cotation"/> - <s:property value="hauteur"/>
 					- <s:property value="nbPoints"/> - <s:property value="duree"/></p>
 				</s:iterator>
-				
 				<p>
 					<s:iterator value="listPhotoSecteur">
-						<img src="<s:property value="nomPhoto"/>" alt="Photo d'un site"  height=500px />
+						<img src="<s:property value="nomPhoto"/>" alt="Photo d'un secteur" height=400px  />
 					</s:iterator>
-				</p>
+				</p>		
 			</s:iterator>
 			
-			<h2>Commentaires personnels
+			<h2 class="well">Commentaires personnels
 				<s:if test="#session.user.pseudo==site.utilisateur.pseudo">
 					<s:a class="pull-right lienModification"><span class="glyphicon glyphicon-pencil"></span>Modifier</s:a>
 				</s:if>
 			</h2>
 			<p class="text-justify"><s:property value="site.commentairePersonnel"/></p>
 			
-			<h2>Espace de prêt de topo
+			<h2 class="well">Espace de prêt de topo
 				<s:if test="#session.user.pseudo==site.utilisateur.pseudo">
 					<s:a class="pull-right lienModification"><span class="glyphicon glyphicon-pencil"></span>Modifier</s:a>
 				</s:if>
@@ -109,7 +110,7 @@
 				</s:else>	
 			</s:else>
 			<div id="sectionCommentaires">
-				<h2 >Commentaires</h2>
+				<h2 class="well">Commentaires</h2>
 				<s:if test="#session.user">
 					<div>
 						<s:if test="#session.user.photoUtilisateur==null">

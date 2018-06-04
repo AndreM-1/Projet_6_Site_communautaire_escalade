@@ -4,12 +4,11 @@ import java.util.List;
 
 import javax.inject.Named;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.impl.rowmapper.photo.PhotoRM;
@@ -18,6 +17,9 @@ import com.escalade.siteweb.model.exception.FunctionalException;
 
 @Named
 public class PhotoDaoImpl extends AbstractDaoImpl implements PhotoDao{
+	
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(PhotoDaoImpl.class);
 
 	@Override
 	public List<Photo> getListPhoto() {
@@ -95,7 +97,7 @@ public class PhotoDaoImpl extends AbstractDaoImpl implements PhotoDao{
 		try {
 			vJdbcTemplate.update(vSQL, nomPhoto,utilisateurId);
 		} catch (DuplicateKeyException vEx) {
-			System.out.println("Couche Consumer - L'utilisateur a déjà une photo en base de données");
+			LOGGER.info("Couche Consumer - L'utilisateur a déjà une photo en base de données");
 			throw new FunctionalException("Couche Consumer - L'utilisateur a déjà une photo en base de données");
 		}
 	}

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.escalade.siteweb.business.contract.ManagerFactory;
@@ -32,6 +34,9 @@ public class GestionFormulaireContact extends ActionSupport implements SessionAw
 	
 	// ----- Eléments Struts
 	private Map<String, Object> session;
+	
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(GestionFormulaireContact.class);
 	
 	// ===================== Getters/Setters =====================
 	public FormulaireContact getFormulaireContact() {
@@ -74,10 +79,10 @@ public class GestionFormulaireContact extends ActionSupport implements SessionAw
 		if(formulaireContact!=null) {
 			if (utilisateur==null) {
 				try {
-					System.out.println(formulaireContact.getNomNa());
-					System.out.println(formulaireContact.getAdresseMailNa());
-					System.out.println(formulaireContact.getObjet());
-					System.out.println(formulaireContact.getMessage());
+					LOGGER.info(formulaireContact.getNomNa());
+					LOGGER.info(formulaireContact.getAdresseMailNa());
+					LOGGER.info(formulaireContact.getObjet());
+					LOGGER.info(formulaireContact.getMessage());
 					bUtil=false;
 					formulaireContact.setDateFormContact(new Date());
 					managerFactory.getFormulaireContactManager().insertFormulaireContact(formulaireContact,bUtil);
@@ -92,11 +97,11 @@ public class GestionFormulaireContact extends ActionSupport implements SessionAw
 					formulaireContact.setAdresseMailNa(utilisateur.getAdresseMail());
 					formulaireContact.setUtilisateur(utilisateur);
 					formulaireContact.setDateFormContact(new Date());
-					System.out.println(utilisateur.getId());
-					System.out.println(formulaireContact.getNomNa());
-					System.out.println(formulaireContact.getAdresseMailNa());
-					System.out.println(formulaireContact.getObjet());
-					System.out.println(formulaireContact.getMessage());	
+					LOGGER.info(utilisateur.getId());
+					LOGGER.info(formulaireContact.getNomNa());
+					LOGGER.info(formulaireContact.getAdresseMailNa());
+					LOGGER.info(formulaireContact.getObjet());
+					LOGGER.info(formulaireContact.getMessage());	
 					bUtil=true;
 					managerFactory.getFormulaireContactManager().insertFormulaireContact(formulaireContact,bUtil);
 					vResult=ActionSupport.SUCCESS;

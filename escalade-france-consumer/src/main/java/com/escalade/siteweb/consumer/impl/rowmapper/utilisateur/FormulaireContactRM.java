@@ -3,6 +3,8 @@ package com.escalade.siteweb.consumer.impl.rowmapper.utilisateur;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
@@ -12,6 +14,9 @@ import com.escalade.siteweb.model.exception.NotFoundException;
 public class FormulaireContactRM implements RowMapper<FormulaireContact> {
 	
 	private UtilisateurDao utilisateurDao;
+	
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(FormulaireContactRM.class);
 	
 	public FormulaireContactRM(UtilisateurDao utilisateurDao) {
 		this.utilisateurDao=utilisateurDao;
@@ -28,7 +33,7 @@ public class FormulaireContactRM implements RowMapper<FormulaireContact> {
 		try {
 			vFormulaireContact.setUtilisateur(utilisateurDao.getUtilisateur(pRS.getInt("utilisateur_id")));
 		} catch (NotFoundException e) {
-			System.out.println(e.getMessage());
+			LOGGER.info(e.getMessage());
 		}
 		vFormulaireContact.setDateFormContact(pRS.getTimestamp("date_form_contact"));
 		return vFormulaireContact;

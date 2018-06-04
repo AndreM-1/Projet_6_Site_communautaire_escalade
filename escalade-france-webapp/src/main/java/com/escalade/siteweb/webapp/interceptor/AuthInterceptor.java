@@ -1,5 +1,8 @@
 package com.escalade.siteweb.webapp.interceptor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
@@ -12,6 +15,9 @@ public class AuthInterceptor extends AbstractInterceptor {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(AuthInterceptor.class);
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
@@ -21,7 +27,7 @@ public class AuthInterceptor extends AbstractInterceptor {
 		} else {
 			vResult="refus-acces-page-profil-res-topo";
 		}
-		System.out.println("AuthInterceptor - Intercepteur :"+vResult);
+		LOGGER.info("AuthInterceptor - Intercepteur :"+vResult);
 		return vResult;
 	}
 }

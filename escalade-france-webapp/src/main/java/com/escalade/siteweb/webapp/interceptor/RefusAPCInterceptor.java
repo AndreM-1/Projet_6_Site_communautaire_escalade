@@ -1,5 +1,8 @@
 package com.escalade.siteweb.webapp.interceptor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
@@ -12,6 +15,9 @@ public class RefusAPCInterceptor extends AbstractInterceptor {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(RefusAPCInterceptor.class);
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
@@ -21,7 +27,7 @@ public class RefusAPCInterceptor extends AbstractInterceptor {
 		} else {
 			vResult="refus-acces-page-connexion";
 		}
-		System.out.println("RefusAPCInterceptor - Intercepteur :"+vResult);
+		LOGGER.info("RefusAPCInterceptor - Intercepteur :"+vResult);
 		return vResult;
 	}
 

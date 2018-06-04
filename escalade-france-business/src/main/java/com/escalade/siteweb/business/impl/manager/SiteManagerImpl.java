@@ -63,7 +63,7 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 			for (ConstraintViolation<Site> violation : vViolations) {
 				LOGGER.info((violation.getMessage())); 
 			}
-			throw new FunctionalException("Certaines champs obligatoires ne sont pas renseignés.");
+			throw new FunctionalException("Veuillez renseigner le nom du site.");
 		}
 
 		//Utilisation d'un TransactionStatus. On a besoin de lever une FunctionalException,

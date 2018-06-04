@@ -154,6 +154,16 @@
 			<result name="success">jsp/pageajoutsite.jsp</result>
 		</action>
 		
+		<!-- Action "upload_photo_site"  -->
+		<action name="upload_photo_site" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doUploadPhotoSite">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="input">jsp/pageajoutsite.jsp</result>
+			<result name="success">jsp/pageajoutsite.jsp</result>
+		</action>
+		
+		
 		<!-- Action "reservation_topo" -->
 		<action name="reservation_topo" class="com.escalade.siteweb.webapp.action.GestionAffichageSite"  method="doReservationTopo">
 			<interceptor-ref name="AuthenticatedStack" />

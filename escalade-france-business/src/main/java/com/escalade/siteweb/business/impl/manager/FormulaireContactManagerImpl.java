@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.inject.Named;
 import javax.validation.ConstraintViolation;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -19,6 +21,9 @@ import com.escalade.siteweb.model.exception.FunctionalException;
 public class FormulaireContactManagerImpl extends AbstractManager implements FormulaireContactManager {
 	
 	private List<FormulaireContact> listFormulaireContact = new ArrayList<>();
+	
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(FormulaireContactManagerImpl.class);
 
 	@Override
 	public List<FormulaireContact> getListFormulaireContact() {
@@ -34,7 +39,7 @@ public class FormulaireContactManagerImpl extends AbstractManager implements For
 
 		if(!vViolations.isEmpty()) {
 			for (ConstraintViolation<FormulaireContact> violation : vViolations) {
-				System.out.println((violation.getMessage())); 
+				LOGGER.info((violation.getMessage())); 
 			}
 			throw new FunctionalException("Certains paramètres ne sont pas renseignés correctement.");
 		}
