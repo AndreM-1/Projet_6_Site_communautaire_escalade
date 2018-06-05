@@ -7,7 +7,6 @@ import javax.inject.Named;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -25,7 +24,6 @@ import com.escalade.siteweb.consumer.contract.dao.SiteDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.consumer.impl.rowmapper.site.SiteRM;
 import com.escalade.siteweb.model.bean.site.Site;
-import com.escalade.siteweb.model.exception.FunctionalException;
 import com.escalade.siteweb.model.exception.NotFoundException;
 
 @Named
@@ -115,16 +113,23 @@ public class SiteDaoImpl extends AbstractDaoImpl implements SiteDao{
 		try {
 			vJdbcTemplate.update(vSQL,vParams);
 		} catch (Exception vEx) {
-			LOGGER.info("Erreur technique lors de l'ajout du site en BDD.");
+			LOGGER.info("Consumer - Méthode insertSite : Erreur technique lors de l'ajout du site en BDD.");
 			throw new Exception("Erreur technique lors de l'ajout du site en BDD.");
 		}
 	}
 	
 	@Override
-	public int getCountNbSite() {
-		String vSQL="SELECT COUNT(*) FROM public.site";
-		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource()); 
-		int nbSite=vJdbcTemplate.queryForObject(vSQL, Integer.class);
+	public int getSequenceSite() throws Exception {
+		String vSQL="SELECT CURRVAL('site_id_seq')";
+		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
+		int nbSite;
+		try {
+			nbSite = vJdbcTemplate.queryForObject(vSQL, Integer.class);
+		} catch (Exception e) {
+			LOGGER.info("Consumer - Méthode getSequenceSite : Erreur technique lors de l'ajout du site en BDD.");
+			throw new Exception("Erreur technique lors de l'ajout du site en BDD.");
+		}
+		
 		return nbSite;
 	}
 }

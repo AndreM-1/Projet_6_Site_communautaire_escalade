@@ -4,8 +4,13 @@ import java.util.List;
 
 import javax.inject.Named;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import com.escalade.siteweb.consumer.contract.dao.VoieDao;
 import com.escalade.siteweb.consumer.impl.rowmapper.site.VoieRM;
@@ -13,6 +18,10 @@ import com.escalade.siteweb.model.bean.site.Voie;
 
 @Named
 public class VoieDaoImpl extends AbstractDaoImpl implements VoieDao{
+	
+
+	//Définition du LOGGER
+	private static final Logger LOGGER=(Logger) LogManager.getLogger(VoieDaoImpl.class);
 	
 	@Override
 	public List<Voie> getListVoie() {
@@ -42,4 +51,19 @@ public class VoieDaoImpl extends AbstractDaoImpl implements VoieDao{
         else
         	return null;
     }
+	
+	@Override
+	public void insertVoie(Voie voie, int secteurId) throws Exception{
+		String vSQL="INSERT INTO public.voie(nom_voie,cotation,hauteur,nb_points,duree,secteur_id) VALUES (?,?,?,?,?,?)";
+				
+		JdbcTemplate vJdbcTemplate=new JdbcTemplate(getDataSource());
+		LOGGER.info("Appel à la méthode insertVoie");
+		
+		try {
+			vJdbcTemplate.update(vSQL,voie.getNomVoie(),voie.getCotation(),voie.getHauteur(),voie.getNbPoints(),voie.getDuree(),secteurId);
+		} catch (Exception e) {
+			LOGGER.info("Consumer - Méthode insertVoie : Erreur technique lors de l'ajout de voies en BDD.");
+			throw new Exception("Erreur technique lors de l'ajout de voies en BDD.");
+		}
+	}
 }

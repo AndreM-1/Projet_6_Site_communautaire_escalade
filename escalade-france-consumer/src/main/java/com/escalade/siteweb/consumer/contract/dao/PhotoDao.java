@@ -19,4 +19,6 @@ public interface PhotoDao {
 
 	void insertPhotoUtilisateur(String nomPhoto, int utilisateurId) throws FunctionalException;
 
+	void insertPhotoSite(String nomPhoto, int siteId) throws FunctionalException;
+
 }

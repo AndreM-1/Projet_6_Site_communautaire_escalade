@@ -15,6 +15,6 @@ public interface SiteDao {
 
 	void insertSite(Site site) throws Exception;
 
-	int getCountNbSite();
+	int getSequenceSite() throws Exception;
 
 }

@@ -37,4 +37,19 @@ public class PhotoManagerImpl extends AbstractManager implements PhotoManager{
 		}
 		getPlatformTransactionManager().commit(vTransactionStatus);
 	}
+	
+	@Override
+	public void insertPhotoSite(String nomPhoto, int siteId) throws FunctionalException {
+		
+		//Utilisation d'un TransactionStatus. On a besoin de lever une FunctionalException,
+		//ce qui n'est pas possible avec l'utilisation d'une classe anonyme du transaction template.
+		TransactionStatus vTransactionStatus= getPlatformTransactionManager().getTransaction(new DefaultTransactionDefinition());
+		try {
+			getDaoFactory().getPhotoDao().insertPhotoSite(nomPhoto,siteId);
+		} catch (FunctionalException vEx) {
+			getPlatformTransactionManager().rollback(vTransactionStatus);
+			throw new FunctionalException("Couche Business - Ce site a déjà une photo en base de données");
+		}
+		getPlatformTransactionManager().commit(vTransactionStatus);
+	}
 }

@@ -151,7 +151,10 @@
 			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
 			<result name="error">jsp/erreur.jsp</result>
 			<result name="input">jsp/pageajoutsite.jsp</result>
-			<result name="success">jsp/pageajoutsite.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">upload_photo_site</param>
+				<param name="id">${site.id}</param>
+			</result>
 		</action>
 		
 		<!-- Action "upload_photo_site"  -->
@@ -159,8 +162,46 @@
 			<interceptor-ref name="AuthenticatedStack" />
 			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
 			<result name="error">jsp/erreur.jsp</result>
-			<result name="input">jsp/pageajoutsite.jsp</result>
-			<result name="success">jsp/pageajoutsite.jsp</result>
+			<result name="input">jsp/uploadphotosite.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">page_ajout_secteur</param>
+				<param name="id">${site.id}</param>	
+			</result>
+		</action>
+		
+		<!-- Action "page_ajout_secteur"  -->
+		<action name="page_ajout_secteur" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doAjoutSecteur">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="input">jsp/pageajoutsecteur.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">page_ajout_voie</param>
+				<param name="id">${site.id}</param>	
+				<param name="nbSecteurs">${nbSecteurs}</param>	
+			</result>
+		</action>
+		
+		<!-- Action "page_ajout_voie"  -->
+		<action name="page_ajout_voie" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doAjoutVoie">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="input">jsp/pageajoutvoie.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">upload_photo_secteur</param>
+				<param name="id">${id}</param>	
+				<param name="nbSecteurs">${nbSecteurs}</param>	
+			</result>
+		</action>
+		
+		<!-- Action "upload_photo_secteur" -->
+		<action name="upload_photo_secteur" class="com.escalade.siteweb.webapp.action.GestionAjoutModifSite"  method="doUploadPhotoSecteur">
+			<interceptor-ref name="AuthenticatedStack" />
+			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
+			<result name="error">jsp/erreur.jsp</result>
+			<result name="input">jsp/uploadphotosecteur.jsp</result>
+			<result name="success">jsp/uploadphotosecteur.jsp</result>
 		</action>
 		
 		

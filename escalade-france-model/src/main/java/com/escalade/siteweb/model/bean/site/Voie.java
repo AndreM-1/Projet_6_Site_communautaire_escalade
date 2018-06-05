@@ -1,5 +1,6 @@
 package com.escalade.siteweb.model.bean.site;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -14,18 +15,27 @@ public class Voie implements java.io.Serializable {
 	private Integer id;
 
 	@NotEmpty (message="Model - L'attribut nomVoie doit être renseigné")
+	@NotBlank(message="Model - L'attribut nomVoie doit être renseigné")
 	@Size (min=1,max=100,message="Model - L'attribut nomVoie ne doit pas comporter plus de 100 caractères")
 	private String nomVoie;
 	
+	@NotEmpty (message="Model - L'attribut cotation doit être renseigné")
+	@NotBlank(message="Model - L'attribut cotation doit être renseigné")
 	@Size (min=0,max=100,message="Model - L'attribut cotation ne doit pas comporter plus de 100 caractères")
 	private String cotation;
 	
+	@NotEmpty (message="Model - L'attribut hauteur doit être renseigné")
+	@NotBlank(message="Model - L'attribut hauteur doit être renseigné")
 	@Size (min=0,max=100,message="Model - L'attribut hauteur ne doit pas comporter plus de 100 caractères")
 	private String hauteur;
 	
+	@NotEmpty (message="Model - L'attribut nbPoints doit être renseigné")
+	@NotBlank(message="Model - L'attribut nbPoints doit être renseigné")
 	@Size (min=0,max=100,message="Model - L'attribut nbPoints ne doit pas comporter plus de 100 caractères")
 	private String nbPoints;
 	
+	@NotEmpty (message="Model - L'attribut duree doit être renseigné")
+	@NotBlank(message="Model - L'attribut duree doit être renseigné")
 	@Size (min=0,max=100,message="Model - L'attribut duree ne doit pas comporter plus de 100 caractères")
 	private String duree;
 

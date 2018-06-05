@@ -83,8 +83,11 @@ public class SiteRM implements RowMapper<Site> {
 		if(commentaireDao.getListCommentaire(pRS.getInt("id"))!=null)
 			vSite.setListCommentaire(commentaireDao.getListCommentaire(pRS.getInt("id")));
 		
-		if(secteurDao.getListSecteur(pRS.getInt("id"))!=null)
+		try {
 			vSite.setListSecteur(secteurDao.getListSecteur(pRS.getInt("id")));
+		} catch (NotFoundException e1) {
+			LOGGER.info(e1.getMessage());
+		}
 		
 		try {
 			vSite.setListReservationTopo(reservationTopoDao.getListReservationTopo(pRS.getInt("id")));

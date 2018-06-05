@@ -16,6 +16,8 @@ public interface SiteManager {
 
 	List<Site> getListSite(int utilisateurId) throws NotFoundException;
 
-	void insertSite(Site site, List<Secteur> listSecteur) throws FunctionalException,TechnicalException;
+	void insertSite(Site site) throws FunctionalException,TechnicalException;
+
+	int getNumSiteAjoute();
 
 }

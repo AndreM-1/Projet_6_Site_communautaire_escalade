@@ -13,7 +13,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.escalade.siteweb.business.contract.manager.SiteManager;
-import com.escalade.siteweb.model.bean.site.Secteur;
 import com.escalade.siteweb.model.bean.site.Site;
 import com.escalade.siteweb.model.exception.FunctionalException;
 import com.escalade.siteweb.model.exception.NotFoundException;
@@ -24,6 +23,7 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 
 	private List<Site> listSite = new ArrayList<>();
 	private Site site;
+	private Integer numSiteAjoute;
 
 	//Définition du LOGGER
 	private static final Logger LOGGER=(Logger) LogManager.getLogger(SiteManagerImpl.class);
@@ -55,7 +55,7 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 	}
 
 	@Override
-	public void insertSite(Site site, List<Secteur> listSecteur) throws FunctionalException,TechnicalException{
+	public void insertSite(Site site) throws FunctionalException,TechnicalException{
 		//On lève une exception si la validation de bean échoue. A noter que la validation
 		// de bean porte sur l'objet site.
 		Set<ConstraintViolation<Site>> vViolations = getConstraintValidator().validate(site);
@@ -71,14 +71,9 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 		TransactionStatus vTransactionStatus= getPlatformTransactionManager().getTransaction(new DefaultTransactionDefinition());
 		try {
 			getDaoFactory().getSiteDao().insertSite(site);
-			int numSiteAjoute=getDaoFactory().getSiteDao().getCountNbSite();
+			numSiteAjoute=getDaoFactory().getSiteDao().getSequenceSite();
 			LOGGER.info("Business - Nb site :"+numSiteAjoute);
-			for(Secteur secteur:listSecteur) {
-				if(!secteur.getNomSecteur().isEmpty()) {
-					getDaoFactory().getSecteurDao().insertSecteur(secteur.getNomSecteur(),numSiteAjoute);
 		
-				}
-			}
 		} catch (Exception vEx) {
 			getPlatformTransactionManager().rollback(vTransactionStatus);
 			throw new TechnicalException("Erreur technique lors de l'ajout du site en BDD.");
@@ -86,4 +81,10 @@ public class SiteManagerImpl extends AbstractManager implements SiteManager {
 
 		getPlatformTransactionManager().commit(vTransactionStatus);
 	}
+
+	@Override
+	public int getNumSiteAjoute() {
+		return numSiteAjoute;
+	}
+
 }

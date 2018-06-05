@@ -10,4 +10,6 @@ public interface VoieDao {
 
 	List<Voie> getListVoie(int secteurId);
 
+	void insertVoie(Voie voie, int secteurId) throws Exception;
+
 }
