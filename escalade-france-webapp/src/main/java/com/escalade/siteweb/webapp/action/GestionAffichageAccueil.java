@@ -101,7 +101,9 @@ public class GestionAffichageAccueil extends ActionSupport implements SessionAwa
 		LOGGER.info("Liste des départements :");
 		LOGGER.info(listDepartement);
 		LOGGER.info("Liste des sites :");
-		LOGGER.info(listSite.get(3));
+		LOGGER.info(listSite.get(0));
+		
+		LOGGER.info("Fin d'appel à la Méthode doList.");
 
 		return ActionSupport.SUCCESS;
 	}

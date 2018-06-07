@@ -143,12 +143,16 @@ h1{
 	margin-bottom:25px;
 }
 
+#etapeEnCours{
+	color:#BA2B00;
+	border-bottom:2px solid #BA2B00;
+}
 
 footer{
 	border: 1px solid grey;
-	margin-bottom:0px;
+	margin-bottom:5px;
 	background-color:#404040;
-	color:white;
+	color:white;	
 }
 
 
@@ -159,8 +163,4 @@ footer img{
 footer .col-lg-2{
 	padding-top:15px;
 	color:white;
-}
-
-
-[class*="col-lg"]{
 }

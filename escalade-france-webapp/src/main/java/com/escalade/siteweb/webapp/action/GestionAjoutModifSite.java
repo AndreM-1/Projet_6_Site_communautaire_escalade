@@ -51,6 +51,7 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 	private Integer id;
 	private List<Integer> listChoixNbSecteurs;
 	private Integer nbSecteurs;
+	private Integer nbSecteursInitial;
 	private Integer secteurCourant;
 	private List<Integer> listChoixNbVoies;
 	private Integer nbVoies;
@@ -65,7 +66,7 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 	private File fileSiteUpload;
 	private String fileSiteUploadContentType;
 	private String fileSiteUploadFileName;
-	
+
 	private List<File> fileSecteurUpload;
 	private List<String> fileSecteurUploadContentType;
 	private List<String> fileSecteurUploadFileName;
@@ -98,7 +99,7 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 	public void setListSecteur(List<Secteur> listSecteur) {
 		this.listSecteur = listSecteur;
 	}
-	
+
 	public List<Integer> getListChoixNbSecteurs() {
 		return listChoixNbSecteurs;
 	}
@@ -106,7 +107,7 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 	public void setListChoixNbSecteurs(List<Integer> listChoixNbSecteurs) {
 		this.listChoixNbSecteurs = listChoixNbSecteurs;
 	}
-	
+
 	public Integer getNbSecteurs() {
 		return nbSecteurs;
 	}
@@ -115,6 +116,14 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 		this.nbSecteurs = nbSecteurs;
 	}
 	
+	public Integer getNbSecteursInitial() {
+		return nbSecteursInitial;
+	}
+
+	public void setNbSecteursInitial(Integer nbSecteursInitial) {
+		this.nbSecteursInitial = nbSecteursInitial;
+	}
+
 	public Integer getSecteurCourant() {
 		return secteurCourant;
 	}
@@ -138,7 +147,7 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 	public void setNbVoies(Integer nbVoies) {
 		this.nbVoies = nbVoies;
 	}
-	
+
 	public List<Voie> getListVoie() {
 		return listVoie;
 	}
@@ -232,7 +241,7 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 	public void setFileSiteUploadFileName(String fileSiteUploadFileName) {
 		this.fileSiteUploadFileName = fileSiteUploadFileName;
 	}
-	
+
 	public List<File> getFileSecteurUpload() {
 		return fileSecteurUpload;
 	}
@@ -392,7 +401,7 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 				this.addActionError("Erreur technique lors de l'ajout du site en BDD.");
 				vResult=ActionSupport.ERROR;
 			}
-			
+
 			if(!this.hasErrors()) {
 				listChoixNbSecteurs=new ArrayList<Integer>();
 				for (int i=1;i<=20;i++) {
@@ -401,7 +410,7 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 				LOGGER.info("Méthode doAjoutSecteur - listChoixNbSecteurs : "+listChoixNbSecteurs);
 				LOGGER.info("Méthode doAjoutSecteur - nbSecteurs : "+nbSecteurs);	
 				LOGGER.info("Méthode doAjoutSecteur - listSecteur : "+listSecteur);	
-				
+
 				if(nbSecteurs!=null&&listSecteur!=null) {
 					try {
 						managerFactory.getSecteurManager().insertSecteur(listSecteur,site.getId());
@@ -414,58 +423,65 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 						this.addActionError(e.getMessage());
 						vResult=ActionSupport.ERROR;
 					}
-				 }
+				}
 			}
-		
+
 		}
-		
+
 		return vResult;
 	}
 
 	public String doAjoutVoie() {
 		String vResult=ActionSupport.INPUT;
-		
+	
 		if(id==null) {
 			this.addActionError("L'id du site est manquant.");
 			vResult=ActionSupport.ERROR;
 		}else {
 			try {
-				//site=managerFactory.getSiteManager().getSite(id);
+				site=managerFactory.getSiteManager().getSite(id);
 				listSecteur=managerFactory.getSecteurManager().getListSecteur(id);
 				LOGGER.info("Méthode doAjoutVoie - Secteurs en cours d'ajout : "+listSecteur);	
 			} catch (NotFoundException e) {
-				LOGGER.info("Méthode doAjoutVoie : Secteur non trouvé");
+				LOGGER.info("Méthode doAjoutVoie : Site/Secteurs non trouvés");
 				this.addActionError("Erreur technique lors de l'ajout du site en BDD.");
 				vResult=ActionSupport.ERROR;
 			}
-			
+
 			if(!this.hasErrors()) {
-				
+
 				listChoixNbVoies=new ArrayList<Integer>();
 				for (int i=1;i<=20;i++) {
 					listChoixNbVoies.add(i);
 				}
 				LOGGER.info("Méthode doAjoutVoie - listChoixNbVoies : "+listChoixNbVoies);
-				
+
 				if(secteurCourant==null) {
-					secteurCourant=1;
-					LOGGER.info("Méthode doAjoutVoie - secteurCourant null :"+secteurCourant);
+					nbSecteursInitial=nbSecteurs;
+					if(nbSecteurs==listSecteur.size()) {
+						secteurCourant=1;
+						LOGGER.info("Méthode doAjoutVoie - secteurCourant null :"+secteurCourant);
+					}else {
+						secteurCourant=listSecteur.size()-nbSecteurs+1;
+						nbSecteurs=listSecteur.size();
+					}
 				}
 				LOGGER.info("Méthode doAjoutVoie - secteurCourant : "+secteurCourant);
 				LOGGER.info("Méthode doAjoutVoie - nbVoies : "+nbVoies);
 				LOGGER.info("Méthode doAjoutVoie - listVoie : "+listVoie);
-				
+
 				if(secteurCourant!=null&&nbVoies!=null&&listVoie!=null) {
 					int secteurId=listSecteur.get(secteurCourant-1).getId();
 					LOGGER.info("Méthode doAjoutVoie - secteurId : "+secteurId);
 					LOGGER.info("Méthode doAjoutVoie - listVoie : "+listVoie);
-					
+
 					//Appel à la couche business
 					try {
 						managerFactory.getVoieManager().insertVoie(listVoie,secteurId);
-					
+
 						if(secteurCourant==nbSecteurs) {
 							LOGGER.info("Les voies ont été ajoutées pour tous les secteurs!");
+							nbSecteurs=nbSecteursInitial;
 							vResult=ActionSupport.SUCCESS;
 						}
 						nbVoies=null;
@@ -482,44 +498,116 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 				if(secteurCourant!=null&&nbVoies==null&&listVoie==null) {
 					if(secteurCourant>nbSecteurs) {
 						LOGGER.info("Les voies ont été ajoutées pour tous les secteurs!");
+						nbSecteurs=nbSecteursInitial;
 						vResult=ActionSupport.SUCCESS;
 					}
 				}
 			}	
 		}
-		
+
 		return vResult;
 	}
-	
+
 	public String doUploadPhotoSecteur(){
 		String vResult=ActionSupport.INPUT;
-		
+
 		if(id==null) {
 			this.addActionError("L'id du site est manquant.");
 			vResult=ActionSupport.ERROR;
 		}else {
 			try {
+				site=managerFactory.getSiteManager().getSite(id);
 				listSecteur=managerFactory.getSecteurManager().getListSecteur(id);
 				LOGGER.info("Méthode doUploadPhotoSecteur - Secteurs en cours d'ajout : "+listSecteur);	
-				
+				LOGGER.info("Méthode doUploadPhotoSecteur - secteurCourant init: "+secteurCourant);
+				LOGGER.info("Méthode doUploadPhotoSecteur - nbSecteurs init: "+nbSecteurs);
+
 			} catch (NotFoundException e) {
-				LOGGER.info("Méthode doUploadPhotoSecteur : Secteur non trouvé");
+				LOGGER.info("Méthode doUploadPhotoSecteur : Site/Secteurs non trouvés");
 				this.addActionError("Erreur technique lors de l'ajout du site en BDD.");
 				vResult=ActionSupport.ERROR;
 			}
+
+			if(!this.hasErrors()) {
 			
-			if(!this.hasErrors()&&fileSecteurUpload!=null) {
-				for(File file :fileSecteurUpload) {
-					LOGGER.info("Méthode doUploadPhotoSecteur - fileSecteurUpload : "+fileSecteurUpload);
+				if(secteurCourant==null) {
+					if(nbSecteurs==listSecteur.size()) {
+						secteurCourant=1;
+						LOGGER.info("Méthode doUploadPhotoSecteur - secteurCourant null :"+secteurCourant);	
+					}else {
+						secteurCourant=listSecteur.size()-nbSecteurs+1;
+						nbSecteurs=listSecteur.size();
+					}
 				}
-				for(String fileName :fileSecteurUploadFileName) {
-					LOGGER.info("Méthode doUploadPhotoSecteur - fileSecteurUploadFileName : "+fileSecteurUploadFileName);
+				
+				if(fileSecteurUpload!=null) {
+					int secteurId=listSecteur.get(secteurCourant-1).getId();
+					int numPhotoSecteur=0;
+					int nbFichiersUploades=0;
+					LOGGER.info("Méthode doUploadPhotoSecteur - secteurId : "+secteurId);
+					String destPathPhoto="";
+					String[] tabString;	
+					String nomPhotoSecteur="";
+					Boolean bUploadPhotoSecteur;
+					for(File fileSecteur :fileSecteurUpload) {
+						LOGGER.info("Méthode doUploadPhotoSecteur - Src (Dossier Temp) File name : "+fileSecteur);
+					}
+					for(String fileNameSecteur :fileSecteurUploadFileName) {
+						bUploadPhotoSecteur=true;
+						LOGGER.info("Méthode doUploadPhotoSecteur - Nom initial du fichier : "+fileSecteurUploadFileName);
+						numPhotoSecteur++;
+						tabString=fileNameSecteur.split("\\.");
+
+						//On change le nom du fichier à uploader, en reprenant l'extension du fichier initial.
+						fileNameSecteur="secteur_"+secteurId+numPhotoSecteur+"."+tabString[tabString.length-1];
+						LOGGER.info("Dst File name: " + fileNameSecteur);			
+
+						//On définit le répertoire où sera uploadé la photo du site.
+						destPathPhoto=servletRequest.getServletContext().getRealPath("/jsp/assets/images/");
+						LOGGER.info("CHEMIN ABSOLU : "+destPathPhoto);
+						
+						File destFile  = new File(destPathPhoto, fileNameSecteur);
+						
+						//On copie le fichier dans ce répertoire.
+						try {
+							FileUtils.copyFile(fileSecteurUpload.get(numPhotoSecteur-1), destFile);
+							nbFichiersUploades++;
+						} catch (IOException e) {
+							this.addActionError("Echec lors de l'upload du fichier lié à la photo "+numPhotoSecteur+ "du secteur.");
+							bUploadPhotoSecteur=false;
+				
+						}
+						
+						if(bUploadPhotoSecteur) {
+							//On définit le nom de la photo tel qu'il sera en base de données
+							nomPhotoSecteur="jsp/assets/images/"+fileNameSecteur;
+							LOGGER.info("Méthode doUploadPhotoSecteur - nomPhotoSecteur en BDD :" +nomPhotoSecteur);
+							LOGGER.info("Méthode doUploadPhotoSecteur - secteur_id : "+secteurId);
+							
+							//Si le secteur n'a pas de photo en BDD, la photo sera ajoutée. Sinon, rien ne se passe, et
+							//on affiche juste un message pour dire que le secteur a déjà une photo en BDD.
+							try {
+								managerFactory.getPhotoManager().insertPhotoSecteur(nomPhotoSecteur,secteurId);
+							} catch (FunctionalException e) {
+								LOGGER.info(e.getMessage());
+							}
+							
+							
+						}	
+					}
+					
+					if(nbFichiersUploades==fileSecteurUploadFileName.size()) {
+						LOGGER.info("Toutes les photos ont bien été uploadées.");	
+						secteurCourant++;
+					}
+					
 				}
-				for(String fileContentType :fileSecteurUploadContentType) {
-					LOGGER.info("Méthode doUploadPhotoSecteur - fileSecteurUploadContentType : "+fileSecteurUploadContentType);
+				
+				if(secteurCourant>nbSecteurs) {
+					LOGGER.info("Les photos ont été ajoutées pour tous les secteurs!");
+					vResult=ActionSupport.SUCCESS;
 				}
 			}
-			
 		}
 		return vResult;
 	}

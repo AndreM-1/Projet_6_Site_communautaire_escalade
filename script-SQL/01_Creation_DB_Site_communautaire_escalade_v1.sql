@@ -74,9 +74,6 @@ CREATE UNIQUE INDEX utilisateur_idx3
  ON public.utilisateur
  ( mot_de_passe_securise );
 
-CREATE UNIQUE INDEX photo_idx
- ON public.photo
- (nom_photo);
 
 CREATE SEQUENCE public.site_id_seq;
 
@@ -124,15 +121,19 @@ CREATE TABLE public.photo (
 
 ALTER SEQUENCE public.photo_id_seq OWNED BY public.photo.id;
 
+CREATE UNIQUE INDEX photo_idx
+ ON public.photo
+ (nom_photo);
+
 CREATE SEQUENCE public.voie_id_seq;
 
 CREATE TABLE public.voie (
                 id INTEGER NOT NULL DEFAULT nextval('public.voie_id_seq'),
                 nom_voie VARCHAR(100) NOT NULL,
-                cotation VARCHAR(100),
-                hauteur VARCHAR(100),
-                nb_points VARCHAR(100),
-                duree VARCHAR(100),
+                cotation VARCHAR(100) NOT NULL,
+                hauteur VARCHAR(100) NOT NULL,
+                nb_points VARCHAR(100) NOT NULL,
+                duree VARCHAR(100) NOT NULL,
                 secteur_id INTEGER NOT NULL,
                 CONSTRAINT voie_pk PRIMARY KEY (id)
 );

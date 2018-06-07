@@ -16,6 +16,7 @@
 			<div class="col-lg-offset-3 col-lg-6" id="divAjoutSite">
 				
 				<h1 class="text-center">Ajouter un site</h1>
+				<h4 class="text-center"><span id="etapeEnCours">Site</span>>>Photo du site>>Secteurs>>Voies>>Photo secteur</h4>
 				<s:actionerror/>
 				<!-- Section liée à la localisation -->
 				<h2>Localisation</h2>
@@ -30,7 +31,7 @@
 					<!-- Section liée au descriptif et à la photo du site -->
 					<h2>Descriptif du site</h2>
 					<s:textfield name="site.nomSite" label="Nom du site" requiredLabel="true"/>
-					<s:textfield name="site.descriptif" label="Descriptif du site"/>															
+					<s:textarea name="site.descriptif" label="Descriptif du site" rows="4"/>															
 						
 					<!-- Section liée aux commentaires personnels -->
 					<h2>Commentaires personnels</h2>

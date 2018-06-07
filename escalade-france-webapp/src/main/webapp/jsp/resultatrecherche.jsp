@@ -66,10 +66,8 @@
 	   			$('a').tooltip();
 				});
 			</script>
-	 		
-			<!-- Pied de page -->
-			<%@ include file="_include/footer.jsp"%>
+		<!-- Pied de page -->
+		<%@ include file="_include/footer.jsp"%>
 		</div>
-	
 	</body>
 </html>

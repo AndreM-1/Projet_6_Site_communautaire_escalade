@@ -114,4 +114,17 @@ public class PhotoDaoImpl extends AbstractDaoImpl implements PhotoDao{
 			throw new FunctionalException("Couche Consumer - Ce site a déjà une photo en base de données");
 		}
 	}
+	
+	@Override
+	public void insertPhotoSecteur(String nomPhotoSecteur,int secteurId) throws FunctionalException{
+		String vSQL="INSERT INTO public.photo(nom_photo,secteur_id) VALUES (?,?)";
+		JdbcTemplate vJdbcTemplate=new JdbcTemplate(getDataSource());
+	
+		try {
+			vJdbcTemplate.update(vSQL, nomPhotoSecteur,secteurId);
+		} catch (DuplicateKeyException vEx) {
+			LOGGER.info("Couche Consumer - Ce secteur a déjà une photo en base de données");
+			throw new FunctionalException("Couche Consumer - Ce secteur a déjà une photo en base de données");
+		}
+	}
 }

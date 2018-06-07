@@ -13,4 +13,6 @@ public interface PhotoManager {
 
 	void insertPhotoSite(String nomPhoto, int siteId) throws FunctionalException;
 
+	void insertPhotoSecteur(String nomPhotoSecteur, int secteurId) throws FunctionalException;
+
 }

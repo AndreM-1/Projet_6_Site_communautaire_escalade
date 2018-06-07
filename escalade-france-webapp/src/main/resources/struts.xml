@@ -4,6 +4,8 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
         
 <struts>
+
+	<constant name="struts.multipart.maxSize" value="10097152" />
 	<!-- Package par défaut -->
 	<package name="default" extends="struts-default">
 	
@@ -201,7 +203,10 @@
 			<result name="refus-acces-page-profil-res-topo" type="redirectAction">connexion</result>
 			<result name="error">jsp/erreur.jsp</result>
 			<result name="input">jsp/uploadphotosecteur.jsp</result>
-			<result name="success">jsp/uploadphotosecteur.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">page_site</param>
+				<param name="id">${id}</param>	
+			</result>
 		</action>
 		
 		

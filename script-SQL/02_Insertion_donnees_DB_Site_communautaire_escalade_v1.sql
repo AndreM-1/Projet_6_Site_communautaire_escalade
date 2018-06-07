@@ -50,9 +50,9 @@ INSERT INTO public.departement (nom_departement,region_id) VALUES ('Ain',1),('Al
 INSERT INTO public.utilisateur(civilite,nom,prenom,pseudo,adresse_mail,salt,mot_de_passe_securise,telephone,date_naissance,adresse,code_postal,ville,pays,administrateur)
 VALUES 
 -- Mot de passe non sécurisé :M0tp@SAdM83!!
-('Monsieur', 'Monnier','André','André M.','andre.monnier@hotmail.fr','31hraAmHVPmwZ3BWrbZOip7OTfHowG','IoqlU/twMW5yR8EQsXw+wm2s9eLRzmtBHapDRfF/ck8=','06-13-74-63-52','1983-10-25','666 Chemin de sur la ville','74340','Samoëns','France',true),
+('Monsieur', 'Monnier','André','André M.','andre.monnier@hotmail.fr','duWHFkUYaDVcIY2F52OFhYM08rSp2U','ukdUT1hmMrcHbEC2lFb5/3CoeH1hSJyhWlslAs6k0GU=','07-74-13-52-09','1983-09-03','667 Chemin de sur la ville','74340','Samoëns','France',true),
 -- Mot de passe non sécurisé :M@rt1R@778?
-('Monsieur', 'Durand','Martin','Martin','martin.durand@gmail.com','tmm74Y907HxYFoZ84fkT18o1WC4J4h','CE/Rkn/38VtNh2NuqCz+7aG/VXiWwyA2Wxm0l/8cQ2c=','06-31-47-36-25','1982-05-04','1 AVENUE BERTHOLLET','74000','ANNECY','France',false),
+('Monsieur', 'Durand','Martin','Martin D','martin.durand@gmail.com','nwhMGwRv5k1HTLIGjmrdyQsoBSYmcb','96MJCGUsI6yzRM53HIugWIF/s1E5ykiQ+GIe1BXi8XM=','06-31-47-36-82','1982-10-03','1 AVENUE BERTHOLLET','74000','ANNECY','France',false),
 -- Mot de passe non sécurisé :GEsc@L@Dais?
 ('Monsieur', 'Gallet','Romuald','Romu G.','romuald.gallet@yahoo.fr','lLGSalPUNp8LaK5YezAzvGiuqvH5Va','QYWhASzYFe0L1TYrKNMovzj9hQ5fLfEaYlqkjP5iKFc=',NULL,NULL,NULL,NULL,NULL,NULL,false);															  
 
@@ -73,7 +73,12 @@ VALUES
 	   -- Site Bassin Long
 	   ('Bassin Long','Site situé dans un cadre agréable et facile d''accès. Ce site comporte 5 secteurs.','La vallée est le lieu habituel de pâturage des chèvres.
 	   	Il est conseillé de ne pas rester sous les falaises lors du passage des troupeaux. Chute de pierres possible. A bassin Long on peut piquer une tête.
-	   	N’oubliez pas d’emporter avec vous les déchets en partant.',true,1,17,101,2,'2018-05-08 14:35:00','2018-05-08 14:35:00');
+	   	N’oubliez pas d’emporter avec vous les déchets en partant.',true,1,17,101,2,'2018-05-08 14:35:00','2018-05-08 14:35:00'),
+
+	   --Site Les Aiguilles de Baulmes / Sous la croix
+	   ('Site Les Aiguilles de Baulmes / Sous la croix','Le site "Les aiguilles de Baulmes" est composé de 4 secteurs. Il est situé à plus de 1500m, généralement au dessus du brouillard, 
+	   	et orienté au sud ce qui le rend particulièrement agréable en automne et hiver. Le secteur Sous la croix, est une falaise orienté sud-est avec une belle vue sur la plaine. 
+	   	Il est constitué de plusieurs couennes destinées aux grimpeurs avancés.','Il est conseillé d''emporter quelques friends et coinceurs pour certaines voies.',false,2,19,105,2,'2018-05-10 14:35:00','2018-05-10 14:35:00');
 
 
 -- *********************************************************************
@@ -81,7 +86,8 @@ VALUES
 -- *********************************************************************
 INSERT INTO public.secteur(nom_secteur,site_id) VALUES ('Combe nord',1),('Grand face',1),
 													   ('Secteur de gauche',2),('Les dévers',2),('Proue',2),
-													   ('Secteur Millefeuilles',3),('Secteur Morinda',3),('Secteur Lock Ness',3),('Secteur Bella vista',3),('Secteur Dôme',3);
+													   ('Secteur Millefeuilles',3),('Secteur Morinda',3),('Secteur Lock Ness',3),('Secteur Bella vista',3),('Secteur Dôme',3),
+													   ('Aiguilles de Baulmes face Sud 1',4),('Aiguilles de Baulmes face Sud 2',4),('Aiguilles de Baulmes face Sud 3',4),('Sous la croix',4);
 
 -- *********************************************************************
 -- voie
@@ -129,7 +135,13 @@ VALUES
 	   ('A: Negrita','6a en passant par la fissure, 6b tout droit','12m','5 points','12 minutes',10),('B: Hypertrichose Palmaire','5c','10m','5 points','10 minutes',10),
 	   ('C: Arrête pleur d’si','6b','15m','6 points','15 minutes',10),('D: Fat in the frok','6c','15m','6 points','15 minutes',10),
 	   ('E: Ce lak se bon','6c','18m','9 points','20 minutes',10),('F: Roger Ladalle','6b+','10m','7 points','10 minutes',10),
-	   ('G: Faillenfeu','6c','10m','6 points','10 minutes',10),('H: P''tit bonhomme','5c','10m','5 points','10 minutes',10);
+	   ('G: Faillenfeu','6c','10m','6 points','10 minutes',10),('H: P''tit bonhomme','5c','10m','5 points','10 minutes',10),
+
+	   -- Voies associées aux secteurs du site Les Aiguilles de Baulmes / Sous la croix
+	   ('Jane-Marie','6c','20 mètres','10 points','30 minutes',11),('Déception','6c','20 mètres','10 points','30 minutes',11),('Crack','7a','20 mètres','10 points','30 minutes',11),
+	   ('Collet','7a+','15 mètres','8 points','25 minutes',12),('Bruand','7b+','15 mètres','8 points','25 minutes',12),('Namaskar','6c','15 mètres','8 points','25 minutes',12),
+	   ('Pilier','7a+','15 mètres','15 points','35 minutes',13),('Tashi delek','6b','15 mètres','15 points','35 minutes',13),('Namaste','6b','15 mètres','15 points','35 minutes',13),
+	   ('Sous la croix Voie 1','7a+','15 mètres','15 points','20 minutes',14),('Sous la croix Voie 2','6b','15 mètres','12 points','35 minutes',14),('Sous la croix Voie 3','6b','15 mètres','11 points','35 minutes',14);
 	  
 -- *********************************************************************
 -- commentaire
@@ -137,7 +149,12 @@ VALUES
 INSERT INTO public.commentaire(commentaire,utilisateur_id,site_id,date_commentaire) VALUES ('J''y suis déjà allé. Très beau site effectivement !!!',2,1,'2018-05-06 18:23:35'),
 																		  				   ('Beaucoup de voies pratiquables, mais certaines sont très compliquées !',2,2,'2018-05-07 22:38:40'),
 																		  				   ('Je vais profiter de mes vacances à la Réunion pour aller sur ce site.',1,3,'2018-05-12 14:05:00'),
-																		  				   ('Effectivement, je te le conseille. C''est aussi ce que j''ai fait ;)',2,3,'2018-05-12 18:15:38');
+																		  				   ('Effectivement, je te le conseille. C''est aussi ce que j''ai fait ;)',2,3,'2018-05-12 18:15:38'),
+																		  				   ('C''est bien vrai!!!',1,2,'2018-05-12 18:15:39'),
+																		  				   ('Je confirme que c''est bien le cas.',1,2,'2018-05-12 18:15:40'),
+																		  				   ('Oui je suis d''accord, surtout pour le secteur les Dévers qui a des voies très compliquées.',3,2,'2018-05-18 16:50:33'),
+																		  				   ('En ce qui me concerne, j''y vais assez régulièrement.',1,1,'2018-05-31 17:03:06');
+																		  				   
 
 -- *********************************************************************
 -- formulaire_contact
@@ -146,7 +163,10 @@ INSERT INTO public.formulaire_contact(nom_na,adresse_mail_na,objet,message,utili
 VALUES (NULL,NULL,'Proposer une nouvelle catégorie','Pourriez-vous créer une catégorie réservée pour les blocs?',2,'2018-05-18 14:00:00'),
 	   (NULL,NULL,'Proposer une amélioration','Pourriez-vous envisager une saisie semi-automatique dans la zone de recherche de sites?',3,'2018-05-19 15:30:02'),
 	   ('Anderson','gillian.anderson@gmail.com','Proposer une amélioration','Serait-il possible d''intégrer des cartes de type Google Maps pour repérer un site?',NULL,'2018-05-20 08:33:33'),
-	   ('Pasquier','sebastien.pasquier@gmail.com','Proposer une nouvelle catégorie','Pourriez-vous créer un espace réservé aux blocs?',NULL,'2018-05-20 09:33:33');
+	   ('Pasquier','sebastien.pasquier@gmail.com','Proposer une nouvelle catégorie','Pourriez-vous créer un espace réservé aux blocs?',NULL,'2018-05-20 09:33:33'),
+	   ('FanEscalade','fanEscalade@gmail.com','Contacter l’administrateur','Bonjour, je souhaiterais vous proposer une amélioration. Êtes-vous d''accord pour en parler. Cdlt.',NULL,'2018-05-22 00:02:05'),
+	   ('FanEscalade','fanEscalade@gmail.com','Contacter l’administrateur','Bonjour, je me permet de vous relancer, car je n''ai toujours pas eu de réponses de votre part.',NULL,'2018-05-25 12:00:05'),
+	   (NULL,NULL,'Proposer une nouvelle catégorie','Êtes-vous d''accord pour ajouter une section bloc? Cdlt.',3,'2018-05-26 13:00:00');
 
 -- *********************************************************************
 -- photo
@@ -170,7 +190,20 @@ VALUES ('jsp/assets/images/utilisateur_1.jpg',1,NULL,NULL),
 	   ('jsp/assets/images/secteur_81.jpg',NULL,NULL,8),
 	   ('jsp/assets/images/secteur_91.jpg',NULL,NULL,9),
 	   ('jsp/assets/images/secteur_101.jpg',NULL,NULL,10),
-	   ('jsp/assets/images/secteur_102.jpg',NULL,NULL,10);
+	   ('jsp/assets/images/secteur_102.jpg',NULL,NULL,10),
+	   ('jsp/assets/images/utilisateur_3.jpg',3,NULL,NULL),
+	   ('jsp/assets/images/site_4.jpg',NULL,4,NULL),
+	   ('jsp/assets/images/secteur_111.jpg',NULL,NULL,11),
+	   ('jsp/assets/images/secteur_112.jpg',NULL,NULL,11),
+	   ('jsp/assets/images/secteur_113.jpg',NULL,NULL,11),
+	   ('jsp/assets/images/secteur_121.jpg',NULL,NULL,12),
+	   ('jsp/assets/images/secteur_122.jpg',NULL,NULL,12),
+	   ('jsp/assets/images/secteur_123.jpg',NULL,NULL,12),
+       ('jsp/assets/images/secteur_131.jpg',NULL,NULL,13),
+	   ('jsp/assets/images/secteur_132.jpg',NULL,NULL,13),
+	   ('jsp/assets/images/secteur_141.jpg',NULL,NULL,14),
+	   ('jsp/assets/images/secteur_142.jpg',NULL,NULL,14),
+	   ('jsp/assets/images/secteur_143.jpg',NULL,NULL,14);
 
 -- *********************************************************************
 -- reservation_topo
@@ -182,4 +215,12 @@ VALUES ('2018-06-20','10:00','2018-06-20','14:00',2,1,'2018-06-12 08:02:03'),
 	   ('2018-06-25','13:00','2018-06-25','16:00',3,2,'2018-06-18 19:05:30'),
 	   ('2018-06-25','14:00','2018-06-25','16:00',1,3,'2018-06-20 20:05:07'),
 	   ('2018-07-02','08:00','2018-07-02','12:00',1,3,'2018-06-26 18:05:07'),
-	   ('2018-07-02','13:00','2018-07-02','17:00',3,3,'2018-06-20 07:15:17');
+	   ('2018-07-02','13:00','2018-07-02','17:00',3,3,'2018-06-20 07:15:17'),
+	   ('2018-05-29','08:00','2018-05-29','09:00',3,3,'2018-05-24 19:06:07'),
+	   ('2018-07-02','12:00','2018-07-02','13:00',3,3,'2018-05-29 19:09:23'),
+	   ('2018-07-03','13:00','2018-07-03','17:00',3,3,'2018-05-29 19:10:27'),
+	   ('2018-06-25','16:00','2018-06-25','18:00',1,3,'2018-05-29 19:20:56'),
+	   ('2018-07-03','12:00','2018-07-03','13:00',1,3,'2018-05-30 09:27:17'),
+	   ('2018-06-25','16:00','2018-06-25','17:00',2,2,'2018-05-30 09:54:40'),
+	   ('2018-06-23','10:00','2018-06-23','12:00',3,1,'2018-05-30 14:26:18'),
+	   ('2018-06-30','08:00','2018-06-30','12:00',3,1,'2018-05-30 14:27:38');
