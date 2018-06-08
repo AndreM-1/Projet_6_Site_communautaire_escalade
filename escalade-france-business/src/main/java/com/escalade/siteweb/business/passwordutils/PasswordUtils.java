@@ -10,6 +10,11 @@ import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+/**
+ * Classe liée au cryptage des mots de passe
+ * en base de données.
+ * @author André Monnier
+ */
 public class PasswordUtils {
 
 	private static final Random RANDOM = new SecureRandom();

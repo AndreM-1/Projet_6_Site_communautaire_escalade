@@ -20,6 +20,11 @@ import com.escalade.siteweb.model.exception.NotFoundException;
 import com.escalade.siteweb.model.exception.TechnicalException;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * Classe d'action permettant d'afficher le détail d'un site,
+ * de gérer l'ajout de commentaires et la réservation de topo.
+ * @author André Monnier
+ */
 public class GestionAffichageSite extends ActionSupport implements SessionAware{
 
 	/**
@@ -88,7 +93,7 @@ public class GestionAffichageSite extends ActionSupport implements SessionAware{
 	// ===================== Méthodes ======================
 
 	/**
-	 * Action affichant les détails d'un {@link Site}
+	 * Méthode affichant les détails d'un {@link Site}
 	 * @return success / error
 	 */
 	public String doDetailSite() {
@@ -105,7 +110,7 @@ public class GestionAffichageSite extends ActionSupport implements SessionAware{
 	}
 
 	/**
-	 * Action permettant d'ajouter un {@link Commentaire}
+	 * Méthode permettant d'ajouter un {@link Commentaire}
 	 * @return success
 	 */
 	public String doAjoutCommentaire() {
@@ -124,6 +129,11 @@ public class GestionAffichageSite extends ActionSupport implements SessionAware{
 
 	}
 
+	/**
+	 * Méthode permettant de gérer la réservation
+	 * de topo pour un site donné.
+	 * @return input / success / error
+	 */
 	public String doReservationTopo(){
 		
 		String vResult=ActionSupport.INPUT;

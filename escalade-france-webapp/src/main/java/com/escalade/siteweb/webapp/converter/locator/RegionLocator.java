@@ -14,6 +14,11 @@ import com.escalade.siteweb.model.bean.site.Region;
 import com.escalade.siteweb.model.exception.NotFoundException;
 import com.opensymphony.xwork2.conversion.TypeConversionException;
 
+/**
+ * Bean Locator permettant de récupérer un objet de type {@link Region}
+ * à partir de l'id de cet objet.
+ * @author André Monnier
+ */
 public class RegionLocator extends StrutsTypeConverter {
 
 	// ======================== Attributs =======================

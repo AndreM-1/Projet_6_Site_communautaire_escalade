@@ -6,6 +6,10 @@ import javax.validation.constraints.NotEmpty;
 
 import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 
+/**
+ * Classe du modèle lié au bean Commentaire.
+ * @author André Monnier
+ */
 public class Commentaire implements java.io.Serializable{
 
 	/**

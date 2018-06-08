@@ -4,6 +4,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * Classe du modèle lié au bean Voie.
+ * @author André Monnier
+ */
 public class Voie implements java.io.Serializable {
 
 	/**

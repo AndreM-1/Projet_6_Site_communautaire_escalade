@@ -9,6 +9,12 @@ import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.model.bean.site.Commentaire;
 import com.escalade.siteweb.model.exception.NotFoundException;
 
+/**
+ * Classe de type RowMapper permettant de mapper des
+ * lignes de résultats (du resultSet en BDD) en objet
+ * de type {@link Commentaire}
+ * @author André Monnier
+ */
 public class CommentaireRM implements RowMapper<Commentaire> {
 	
 	private UtilisateurDao utilisateurDao;

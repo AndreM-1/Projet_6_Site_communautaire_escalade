@@ -9,6 +9,12 @@ import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.consumer.contract.dao.VoieDao;
 import com.escalade.siteweb.model.bean.site.Secteur;
 
+/**
+ * Classe de type RowMapper permettant de mapper des
+ * lignes de résultats (du resultSet en BDD) en objet
+ * de type {@link Secteur}
+ * @author André Monnier
+ */
 public class SecteurRM implements RowMapper<Secteur> {
 	
 	private PhotoDao photoDao;

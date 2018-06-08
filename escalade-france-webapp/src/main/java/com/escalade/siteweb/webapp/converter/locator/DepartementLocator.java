@@ -14,6 +14,11 @@ import com.escalade.siteweb.model.bean.site.Departement;
 import com.escalade.siteweb.model.exception.NotFoundException;
 import com.opensymphony.xwork2.conversion.TypeConversionException;
 
+/**
+ * Bean Locator permettant de récupérer un objet de type {@link Departement}
+ * à partir de l'id de cet objet.
+ * @author André Monnier
+ */
 public class DepartementLocator extends StrutsTypeConverter{
 	
 	// ======================== Attributs =======================

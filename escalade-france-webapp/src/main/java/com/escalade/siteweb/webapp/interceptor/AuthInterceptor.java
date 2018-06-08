@@ -7,7 +7,9 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 /**
- *  Intercepteur permettant de bloquer l'accès à la page de profil ou de réservation de topo pour un utilisateur non connecté
+ *  Intercepteur permettant de bloquer l'accès à la page de profil, de réservation de topo,
+ *  d'ajout de site et l'ajout de commentaires pour un utilisateur non connecté.
+ *  @author André Monnier
  */
 public class AuthInterceptor extends AbstractInterceptor {
 	

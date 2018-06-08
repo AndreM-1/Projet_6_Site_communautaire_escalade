@@ -9,9 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.escalade.siteweb.consumer.contract.dao.DepartementDao;
 import com.escalade.siteweb.consumer.impl.rowmapper.site.DepartementRM;
-import com.escalade.siteweb.consumer.impl.rowmapper.site.RegionRM;
 import com.escalade.siteweb.model.bean.site.Departement;
-import com.escalade.siteweb.model.bean.site.Region;
 import com.escalade.siteweb.model.exception.NotFoundException;
 
 @Named

@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.escalade.siteweb.model.bean.site.Voie;
 
+/**
+ * Classe de type RowMapper permettant de mapper des
+ * lignes de résultats (du resultSet en BDD) en objet
+ * de type {@link Voie}
+ * @author André Monnier
+ */
 public class VoieRM implements RowMapper<Voie> {
 
 	@Override

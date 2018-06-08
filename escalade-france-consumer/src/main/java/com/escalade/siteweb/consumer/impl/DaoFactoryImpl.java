@@ -16,6 +16,9 @@ import com.escalade.siteweb.consumer.contract.dao.SiteDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.consumer.contract.dao.VoieDao;
 
+/**
+ * Implémentation de la {@link DaoFactory}
+ */
 @Named
 public class DaoFactoryImpl implements DaoFactory{
 

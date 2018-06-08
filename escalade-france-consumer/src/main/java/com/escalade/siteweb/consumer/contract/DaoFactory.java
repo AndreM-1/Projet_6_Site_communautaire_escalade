@@ -12,6 +12,10 @@ import com.escalade.siteweb.consumer.contract.dao.SiteDao;
 import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.consumer.contract.dao.VoieDao;
 
+/**
+ * Factory des DAO
+ * @author André Monnier
+ */
 public interface DaoFactory {
 
 	void setDepartementDao(DepartementDao departementDao);

@@ -8,6 +8,10 @@ import javax.validation.constraints.Size;
 
 import com.escalade.siteweb.model.bean.photo.Photo;
 
+/**
+ * Classe du modèle lié au bean Secteur.
+ * @author André Monnier
+ */
 public class Secteur implements java.io.Serializable {
 
 	/**

@@ -16,6 +16,9 @@ import com.escalade.siteweb.business.contract.manager.SiteManager;
 import com.escalade.siteweb.business.contract.manager.UtilisateurManager;
 import com.escalade.siteweb.business.contract.manager.VoieManager;
 
+/**
+ * Implémentation de la {@link ManagerFactory}.
+ */
 @Named
 public class ManagerFactoryImpl implements ManagerFactory {
 
@@ -161,6 +164,4 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	public void setReservationTopoManager(ReservationTopoManager reservationTopoManager) {
 		this.reservationTopoManager = reservationTopoManager;
 	}
-	
-	
 }

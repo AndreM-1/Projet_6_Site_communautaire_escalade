@@ -4,6 +4,10 @@ import java.util.Date;
 
 import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 
+/**
+ * Classe du modèle lié au bean ReservationTopo.
+ * @author André Monnier
+ */
 public class ReservationTopo implements java.io.Serializable{
 
 	/**

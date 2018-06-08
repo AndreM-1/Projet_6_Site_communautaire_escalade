@@ -16,7 +16,10 @@ import com.escalade.siteweb.model.bean.site.Region;
 import com.escalade.siteweb.model.bean.site.Site;
 import com.opensymphony.xwork2.ActionSupport;
 
-
+/**
+ * Classe d'action relative à la page d'accueil.
+ * @author André Monnier
+ */
 public class GestionAffichageAccueil extends ActionSupport implements SessionAware {
 	// ===================== Attributs =====================
 

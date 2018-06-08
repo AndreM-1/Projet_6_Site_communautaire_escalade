@@ -28,6 +28,12 @@ import com.escalade.siteweb.model.exception.NotFoundException;
 import com.escalade.siteweb.model.exception.TechnicalException;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * Classe d'action permettant de gérer toutes les fonctionnalitées
+ * relatives à l'ajout d'un {@link Site} : ajout du site, des secteurs,
+ * des voies, upload de photos pour le site et les secteurs.
+ * @author André Monnier
+ */
 public class GestionAjoutModifSite extends ActionSupport implements SessionAware, ServletRequestAware {
 
 	/**
@@ -267,6 +273,14 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 	}
 
 	// ===================== Méthodes ======================
+	
+	/**
+	 * Méthode permettant d'ajouter un {@link Site} avec
+	 * ses informations générales : localisation,
+	 * nom du site, descriptif, commentaire personnel
+	 * de l'{@link Utilisateur} qui a posté le site.
+	 * @return input / success / error
+	 */
 	public String doAjoutSite() {
 		String vResult=ActionSupport.INPUT;
 		Utilisateur utilisateur=(Utilisateur)session.get("user");
@@ -316,6 +330,10 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 		return vResult;
 	}
 
+	/**
+	 * Méthode permettant d'uploader une photo pour le {@link Site}.
+	 * @return input / success / error
+	 */
 	public String doUploadPhotoSite() {
 		String vResult=ActionSupport.INPUT;
 
@@ -386,6 +404,10 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 		return vResult;
 	}
 
+	/**
+	 * Méthode permettant d'ajouter des {@link Secteur} au {@link Site}.
+	 * @return input / success / error
+	 */
 	public String doAjoutSecteur() {
 		String vResult=ActionSupport.INPUT;
 
@@ -431,6 +453,11 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 		return vResult;
 	}
 
+	/**
+	 * Méthode permettant d'ajouter des {@link Voie}
+	 * pour un {@link Secteur} donné
+	 * @return input / success / error
+	 */
 	public String doAjoutVoie() {
 		String vResult=ActionSupport.INPUT;
 	
@@ -508,6 +535,11 @@ public class GestionAjoutModifSite extends ActionSupport implements SessionAware
 		return vResult;
 	}
 
+	/**
+	 * Méthode permettant d'uploader des photos (entre 0 et 3)
+	 * pour un {@link Secteur} donné.
+	 * @return input / success / error
+	 */
 	public String doUploadPhotoSecteur(){
 		String vResult=ActionSupport.INPUT;
 

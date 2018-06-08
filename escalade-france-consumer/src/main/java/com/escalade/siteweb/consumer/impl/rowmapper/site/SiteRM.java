@@ -18,6 +18,12 @@ import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.model.bean.site.Site;
 import com.escalade.siteweb.model.exception.NotFoundException;
 
+/**
+ * Classe de type RowMapper permettant de mapper des
+ * lignes de résultats (du resultSet en BDD) en objet
+ * de type {@link Site}
+ * @author André Monnier
+ */
 public class SiteRM implements RowMapper<Site> {
 	
 	private UtilisateurDao utilisateurDao;

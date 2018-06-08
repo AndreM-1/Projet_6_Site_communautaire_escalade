@@ -15,6 +15,10 @@ import com.escalade.siteweb.model.bean.site.Region;
 import com.escalade.siteweb.model.bean.site.Site;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * Classe d'action permettant de gérer la recherche d'un {@link Site}
+ * @author André Monnier
+ */
 public class GestionRechercheSite extends ActionSupport {
 	
 	/**
@@ -95,6 +99,10 @@ public class GestionRechercheSite extends ActionSupport {
 	}
 
 	// ===================== Méthodes ======================
+	/**
+	 * Méthode permettant de gérer la recherche d'un {@link Site}
+	 * @return success / error
+	 */
 	public String doRechercheSite() {
 		String vResult;	
 	

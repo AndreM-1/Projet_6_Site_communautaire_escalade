@@ -11,6 +11,12 @@ import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.model.bean.utilisateur.FormulaireContact;
 import com.escalade.siteweb.model.exception.NotFoundException;
 
+/**
+ * Classe de type RowMapper permettant de mapper des
+ * lignes de résultats (du resultSet en BDD) en objet
+ * de type {@link FormulaireContact}
+ * @author André Monnier
+ */
 public class FormulaireContactRM implements RowMapper<FormulaireContact> {
 	
 	private UtilisateurDao utilisateurDao;

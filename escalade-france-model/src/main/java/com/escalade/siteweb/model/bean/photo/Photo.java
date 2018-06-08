@@ -3,6 +3,10 @@ package com.escalade.siteweb.model.bean.photo;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * Classe du modèle lié au bean Photo.
+ * @author André Monnier
+ */
 public class Photo implements java.io.Serializable {
 	
 	/**

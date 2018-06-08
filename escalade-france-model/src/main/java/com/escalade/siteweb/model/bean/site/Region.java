@@ -3,6 +3,10 @@ package com.escalade.siteweb.model.bean.site;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * Classe du modèle lié au bean Region.
+ * @author André Monnier
+ */
 public class Region implements java.io.Serializable {
 
 	/**

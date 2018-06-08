@@ -18,9 +18,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 /**
- * Action permettant de créer un compte utilisateur
+ * Classe d'action permettant de créer un compte {@link Utilisateur}
  * @author André Monnier
- *
  */
 public class GestionCreationCompte extends ActionSupport implements SessionAware, ServletRequestAware {
 
@@ -78,8 +77,8 @@ public class GestionCreationCompte extends ActionSupport implements SessionAware
 
 	// ===================== Méthodes =====================
 	/**
-	 * Action permettant la création d'un compte utilisateur
-	 * @return error/input/success
+	 * Méthode permettant la création d'un compte utilisateur
+	 * @return input / success / error
 	 */
 	public String doCreationCompte() {
 		// Si (this.utilisateur == null) c'est que l'on entre dans le formulaire de création de compte utilisateur

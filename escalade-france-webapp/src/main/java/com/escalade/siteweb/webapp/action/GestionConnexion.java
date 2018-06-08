@@ -16,6 +16,11 @@ import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 import com.escalade.siteweb.model.exception.NotFoundException;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * Classe d'action permettant de gérer la connexion
+ * et la déconnexion d'un {@link Utilisateur}
+ * @author André Monnier
+ */
 public class GestionConnexion extends ActionSupport implements SessionAware, ServletRequestAware{
 	
 	private static final long serialVersionUID = 1L;
@@ -66,8 +71,8 @@ public class GestionConnexion extends ActionSupport implements SessionAware, Ser
 	
 	// ===================== Méthodes ======================
 	/**
-	 * Action permettant la connexion d'un utilisateur. Le but est de ressortir de cette méthode
-	 * avec un objet de type Utilisateur en session
+	 * Méthode permettant la connexion d'un utilisateur. Le but est de ressortir de cette méthode
+	 * avec un objet de type {@link Utilisateur} en session
 	 * @return input / success
 	 */
 	public String doLogin() {
@@ -92,7 +97,7 @@ public class GestionConnexion extends ActionSupport implements SessionAware, Ser
 	}
 	
 	/**
-	 * Action de déconnexion d'un utilisateur
+	 * Méthode permettant la déconnexion d'un utilisateur
 	 * @return success
 	 */
 	public String doLogout() {

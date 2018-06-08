@@ -16,6 +16,10 @@ import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 import com.escalade.siteweb.model.exception.FunctionalException;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * Classe d'action permettant de gérer les formulaires de contact {@link FormulaireContact}
+ * @author André Monnier
+ */
 public class GestionFormulaireContact extends ActionSupport implements SessionAware{
 
 	/**
@@ -63,8 +67,8 @@ public class GestionFormulaireContact extends ActionSupport implements SessionAw
 	
 	// ===================== Méthodes =====================
 	/**
-	 * Action permettant d'envoyer un formulaire de contact
-	 * @return input/success
+	 * Méthode permettant d'envoyer un formulaire de contact.
+	 * @return input / success
 	 */
 	public String doEnvoiFormContact() {
 		// Si (this.formulaireContact == null) c'est que l'on entre dans le formulaire de contact
@@ -113,7 +117,11 @@ public class GestionFormulaireContact extends ActionSupport implements SessionAw
 		return vResult;
 	}
 	
-	
+	/**
+	 * Méthode permettant de consulter les formulaires de contact.
+	 * Les formulaires de contact ne peuvent être consultés que par l'administrateur.
+	 * @return success
+	 */
 	public String doVisuFormContact() {
 		listFormulaireContact=managerFactory.getFormulaireContactManager().getListFormulaireContact();
 		return ActionSupport.SUCCESS;

@@ -3,6 +3,10 @@ package com.escalade.siteweb.model.bean.site;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * Classe du modèle lié au bean Pays.
+ * @author André Monnier
+ */
 public class Pays implements java.io.Serializable {
 
 

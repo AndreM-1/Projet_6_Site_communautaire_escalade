@@ -22,6 +22,12 @@ import com.escalade.siteweb.model.exception.FunctionalException;
 import com.escalade.siteweb.model.exception.NotFoundException;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * Classe d'action permettant d'afficher le détail d'un utilisateur,
+ * et de mettre à jour ses informations (l'ensemble de ses coordonnées,
+ * le mot de passe, la photo de profil).
+ * @author André Monnier
+ */
 public class GestionAffichageUtilisateur extends ActionSupport implements SessionAware, ServletRequestAware{
 
 	/**
@@ -170,7 +176,7 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 
 
 	/**
-	 * Action affichant les détails d'un {@link Utilisateur}
+	 * Méthode affichant les détails d'un {@link Utilisateur}
 	 * @return success / error
 	 */
 	public String doDetailUtilisateur() {
@@ -194,6 +200,11 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 		return (this.hasErrors()) ? ActionSupport.ERROR : ActionSupport.SUCCESS;
 	}
 
+	/**
+	 * Méthode permettant de mettre à jour les informations
+	 * relatives à un {@link Utilisateur}
+	 * @return input / success / error / success-deconnexion-chgt-pseudo
+	 */
 	public String doUpdateUtilisateur() {
 
 		String vResult = ActionSupport.INPUT;
@@ -236,7 +247,12 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 
 		return vResult;
 	}
-
+	
+	/**
+	 * Méthode permettant de mettre à jour le mot de passe
+	 * d'un {@link Utilisateur}
+	 * @return success /error
+	 */
 	public String doUpdateMdp() {
 
 		String vResult = ActionSupport.SUCCESS;
@@ -289,6 +305,11 @@ public class GestionAffichageUtilisateur extends ActionSupport implements Sessio
 		return vResult;
 	}
 
+	/**
+	 * Méthode permettant d'uploader une photo
+	 * de profil pour un {@link Utilisateur}
+	 * @return success /error
+	 */
 	public String doUploadPhotoUtil() {
 
 		String destPath="";

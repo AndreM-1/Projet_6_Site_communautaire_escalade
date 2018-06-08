@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.escalade.siteweb.model.bean.site.Departement;
 
+/**
+ * Classe de type RowMapper permettant de mapper des
+ * lignes de résultats (du resultSet en BDD) en objet
+ * de type {@link Departement}
+ * @author André Monnier
+ */
 public class DepartementRM implements RowMapper<Departement> {
 
 	@Override

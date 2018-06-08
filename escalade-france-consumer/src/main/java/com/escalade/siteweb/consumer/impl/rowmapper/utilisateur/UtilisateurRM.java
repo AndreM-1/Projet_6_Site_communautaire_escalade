@@ -8,6 +8,12 @@ import org.springframework.jdbc.core.RowMapper;
 import com.escalade.siteweb.consumer.contract.dao.PhotoDao;
 import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 
+/**
+ * Classe de type RowMapper permettant de mapper des
+ * lignes de résultats (du resultSet en BDD) en objet
+ * de type {@link Utilisateur}
+ * @author André Monnier
+ */
 public class UtilisateurRM implements RowMapper<Utilisateur>{
 	
 	private PhotoDao photoDao;

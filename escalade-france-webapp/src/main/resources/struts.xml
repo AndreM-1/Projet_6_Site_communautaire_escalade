@@ -234,12 +234,7 @@
 		<action name="deconnexion" class="com.escalade.siteweb.webapp.action.GestionConnexion" method="doLogout">
        		<result type="redirectAction">index</result>
         </action>
-		
-		<!-- Action "test" -->
-		<action name="test" class="com.escalade.siteweb.webapp.action.TestAction" method="doTest">
-			<result>/jsp/test.jsp</result>
-		</action>
-		
+				
 	</package>
 	
 	<!-- Package pour les actions AJAX -->

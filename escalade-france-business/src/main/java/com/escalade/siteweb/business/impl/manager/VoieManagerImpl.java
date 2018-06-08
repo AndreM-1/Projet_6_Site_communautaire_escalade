@@ -13,7 +13,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.escalade.siteweb.business.contract.manager.VoieManager;
-import com.escalade.siteweb.model.bean.site.Secteur;
 import com.escalade.siteweb.model.bean.site.Voie;
 import com.escalade.siteweb.model.exception.FunctionalException;
 import com.escalade.siteweb.model.exception.TechnicalException;

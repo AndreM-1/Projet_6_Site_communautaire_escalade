@@ -14,6 +14,7 @@ import com.escalade.siteweb.business.contract.manager.VoieManager;
 
 /**
  * Factory des Managers
+ * @author André Monnier
  */
 public interface ManagerFactory {
 
@@ -60,5 +61,4 @@ public interface ManagerFactory {
 	void setReservationTopoManager(ReservationTopoManager reservationTopoManager);
 
 	ReservationTopoManager getReservationTopoManager();
-
 }

@@ -8,6 +8,7 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 /**
  * Intercepteur permettant de bloquer l'accès à la page de connexion et à la page de création de compte pour un utilisateur déjà connecté.
+ * @author André Monnier
  */
 public class RefusAPCInterceptor extends AbstractInterceptor {
 

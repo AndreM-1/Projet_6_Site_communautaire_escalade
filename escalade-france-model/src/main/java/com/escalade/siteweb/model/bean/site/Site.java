@@ -10,7 +10,10 @@ import javax.validation.constraints.Size;
 import com.escalade.siteweb.model.bean.photo.Photo;
 import com.escalade.siteweb.model.bean.utilisateur.Utilisateur;
 
-
+/**
+ * Classe du modèle lié au bean Site.
+ * @author André Monnier
+ */
 public class Site implements java.io.Serializable {
 
 

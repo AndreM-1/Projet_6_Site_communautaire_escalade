@@ -9,6 +9,12 @@ import com.escalade.siteweb.consumer.contract.dao.UtilisateurDao;
 import com.escalade.siteweb.model.bean.site.ReservationTopo;
 import com.escalade.siteweb.model.exception.NotFoundException;
 
+/**
+ * Classe de type RowMapper permettant de mapper des
+ * lignes de résultats (du resultSet en BDD) en objet
+ * de type {@link ReservationTopo}
+ * @author André Monnier
+ */
 public class ReservationTopoRM implements RowMapper<ReservationTopo>{
 
 	private UtilisateurDao utilisateurDao;
