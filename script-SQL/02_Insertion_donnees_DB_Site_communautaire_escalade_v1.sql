@@ -40,7 +40,7 @@ INSERT INTO public.departement (nom_departement,region_id) VALUES ('Ain',1),('Al
 																  ('Berne',20),('Fribourg',20),('Jura',20),('Neuchâtel',20),('Soleure',20),
 																  ('Argovie',21),('Bâle-Campagne',21),('Bâle-Ville',21),
 																  ('Zurich',22),
-																  ('Appenzell Rhodes-Extérieures',23),('Appenzell Rhodes-Intérieures',23),('Glaris',23),('Grisons',23),('Saint-Gall',23),('Schaffhouse',23),('Thurgovie',23)
+																  ('Appenzell Rhodes-Extérieures',23),('Appenzell Rhodes-Intérieures',23),('Glaris',23),('Grisons',23),('Saint-Gall',23),('Schaffhouse',23),('Thurgovie',23),
 																  ('Lucerne',24),('Nidwald',24),('Obwald',24),('Schwytz',24),('Uri',24),('Zoug',24),
 																  ('Tessin',25);
 
